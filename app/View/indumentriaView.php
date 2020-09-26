@@ -1,5 +1,7 @@
 <?php
 
+require_once('libs/smarty/libs/Smarty.class.php');
+
     class IndumentariaView {
 
         private $title;
@@ -8,7 +10,13 @@
             $this->title  = "Subject";
         }
 
-        function showHome($categorias){
+        function showHome($categoria, $producto){
+            $smarty = new Smarty();
+            // var_dump($categoria);
+            // var_dump($producto);
+            $smarty->assign('categoria', $categoria, true);
+            $smarty->assign('producto', $producto, true);
+            $smarty-> display('templates/tabla.tpl');
         }
 
         function showProducto($productosPoriddecoategoria){

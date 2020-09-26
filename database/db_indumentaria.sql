@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 23, 2020 at 10:18 PM
+-- Generation Time: Sep 26, 2020 at 09:43 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -30,8 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
-  `disenador` varchar(20) NOT NULL
+  `coleccion` varchar(35) NOT NULL,
+  `url_img` varchar(3000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `coleccion`, `url_img`) VALUES
+(1, 'Colección Otoño 2020', 'https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+(2, 'Colección Otoño 2020', 'https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
 
 -- --------------------------------------------------------
 
@@ -46,6 +55,15 @@ CREATE TABLE `producto` (
   `talle` varchar(10) NOT NULL,
   `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `producto`
+--
+
+INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`) VALUES
+(7, 'Remera', 'Rojo flama', 'X', 1),
+(9, 'Remera', 'Rojo flama', 'X', 1),
+(10, 'Pantalon', 'Verde', 'X', 1);
 
 --
 -- Indexes for dumped tables
@@ -72,13 +90,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

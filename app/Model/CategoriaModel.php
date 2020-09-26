@@ -5,7 +5,7 @@
         private $db;
 
         function __construct() {
-            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', '');
+            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', 'root');
         }
         
         function GetCategoria(){
@@ -16,7 +16,6 @@
         function InsertCategoria($disenador){
             $sentencia = $this->db->prepare( "INSERT INTO categoria(disenador) VALUES(?)");           
             $sentencia->execute(array($disenador));
-            
         }
         
         function DeleteCategoria($id){

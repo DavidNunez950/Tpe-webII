@@ -1,8 +1,8 @@
 <?php
 
-    require_once("app/View/indumentariaView.php");
     require_once("app/Model/ProductoModel.php");
     require_once("app/Model/CategoriaModel.php");
+    require_once("app/View/indumentriaView.php");
 
     class IndumentariaController{
 
@@ -11,11 +11,25 @@
         private $ProductoModel;
 
         function __construct() {
-            $this->view = new indumentariaView();
-            $this->CategoriaModel = new ProductoModel();
-            $this->ProductoModel = new CategoriaModel();
+            $this->view = new IndumentariaView();
+            $this->CategoriaModel = new CategoriaModel();
+            $this->ProductoModel = new ProductoModel();
         }
 
+        function showHome(/*$categoria*/) {
+            $categoria = $this->CategoriaModel->GetCategoria();
+            $id_categoria = $categoria[0]->id;
+            $producto = $this->ProductoModel->GetProducto($id_categoria);
+            $this->view->showHome($categoria[0], $producto);
+        }
+
+        function showProducto($id) {
+            //code
+        }
+
+        function loggin($id) {
+            //code
+        }
 
     }
 ?>

@@ -5,12 +5,12 @@
         private $db;
 
         function __construct() {
-            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', '');
+            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', 'root');
         }
 
         function GetProducto($id){
-            $sentencia = $this->db->prepare( "SELECT * FROM producto WHERE id_categoria=?");
-            $sentencia->execute($id);
+            $sentencia = $this->db->prepare( "SELECT * FROM producto WHERE producto.id_categoria=1");
+            $sentencia->execute();
             return  $sentencia->fetchAll(PDO::FETCH_OBJ);
         }
 
