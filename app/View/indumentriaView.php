@@ -10,7 +10,7 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $this->title  = "Subject";
         }
 
-        function showHome($categoria, $producto){
+        function showProducto($categoria, $producto){
             $smarty = new Smarty();
             // var_dump($categoria);
             // var_dump($producto);
@@ -18,9 +18,16 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $smarty->assign('producto', $producto, true);
             $smarty-> display('templates/tabla.tpl');
         }
-
-        function showProducto($productosPoriddecoategoria){
+        
+        function ShowHome($categorias){
+            $smarty = new Smarty();
+            $smarty->assign('categorias', $categorias);
+           
+            $smarty->display('templates/categorias.tpl');
+            
         }
+
+
 
         function showLoggin(){
         }

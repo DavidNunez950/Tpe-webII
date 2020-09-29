@@ -1,4 +1,4 @@
-{include "header.tpl" }
+{include file="header.tpl" }
                 <div></div>
                 <div class="container mt-1 mb-1 bg-secondary">
                     <div class="row">
@@ -30,4 +30,4 @@
                         </table>
                     </div>
                 </div>
-{* {include "foother.tpl" }             *}
+{include file="footer.tpl"}
