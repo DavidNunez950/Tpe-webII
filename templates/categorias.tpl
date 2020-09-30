@@ -9,7 +9,8 @@
             <ul class="list-group">
             
                 {foreach from=$categorias item=categoria}   
-                    <li class="list-group-item">{$categoria->}</li> //ver tabla en BBSS por img y botones 
+                    <li class="list-group-item">
+                    <img src="{$categoria->url_img}" width="50" height="50"/>{$categoria->coleccion}<button type="button" class="btn btn-dark">Ver</button></li>
                 {/foreach}
             </ul>
         </div>

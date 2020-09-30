@@ -16,11 +16,15 @@
             $this->ProductoModel = new ProductoModel();
         }
 
-        function showHome(/*$categoria*/) {
+       /* function showHome(*$categoria*) {
             $categoria = $this->CategoriaModel->GetCategoria();
             $id_categoria = $categoria[0]->id;
             $producto = $this->ProductoModel->GetProducto($id_categoria);
             $this->view->showHome($categoria[0], $producto);
+        }*/
+        function Home() {
+            $categoria = $this->CategoriaModel->GetCategoria();
+            $this->view->showHome($categoria);
         }
 
         function showProducto($id) {

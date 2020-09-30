@@ -19,7 +19,7 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $smarty-> display('templates/tabla.tpl');
         }
         
-        function ShowHome($categorias){
+        function showHome($categorias){
             $smarty = new Smarty();
             $smarty->assign('categorias', $categorias);
            
