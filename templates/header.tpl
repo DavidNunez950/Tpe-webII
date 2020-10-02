@@ -12,7 +12,7 @@
                     {* <base href=".BASE_URL."> *}
                     <title>TUDAI</title>
                 </head>
-                <body>
+                <body class="bg-body-blue">
                     <div class="container-fluid m-0 p-0 position-sticky sticky-top">
                         <div class="row">
                             <div class="col-12">
@@ -35,7 +35,7 @@
                                         <img src="https://thumbs.dreamstime.com/b/icono-del-usuario-s%C3%ADmbolo-humano-de-la-persona-muestra-inicio-sesi%C3%B3n-avatar-ejemplo-vector-aislado-en-fondo-moderno-118096858.jpg" class="rounded-circle" width="75px" height="75px">
                                         <figcaption class="figure-caption text-right">
                                             <div class="dropdown">
-                                                <a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <a class="btn btn-sm btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Usuario
                                                 </a>
                                                 <div class="mx-n5">
