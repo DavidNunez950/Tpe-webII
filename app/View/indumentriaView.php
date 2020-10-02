@@ -11,15 +11,13 @@ require_once('libs/smarty/libs/Smarty.class.php');
         }
 
         function showHome($categoria, $producto){
+        }
+
+        function showProducto($categoria, $producto){
             $smarty = new Smarty();
-            // var_dump($categoria);
-            // var_dump($producto);
             $smarty->assign('categoria', $categoria, true);
             $smarty->assign('producto', $producto, true);
             $smarty-> display('templates/tabla.tpl');
-        }
-
-        function showProducto($productosPoriddecoategoria){
         }
 
         function showLoggin(){
@@ -27,6 +25,9 @@ require_once('libs/smarty/libs/Smarty.class.php');
 
         function ShowHomeLocation(){
             header("Location: ".BASE_URL."home");
+        }
+        function ShowCategoriasLocation($categoria){
+            header("Location: ".BASE_URL."home/categorias/".$categoria);
         }
     }
 ?>

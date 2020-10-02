@@ -9,25 +9,25 @@
         }
 
         function GetProducto($id){
-            $sentencia = $this->db->prepare( "SELECT * FROM producto WHERE producto.id_categoria=1");
-            $sentencia->execute();
+            $sentencia = $this->db->prepare( "SELECT * FROM producto WHERE producto.id_categoria=?");
+            $sentencia->execute(array($id));
             return  $sentencia->fetchAll(PDO::FETCH_OBJ);
         }
 
         function InsertProducto($color,$id_categoria,$talle,$tipo){
-            $sentencia = $this->db->prepare( "INSERT INTO producto(color,id_categoria,talle,tipo) VALUES(?,?,?,?)");           
+            $sentencia = $this->db->prepare("INSERT INTO producto(color,id_categoria,talle,tipo) VALUES(?,?,?,?)");           
             $sentencia->execute(array($color,$id_categoria,$talle,$tipo));
             
         }
 
         function DeleteProducto($id){
-            $sentencia = $this->db->prepare( "DELETE FROM producto WHERE id=?");
+            $sentencia = $this->db->prepare("DELETE FROM producto WHERE id=?");
             $sentencia->execute(array($id));
         }
 
-        function EditProducto($id,$color,$id_categoria,$talle,$tipo){
-            $sentencia = $this->db->prepare( "UPDATE producto SET color=?,id_categoria=?,talle=?,tipo=? WHERE id=?");
-            $sentencia->execute(array($color,$id_categoria,$talle,$tipo,$id));
+        function EditProducto($id,$color,$talle,$tipo){
+            $sentencia = $this->db->prepare("UPDATE producto SET tipo=?, color=?, talle=? WHERE id=?");
+            $sentencia->execute(array($tipo,$color,$talle,$id));
         }
     }
 ?>

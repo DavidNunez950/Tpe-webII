@@ -7,10 +7,11 @@
                     <!-- Bootstrap CSS -->
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
                     <script src="jquery-1.3.2.min.js" type="text/javascript"></script>   
+                    {* <base href=".BASE_URL."> *}
                     <title>TUDAI</title>
                 </head>
                 <body>
-                    <div class="container-fluid m-0 position-sticky sticky-top">
+                    <div class="container-fluid m-0 p-0 position-sticky sticky-top">
                         <div class="row">
                             <div class="col-12">
                                 <nav class="navbar navbar-expand-lg navbar-light bg-dark  d-flex justify-content-around">
@@ -39,20 +40,20 @@
                                                     <div class="dropdown-menu mx-n5">
                                                     <form class="px-4 py-3">
                                                         <div class="form-group">
-                                                        <label for="exampleDropdownFormEmail1">Email address</label>
-                                                        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                                            <label for="exampleDropdownFormEmail1">Email address</label>
+                                                            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
                                                         </div>
                                                         <div class="form-group">
-                                                        <label for="exampleDropdownFormPassword1">Password</label>
-                                                        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                                            <label for="exampleDropdownFormPassword1">Password</label>
+                                                            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
                                                         </div>
                                                         <div class="form-group">
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                                            <label class="form-check-label" for="dropdownCheck">
-                                                            Remember me
-                                                            </label>
-                                                        </div>
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                                                <label class="form-check-label" for="dropdownCheck">
+                                                                    Remember me
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Sign in</button>
                                                     </form>
@@ -62,7 +63,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </figcaption>
                                     </figure>
                                 </nav>
