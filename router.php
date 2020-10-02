@@ -18,10 +18,12 @@
     // //$r->addRoute("mermelada", "GET", "TasksController", "Home");
 
     // //Esto lo veo en TasksView
-    // $r->addRoute("insert", "POST", "IndumentariaController", "InsertPago");
-    // $r->addRoute("edit", "GET", "IndumentariaController", "EditPago");
+     $r->addRoute("insert", "POST", "indumentariaController", "InsertCategoria");
+     $r->addRoute("delete/:ID", "GET", "indumentariaController", "DeleteCategoria");
+     $r->addRoute("edit/:ID", "POST", "indumentariaController", "EditCategoria");
+     $r->addRoute("ver/:ID", "GET", "indumentariaController", "VerCategoria");
 
-    // $r->addRoute("delete/:ID", "GET", "IndumentariaController", "BorrarLaTaskQueVienePorParametro");
+     //$r->addRoute("delete/:ID", "GET", "IndumentariaController", "BorrarLaTaskQueVienePorParametro");
     // $r->addRoute("completar/:ID", "GET", "IndumentariaController", "MarkAsCompletedTask");
 
     // //Ruta por defecto.

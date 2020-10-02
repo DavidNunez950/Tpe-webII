@@ -26,6 +26,14 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $smarty->display('templates/categorias.tpl');
             
         }
+        function showProductosPorCategoria($productos){
+            $smarty = new Smarty();
+           // $smarty->assign('id_categoria_s', $id_categoria);
+            $smarty->assign('productos', $productos);
+           
+            $smarty->display('templates/productos_por_categoria.tpl');
+            
+        }
 
 
 

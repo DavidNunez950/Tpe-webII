@@ -9,9 +9,10 @@
         }
 
         function GetProducto($id){
-            $sentencia = $this->db->prepare( "SELECT * FROM producto WHERE producto.id_categoria=1");
-            $sentencia->execute();
+            $sentencia = $this->db->prepare( "SELECT * FROM producto WHERE id_categoria=?");
+            $sentencia->execute(array($id));
             return  $sentencia->fetchAll(PDO::FETCH_OBJ);
+           
         }
 
         function InsertProducto($color,$id_categoria,$talle,$tipo){
@@ -29,6 +30,8 @@
             $sentencia = $this->db->prepare( "UPDATE producto SET color=?,id_categoria=?,talle=?,tipo=? WHERE id=?");
             $sentencia->execute(array($color,$id_categoria,$talle,$tipo,$id));
         }
+        
     }
 ?>
+
 
