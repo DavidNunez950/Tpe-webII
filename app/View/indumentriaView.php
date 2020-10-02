@@ -10,7 +10,11 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $this->title  = "Subject";
         }
 
-        function showHome($categoria, $producto){
+        function showHome($categorias){
+            $smarty = new Smarty();
+            $smarty->assign('categorias', $categorias);
+            $smarty->display('templates/categorias.tpl');
+            
         }
 
         function showProducto($categoria, $producto){
@@ -19,6 +23,15 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $smarty->assign('producto', $producto, true);
             $smarty-> display('templates/tabla.tpl');
         }
+        
+
+        // function showProductosPorCategoria($productos){
+        //     $smarty = new Smarty();
+        //     $smarty->assign('productos', $productos);
+        //     $smarty->display('templates/productos_por_categoria.tpl');
+        // }
+
+
 
         function showLoggin(){
         }
@@ -26,8 +39,12 @@ require_once('libs/smarty/libs/Smarty.class.php');
         function ShowHomeLocation(){
             header("Location: ".BASE_URL."home");
         }
-        function ShowCategoriasLocation($categoria){
-            header("Location: ".BASE_URL."home/categorias/".$categoria);
+
+        function ShowCategoriasNombreLocation($coleccion){
+            header("Location: ".BASE_URL."home/categorias/".$coleccion);
+        }
+        function ShowCategoriasIDLocation($id_coleccion){
+            header("Location: ".BASE_URL."home/categorias/".$id_coleccion);
         }
     }
 ?>

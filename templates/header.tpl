@@ -22,10 +22,10 @@
                                     <div class="collapse navbar-collapse" id="navbarNav">
                                         <ul class="navbar-nav">
                                             <li class="nav-item active">
-                                                <a class="nav-link display-5 text-white" href="home">Home<span class="sr-only">(current)</span></a>
+                                                <a class="nav-link display-5 text-white" href="../">Home<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item active">
-                                                <a class="nav-link display-5 text-white" href="search">Search<span class="sr-only">(current)</span></a>
+                                                <a class="nav-link display-5 text-white" href="search">Login<span class="sr-only">(current)</span></a>
                                             </li>
                                         </ul>
                                     </div>
