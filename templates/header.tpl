@@ -6,7 +6,9 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                     <!-- Bootstrap CSS -->
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-                    <script src="jquery-1.3.2.min.js" type="text/javascript"></script>   
+                    <script src="jquery-1.3.2.min.js" type="text/javascript"></script>  
+                    {* <link rel="stylesheet" href="css/nomarlize.css"> *}
+                    <link rel="stylesheet" href="css/css.css">
                     {* <base href=".BASE_URL."> *}
                     <title>TUDAI</title>
                 </head>
@@ -14,7 +16,7 @@
                     <div class="container-fluid m-0 p-0 position-sticky sticky-top">
                         <div class="row">
                             <div class="col-12">
-                                <nav class="navbar navbar-expand-lg navbar-light bg-dark  d-flex justify-content-around">
+                                <nav class="navbar navbar-expand-lg navbar-light bg-dark  d-flex justify-content-around bg-color">
                                     <a class="navbar-brand" href="#"><h1 class=" display-5 text-white">TodoRopa</h1> <a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon"></span>

@@ -22,6 +22,8 @@
         function showProducto(/*$id_categoria*/) {
             $categoria = $this->CategoriaModel->GetCategoria();
             $id_categoria = $categoria[0]->id;
+            // $categoria = $this->CategoriaModel->GetCategoria($id_categoria);
+            // $id_categoria = $categoria->id;
             $producto = $this->ProductoModel->GetProducto($id_categoria);
             $this->view->showProducto(($categoria[0]), $producto);
         }

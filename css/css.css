@@ -1,0 +1,8 @@
+.bg-color {
+    background: rgba(232,75,75,1);
+    background: linear-gradient(45deg, rgba(232,75,75,1) 0%, rgba(227,141,240,1) 16%, rgba(141,141,240,1) 32%, rgba(141,240,235,1) 51%, rgba(158,240,141,1) 69%, rgba(240,227,141,1) 85%, rgba(227,123,32,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e84b4b', endColorstr='#e37b20', GradientType=1 );
+}
+.bg-transparent {
+    background-color: rgba(255, 0, 0, 0);
+}
