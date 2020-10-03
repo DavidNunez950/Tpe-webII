@@ -11,6 +11,11 @@
     background: linear-gradient(45deg, rgb(75, 104, 232) 0%, rgb(141, 184, 240) 60%, rgba(75, 104, 232) 100%);
 }
 
+.bg-main {
+    background: rgba(87,108,166,1);
+background: linear-gradient(45deg, rgba(87,108,166,1) 0%, rgba(84,240,131,1) 67%, rgba(106,252,242,1) 100%);
+}
+
 .img-circle-rigth {
     margin-right: -125px;
 }

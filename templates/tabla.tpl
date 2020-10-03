@@ -1,7 +1,7 @@
 {include "header.tpl" }
                 <div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
                     <div class="row">
-                        <div class="w-100 p-3">
+                        <div class="w-100 p-3 bg-color">
                             <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-transparent">
                                     <figure class="figure mb-0 text-center position-relative bg-transparent img-circle-rigth">
                                         <img src="https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="rounded-circle" alt="colleciones"  width="250" height="250">
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-100 p-3">
+                        <div class="w-100 p-3"> 
                             <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-dark">
                                 <figure class="figure text-center position-relative mt-0 mb-0 pt-0 pb-0 mr-n4 bg-white">
                                     <img src="https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="rounded-circle mr-n5" alt="colleciones"  width="250" height="250">

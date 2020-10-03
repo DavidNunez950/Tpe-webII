@@ -7,7 +7,6 @@
                     <!-- Bootstrap CSS -->
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
                     <script src="jquery-1.3.2.min.js" type="text/javascript"></script>  
-                    {* <link rel="stylesheet" href="css/nomarlize.css"> *}
                     <link rel="stylesheet" href="css/css.css">
                     {* <base href=".BASE_URL."> *}
                     <title>TUDAI</title>
@@ -24,7 +23,7 @@
                                     <div class="collapse navbar-collapse" id="navbarNav">
                                         <ul class="navbar-nav">
                                             <li class="nav-item active">
-                                                <a class="nav-link display-5 text-white" href="home">Home<span class="sr-only">(current)</span></a>
+                                                <a class="nav-link display-5 text-white" href="home/">Home<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item active">
                                                 <a class="nav-link display-5 text-white" href="search">Search<span class="sr-only">(current)</span></a>
