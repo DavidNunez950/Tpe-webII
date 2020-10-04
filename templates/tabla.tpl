@@ -1,7 +1,7 @@
 {include "header.tpl" }
                 <div class="container mt-2 bg-white border border-secondaryp-3 mb-5 rounded shadow">
-                    <div class="row">
-                        <div class="w-100 p-3">
+                    <div class="row p-5">
+                        <div class="w-100">
                             <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-light">
                                 <figure class="figure text-center position-relative mt-0 mb-0 pt-0 pb-0 mr-n4">
                                     <img src="https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="rounded-circle mr-n5" alt="colleciones"  width="250" height="250">
@@ -11,8 +11,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-100 pr-5 pl-5">
-                            <table class="table table-striped table-light table-responsive-sm shadow text-center">
+                        <div class="w-100">
+                            <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">Prenda</th>
