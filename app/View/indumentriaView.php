@@ -10,7 +10,14 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $this->title  = "Subject";
         }
 
-        function showHome($categorias){
+        function showHome(){
+            $smarty = new Smarty();
+          //  $smarty->assign('categorias', $categorias);
+            $smarty->display('templates/home.tpl');
+            
+        }
+
+        function showCategorias($categorias){
             $smarty = new Smarty();
             $smarty->assign('categorias', $categorias);
             $smarty->display('templates/categorias.tpl');

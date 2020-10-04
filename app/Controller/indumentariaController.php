@@ -47,8 +47,12 @@
             $this->view->ShowHomeLocation();
         }
         function Home() {
+           // $categoria = $this->CategoriaModel->GetCategoria();
+            $this->view->showHome();
+        }
+        function Categorias() {
             $categoria = $this->CategoriaModel->GetCategoria();
-            $this->view->showHome($categoria);
+            $this->view->showCategorias($categoria);
         }
 
         function loggin($id) {

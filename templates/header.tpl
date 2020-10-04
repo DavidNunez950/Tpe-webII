@@ -1,4 +1,5 @@
-<!doctype html>
+
+<!DOCTYPE html>
             <html lang="en">
                 <head>
                     <!-- Required meta tags -->
@@ -15,14 +16,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <nav class="navbar navbar-expand-lg navbar-light bg-dark  d-flex justify-content-around">
-                                    <a class="navbar-brand" href="#"><h1 class=" display-5 text-white">TodoRopa</h1> <a>
+                                    <a class="navbar-brand" href="#"><h1 class=" display-5 text-white">Todo Ropa</h1> <a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarNav">
                                         <ul class="navbar-nav">
                                             <li class="nav-item active">
-                                                <a class="nav-link display-5 text-white" href="../">Home<span class="sr-only">(current)</span></a>
+                                                <a class="nav-link display-5 text-white" href="home">Home<span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="nav-item active">
+                                                <a class="nav-link display-5 text-white" href="categorias">Categorias<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item active">
                                                 <a class="nav-link display-5 text-white" href="search">Login<span class="sr-only">(current)</span></a>

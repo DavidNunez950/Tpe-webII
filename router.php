@@ -10,6 +10,7 @@
     $r = new Router(); 
 
     $r->addRoute("home", "GET", "indumentariaController", "Home");
+    $r->addRoute("categorias", "GET", "indumentariaController", "Categorias");
 
     // $r->addRoute("home", "GET", "indumentariaController", "showProducto");
     
