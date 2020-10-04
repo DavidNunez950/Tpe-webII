@@ -11,19 +11,16 @@
 
     $r->addRoute("home", "GET", "indumentariaController", "Home");
 
-    // $r->addRoute("home", "GET", "indumentariaController", "showProducto");
-    
-    $r->addRoute("categoria/insertProducto", "POST", "indumentariaController", "insertProductoEnCategoria");
-    $r->addRoute("categoria/deleteProducto/:ID", "GET", "indumentariaController", "deleteProducto");
-    $r->addRoute("categoria/editProducto/:ID", "POST", "indumentariaController", "editProducto");
+    $r->addRoute("insertProducto/:ID", "POST", "indumentariaController", "insertProductoEnCategoria");
+    $r->addRoute("deleteProducto/:ID", "GET", "indumentariaController", "deleteProducto");
+    $r->addRoute("editProducto/:ID", "POST", "indumentariaController", "editProducto");
 
     $r->addRoute("insertCategoria", "POST", "indumentariaController", "insertCategoria");
     $r->addRoute("deleteCategoria/:ID", "GET", "indumentariaController", "deleteCategoria");
     $r->addRoute("editCategoria/:ID", "POST", "indumentariaController", "editCategoria");
-    $r->addRoute("categoria/:COLECCION", "GET", "indumentariaController", "showProducto");
+    $r->addRoute("categoria/:ID", "GET", "indumentariaController", "showProducto");
 
     $r->setDefaultRoute("IndumentariaController", "Home");
-
 
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>
