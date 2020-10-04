@@ -10,30 +10,33 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $this->title  = "Subject";
         }
 
+        function showHome(){
+            $smarty = new Smarty();
+          //  $smarty->assign('categorias', $categorias);
+            $smarty->display('templates/home.tpl');
+            
+        }
+
+        function showCategorias($categorias){
+            $smarty = new Smarty();
+            $smarty->assign('categorias', $categorias);
+            $smarty->display('templates/categorias.tpl');
+            
+        }
+
         function showProducto($categoria, $producto){
             $smarty = new Smarty();
-            // var_dump($categoria);
-            // var_dump($producto);
             $smarty->assign('categoria', $categoria, true);
             $smarty->assign('producto', $producto, true);
             $smarty-> display('templates/tabla.tpl');
         }
         
-        function showHome($categorias){
-            $smarty = new Smarty();
-            $smarty->assign('categorias', $categorias);
-           
-            $smarty->display('templates/categorias.tpl');
-            
-        }
-        function showProductosPorCategoria($productos){
-            $smarty = new Smarty();
-           // $smarty->assign('id_categoria_s', $id_categoria);
-            $smarty->assign('productos', $productos);
-           
-            $smarty->display('templates/productos_por_categoria.tpl');
-            
-        }
+
+        // function showProductosPorCategoria($productos){
+        //     $smarty = new Smarty();
+        //     $smarty->assign('productos', $productos);
+        //     $smarty->display('templates/productos_por_categoria.tpl');
+        // }
 
 
 
@@ -42,6 +45,13 @@ require_once('libs/smarty/libs/Smarty.class.php');
 
         function ShowHomeLocation(){
             header("Location: ".BASE_URL."home");
+        }
+
+        function ShowCategoriasNombreLocation($coleccion){
+            header("Location: ".BASE_URL."home/categorias/".$coleccion);
+        }
+        function ShowCategoriasIDLocation($id_coleccion){
+            header("Location: ".BASE_URL."home/categorias/".$id_coleccion);
         }
     }
 ?>
