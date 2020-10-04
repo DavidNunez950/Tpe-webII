@@ -16,45 +16,64 @@
             $this->ProductoModel = new ProductoModel();
         }
 
-       /* function showHome(*$categoria*) {
-            $categoria = $this->CategoriaModel->GetCategoria();
-            $id_categoria = $categoria[0]->id;
-            $producto = $this->ProductoModel->GetProducto($id_categoria);
-            $this->view->showHome($categoria[0], $producto);
-        }*/
-        function Home() {
-            $categoria = $this->CategoriaModel->GetCategoria();
-            $this->view->showHome($categoria);
+        function showProducto($params = null){
+            $colection = $params[':COLECCION'];
+            $id_categoria = $this->CategoriaModel->GetCategoriaPorColeccion($colection);
+            $producto = $this->ProductoModel->GetProducto($id_categoria[0]->id);
+            $this->view->showProducto($id_categoria[0]->id, $producto);
         }
 
+        function insertProductoEnCategoria(){
+            var_dump($_POST['color']);
+            // if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
+                $this->ProductoModel->InsertProducto($_POST['color'], $_POST['talle'], $_POST['tipo']);
+            // }
+            //$this->view->ShowCategoriasLocation($colection);
+            $this->view->ShowHomeLocation();
+        }
 
-        function showProducto($id) {
-            //code
+        function editProducto($params = null){
+            $id_producto = $params[':ID'];
+            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
+                $this->ProductoModel->EditProducto($id_producto, $_POST['color'], $_POST['talle'], $_POST['tipo']);
+            }
+            $this->view->ShowHomeLocation();
+        }
+
+        function deleteProducto($params = null){
+            $id_producto = $params[':ID'];
+            $this->ProductoModel->DeleteProducto($id_producto);
+            //$this->view->ShowCategoriasIDLocation($id_producto);
+            $this->view->ShowHomeLocation();
+        }
+        function Home() {
+           // $categoria = $this->CategoriaModel->GetCategoria();
+            $this->view->showHome();
+        }
+        function Categorias() {
+            $categoria = $this->CategoriaModel->GetCategoria();
+            $this->view->showCategorias($categoria);
         }
 
         function loggin($id) {
             //code
         }
 
-        function InsertCategoria(){
-            
+        function insertCategoria(){
             $this->CategoriaModel-> InsertCategoria($_POST['input_url_img'],$_POST['input_coleccion']);
             $this->view->ShowHomeLocation();
         } 
-        function DeleteCategoria($params = null){
+        function deleteCategoria($params = null){
             $id_categoria = $params[':ID'];
             $this->CategoriaModel->DeleteCategoria($id_categoria);
             $this->view->ShowHomeLocation();
         }
-        function EditCategoria($params = null){
+        function editCategoria($params = null){
             $id_categoria = $params[':ID'];
-            $this->CategoriaModel->EditCategoria($id_categoria);
+            $url_img = $_POST['url_img'];
+            $coleccion= $_POST['coleccion'];
+            $this->CategoriaModel->EditCategoria($id_categoria, $url_img, $coleccion);
             $this->view->ShowHomeLocation();
-        }
-        function VerCategoria($params = null){
-            $id_categoria = $params[':ID'];
-            $productos = $this->ProductoModel->GetProducto($id_categoria);
-            $this->view->showProductosPorCategoria($productos);
         }
 
     }
