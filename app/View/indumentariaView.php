@@ -39,10 +39,7 @@ require_once('libs/smarty/libs/Smarty.class.php');
         // }
 
 
-
-        function showLoggin(){
-        }
-
+    
         function ShowHomeLocation(){
             header("Location: ".BASE_URL."home");
         }

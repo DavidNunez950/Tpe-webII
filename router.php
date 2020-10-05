@@ -1,6 +1,7 @@
 <?php 
     define("BASE_URL", '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
     require_once('app/Controller/indumentariaController.php');
+    require_once('app/Controller/UserController.php');
     require_once 'RouterClass.php';
     if(!empty($_GET['action'])) {
         $action = $_GET['action'];
@@ -8,11 +9,18 @@
         $action = "home";
     }
     $r = new Router(); 
-
+    define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
+    define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
+   
     $r->addRoute("home", "GET", "indumentariaController", "Home");
     $r->addRoute("categorias", "GET", "indumentariaController", "Categorias");
 
+    
     // $r->addRoute("home", "GET", "indumentariaController", "showProducto");
+    
+    $r->addRoute("login", "GET", "UserController", "Login");
+    $r->addRoute("logout", "GET", "UserController", "Logout");
+    $r->addRoute("verifyUser", "POST", "UserController", "VerifyUser");
     
     $r->addRoute("categoria/insertProducto", "POST", "indumentariaController", "insertProductoEnCategoria");
     $r->addRoute("categoria/deleteProducto/:ID", "GET", "indumentariaController", "deleteProducto");

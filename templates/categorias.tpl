@@ -11,7 +11,7 @@
                 <div class="text-center display-1">
                     <h1>Categorias</h1>
                 </div>
-                </div>
+            </div>
             <ul class="list-group">
             
                 {foreach from=$categorias item=categoria}                                           
