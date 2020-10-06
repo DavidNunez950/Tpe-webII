@@ -14,9 +14,9 @@
             return  $sentencia->fetchAll(PDO::FETCH_OBJ);
         }
 
-        function InsertProducto($color,$talle,$tipo){
-            $sentencia = $this->db->prepare("INSERT INTO producto(color,talle,tipo) VALUES(?,?,?)");           
-            $sentencia->execute(array($color,$talle,$tipo));
+        function InsertProducto($color,$talle,$tipo, $id_categoria){
+            $sentencia = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria) VALUES(?,?,?,?)");           
+            $sentencia->execute(array($color,$talle,$tipo, $id_categoria));
             
         }
 
