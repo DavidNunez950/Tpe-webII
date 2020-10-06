@@ -47,7 +47,6 @@
         function showProducto($params = null){
             $id_categoria = $params[':ID'];
             $categoria =  $this->CategoriaModel->GetCategoriaPorID($id_categoria);
-            var_dump($categoria);
             $producto = $this->ProductoModel->GetProducto($id_categoria);
             $this->view->showProducto($categoria[0], $producto);
         }

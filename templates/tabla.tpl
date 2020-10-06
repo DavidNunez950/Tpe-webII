@@ -1,12 +1,12 @@
 {include "header.tpl" }
-                <div class="container mt-2 bg-white border border-secondaryp-3 mb-5 rounded shadow">
+                <div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
                     <div class="row p-5">
                         <div class="w-100">
-                            <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-light">
+                            <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-transparent">
                                 <figure class="figure text-center position-relative mt-0 mb-0 pt-0 pb-0 mr-n4">
-                                    <img src="https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="rounded-circle mr-n5" alt="colleciones"  width="250" height="250">
+                                    <img src="{$categoria->url_img}" class="rounded-circle mr-n5" alt="colleciones"  width="250" height="250">
                                 </figure>
-                                <div class="h-100 w-100 ml-n5 pl-5 display-1 bg-light border-secondary shadow">
+                                <div class="h-100 w-100 ml-n5 pl-5 display-1 border-secondary shadow  text-white bg-dark d-flex">
                                     <h1 class="ml-5 pl-5 pt-5 d-inline align-middle">Categoria: {$categoria->coleccion}</h1>
                                 </div>
                             </div>
@@ -36,26 +36,22 @@
                                         <div class="modal fade" id="borrar{$prenda->id}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content ">
-                                                    <form class="form-inline" action="deleteProducto/{$prenda->id}" method="GET">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Estas seguro de que quieres borrar la {$prenda->tipo}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Estas seguro de que quieres borrar la  prenda {$prenda->tipo} de la {$categoria->coleccion}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            
-                                                            <div class="btn-group btn-group-lg m-0 mt-3" role="group"> 
-                                                                <button type="button" class="border-0 close">
-                                                                    <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
-                                                                        Cancelar
-                                                                    </button>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="btn-group btn-group-lg m-0 mt-3" role="group"> 
+                                                            <button type="button" class="border-0 close">
+                                                                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
+                                                                    Cancelar
                                                                 </button>
-                                                                {* <a href="borrar/{$prenda->id}" class="btn btn-danger stretched-link text-white">Confirmar</a>'. *}
-                                                                <button type="submit" class="btn btn-danger stretched-link text-white">Submit</button>
-                                                            </div>
+                                                            </button>
+                                                            <a href="deleteProducto/{$prenda->id}" class="btn btn-danger stretched-link text-white">Confirmar</a>'.
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
