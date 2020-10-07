@@ -17,13 +17,12 @@ require_once('libs/smarty/libs/Smarty.class.php');
             
         }
 
-        function showCategorias($categorias,$loginIn){
+        function showCategorias($categorias,$loginIn){ 
             $smarty = new Smarty();
             $smarty->assign('BASE_URL', BASE_URL);
             $smarty->assign('categorias', $categorias, false);
             $smarty->assign('loginIn', $loginIn, false);
             $smarty->display('templates/categorias.tpl');
-            $smarty-> display('templates/header.tpl');
             
         }
 
@@ -39,6 +38,12 @@ require_once('libs/smarty/libs/Smarty.class.php');
 
         function ShowHomeLocation(){
             header("Location: ".BASE_URL."home");
+        }
+        function ShowCategoriasLocation(){
+            header("Location: ".BASE_URL."categorias");
+        }
+        function ShowCategoriaLocation($id_categoria){
+            header("Location: ".BASE_URL."categoria/$id_categoria");
         }
     }
 ?>

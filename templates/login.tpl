@@ -4,7 +4,6 @@
         <strong>{$message}</strong>
     </div>
 {/if}
-    <section id="cover" class="min-vh-50">
         <div id="cover-caption">
             <div class="container">
                 <div class="row text-black">
@@ -28,5 +27,4 @@
                 </div>
             </div>
         </div>
-    </section>
 {include file="footer.tpl"}

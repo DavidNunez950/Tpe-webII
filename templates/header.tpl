@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/css.css"  type="text/css">
+    <link rel="stylesheet" href="{$BASE_URL}css/css.css"  type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     
     <script src="jquery-1.3.2.min.js" type="text/javascript"></script>   
@@ -29,16 +29,12 @@
                             <li class="nav-item active">
                                 <a class="nav-link display-5 text-white" href="categorias">Categorias</a>
                             </li>
-                            <li class="nav-item active">
-                                
-                            </li>
                         </ul>
                     </div>
                     <a class="nav-link display-5 text-white" href="login">Login</a>
                     <figure class="figure d-flex flex-column justify-content-center align-items-center pr-5 mr-5">
                         <img src="https://thumbs.dreamstime.com/b/icono-del-usuario-s%C3%ADmbolo-humano-de-la-persona-muestra-inicio-sesi%C3%B3n-avatar-ejemplo-vector-aislado-en-fondo-moderno-118096858.jpg" class="rounded-circle" width="75px" height="75px" >
-                    </figure>
-                     
+                    </figure>                  
                 </nav>
             </div>
         </div>
