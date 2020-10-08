@@ -107,9 +107,7 @@
         }
         function IsUserLogin(){
             session_start();
-            return $_SESSION["EMAIL"] != null;
+            return isset($_SESSION["EMAIL"]);
         }
-    
-
     }
 ?>

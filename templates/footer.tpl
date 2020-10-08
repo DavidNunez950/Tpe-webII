@@ -1,5 +1,5 @@
     <div class="container-fluid m-0 bg-dark text-white">
-        <div class="row d-flex justify-content-around ">
+        <div class="row d-flex justify-content-around p-5">
             <div class="d-flex">
                 <div class="col-6 col-md-4">
                     <h5>Contacto:</h5>
