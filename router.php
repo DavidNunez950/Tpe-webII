@@ -20,6 +20,7 @@
     $r->addRoute("logout", "GET", "UserController", "Logout");
     $r->addRoute("verifyUser", "POST", "UserController", "VerifyUser");
     
+    $r->addRoute("productos", "GET", "indumentariaController", "MostrarTodosLosProductos");
     $r->addRoute("insertProducto/:ID", "POST", "indumentariaController", "insertProductoEnCategoria");
     $r->addRoute("deleteProducto/:ID", "GET", "indumentariaController", "deleteProducto");
     $r->addRoute("editProducto/:ID", "POST", "indumentariaController", "editProducto");
@@ -28,6 +29,7 @@
     $r->addRoute("deleteCategoria/:ID", "GET", "indumentariaController", "deleteCategoria");
     $r->addRoute("editCategoria/:ID", "POST", "indumentariaController", "editCategoria");
     $r->addRoute("categoria/:ID", "GET", "indumentariaController", "showProducto");
+    $r->addRoute("insertProductoEnCategoria", "POST", "indumentariaController", "InsertarProductoEnCategoria");
 
     $r->setDefaultRoute("IndumentariaController", "Home");
 

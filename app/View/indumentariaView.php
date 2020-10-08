@@ -35,6 +35,15 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $smarty-> display('templates/tabla.tpl');
             
         }
+        function showAllCategorias($productos,$loginIn,$categorias){
+            var_dump($categorias);
+            $smarty = new Smarty();
+            $smarty->assign('BASE_URL', BASE_URL);
+            $smarty->assign('producto', $productos, true);
+            $smarty->assign('categorias', $categorias, true);
+            $smarty->assign('loginIn', $loginIn, false);
+            $smarty-> display('templates/productos.tpl');
+        }
 
         function ShowHomeLocation(){
             header("Location: ".BASE_URL."home");

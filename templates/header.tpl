@@ -29,6 +29,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link display-5 text-white" href="categorias">Categorias</a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link display-5 text-white" href="productos">Productos</a>
+                            </li>
                         </ul>
                     </div>
                     <a class="nav-link display-5 text-white" href="login">Login</a>

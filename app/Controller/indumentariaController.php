@@ -20,8 +20,8 @@
 
         function Home() {
             // $this->checkLoggedIn();
-            $categoria = $this->CategoriaModel->GetCategoria();
-            $this->view->showHome($categoria);
+           // $categoria = $this->CategoriaModel->GetCategoria();
+            $this->view->showHome();
         }
         // 1.b Funciones para realizar acciones de ABM con la tabla de categorias
 
@@ -88,6 +88,21 @@
             $categoria = $this->CategoriaModel->GetCategoria();
             $IsUserLogin = $this->IsUserLogin();
             $this->view->showCategorias($categoria,$IsUserLogin);
+        }
+        function MostrarTodosLosProductos(){
+            $productos = $this->ProductoModel->GetProductoConCategoria();
+            $categoria = $this->CategoriaModel->GetCategoria();
+            $IsUserLogin = $this->IsUserLogin();
+            $this->view->showAllCategorias($productos,$IsUserLogin,$categoria);
+        }
+
+        function InsertarProductoEnCategoria() {
+            $id_categoria = $_POST['categoria'];
+            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
+                $this->ProductoModel->InsertProducto($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_categoria);
+            }
+            $this->view->ShowCategoriaLocation($id_categoria);
+
         }
 
         private function checkLoggedIn(){
