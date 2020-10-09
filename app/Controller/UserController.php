@@ -14,7 +14,7 @@ class UserController{
     }
 
     function Login(){
-        $this->view->ShowLogin();
+        $this->view->RenderLogin();
     }
 
     function Logout(){
@@ -36,21 +36,13 @@ class UserController{
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
                 }else{
-                    $this->view->ShowLogin("Contraseña incorrecta");
+                    $this->view->RenderLogin("Contraseña incorrecta");
                 }
             }else{
-                $this->view->ShowLogin("El usuario no existe");
+                $this->view->RenderLogin("El usuario no existe");
             }
         }
     }
-    function IsUserLogin(){
-
-        session_start();
-        return  $_SESSION["EMAIL"] != "";      
-    }
- 
-
 }
-
 
 ?>
