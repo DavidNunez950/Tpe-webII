@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2020 a las 01:21:25
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.9
+-- Host: localhost:3306
+-- Generation Time: Oct 11, 2020 at 03:12 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_indumentaria`
+-- Database: `db_indumentaria`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -34,21 +35,18 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `categoria`
+-- Dumping data for table `categoria`
 --
 
 INSERT INTO `categoria` (`id`, `coleccion`, `url_img`) VALUES
 (1, 'Colección Otoño 2020', 'https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-(2, 'Colección Otoño 2020', 'https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-(3, 'Colección Verano 2021', 'https://tuneatulinux.files.wordpress.com/2011/06/at_the_beach_by_discoverist.jpg'),
-(4, 'Colección Verano 2021', 'https://tuneatulinux.files.wordpress.com/2011/06/at_the_beach_by_discoverist.jpg'),
-(9, 'Colección Otoño 2021', 'https://ca-times.brightspotcdn.com/dims4/default/f340c74/2147483647/strip/true/crop/600x500+0+0/resize/840x700!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fe0%2Fdb%2F0e83c62d421c94e0154c1c20eaa0%2F2017-mclaren-650s.jpg'),
-(13, 'Colección Invierno 2021', 'https://decoracionyjardines.com/wp-content/uploads/2015/04/Flores-para-decorar-en-primavera-1.jpg');
+(13, 'Colección primavera 2021', 'https://decoracionyjardines.com/wp-content/uploads/2015/04/Flores-para-decorar-en-primavera-1.jpg'),
+(15, 'Colección otoño 2021', 'https://imagenes.milenio.com/KwMz7kuKcaOBJB0C8rrPu40Myy8=/936x566/https://www.milenio.com/uploads/media/2019/09/20/el-de-septiembre-es-la_0_10_500_312.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Table structure for table `producto`
 --
 
 CREATE TABLE `producto` (
@@ -60,17 +58,28 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `producto`
+-- Dumping data for table `producto`
 --
 
 INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`) VALUES
-(7, 'Remera', 'Rojo flama', 'X', 1),
-(10, 'Pantalon', 'Verde', 'X', 1);
+(7, 'Zapatillas', 'Rojo Flama', 'XXXL', 1),
+(10, 'Pantalon', 'Verde', 'X', 1),
+(13, 'Camisa', 'Amarillo', 'XS', 1),
+(14, 'Zapatillas', 'Gris', 'XS', 1),
+(16, 'Buzo', 'Negro', 'XXXL', 15),
+(17, 'Zapatillas', 'Gris', 'XXXL', 13),
+(18, 'Camisa', 'Amarillo', 'XS', 13),
+(19, 'Jean', 'Gris', 'S', 13),
+(20, 'Camisa', 'Amarillo', 'XS', 13),
+(21, 'Zapatillas', 'Gris', 'XS', 13),
+(22, 'Buzo', 'Verde', 'XXL', 1),
+(23, 'Sueter', 'Verde', 'XS', 15),
+(24, 'Camisa', 'Gris', 'XXXL', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user_data`
+-- Table structure for table `user_data`
 --
 
 CREATE TABLE `user_data` (
@@ -82,7 +91,7 @@ CREATE TABLE `user_data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `user_data`
+-- Dumping data for table `user_data`
 --
 
 INSERT INTO `user_data` (`id`, `user`, `email`, `password`, `admin`) VALUES
@@ -90,56 +99,56 @@ INSERT INTO `user_data` (`id`, `user`, `email`, `password`, `admin`) VALUES
 (2, 'administradorUno', 'admin@uno.com', '$2y$10$guxOazOWv/DwW5U48k04SOJWClIZ11UgSq6DFwr4dCk', 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `producto`
+-- Indexes for table `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_tipo` (`id_categoria`);
 
 --
--- Indices de la tabla `user_data`
+-- Indexes for table `user_data`
 --
 ALTER TABLE `user_data`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `categoria`
+-- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
+-- AUTO_INCREMENT for table `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT de la tabla `user_data`
+-- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `producto`
+-- Constraints for table `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`);
