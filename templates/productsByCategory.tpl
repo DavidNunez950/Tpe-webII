@@ -18,9 +18,7 @@
                             <th scope="col">Prenda</th>
                             <th scope="col">Color</th>
                             <th scope="col">Talle</th>
-                            {if $loginIn eq true}
-                            <th scope="col">Editar</th>
-                            {/if}
+                            <th scope="col">Datos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +31,7 @@
                             <td class="w-25">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$prenda->id}" aria-expanded="false">Borrar</button>
+                                    <a href="product/{$prenda->id}" class="btn btn-success stretched-link text-white">Ver</a>
                                     <button type="button"  class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$prenda->id}" aria-expanded="false">Editar</button>
                                 </div>
                             </td>
@@ -52,7 +51,7 @@
                                                         Cancelar
                                                     </button>
                                                 </button>
-                                                <a href="deleteProduct/{$prenda->id}" class="btn btn-danger stretched-link text-white">Confirmar</a>'.
+                                                <a href="deleteProduct/{$prenda->id}" class="btn btn-danger stretched-link text-white">Confirmar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -100,6 +99,12 @@
                                     </div>
                                 </div>
                             </div>
+                            {else}
+                            <td class="w-25">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="product/{$prenda->id}" class="btn btn-success stretched-link text-white">Ver</a>
+                                </div>
+                            </td>
                             {/if}
                         </tr>
                     {/foreach}

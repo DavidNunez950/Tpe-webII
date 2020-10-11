@@ -8,10 +8,10 @@ class UserView{
     
 
     function __construct(){
-        $this->title = "Login";
+        $this->title = "login";
     }
 
-    function RenderLogin($message = ""){
+    function renderlogin($message = ""){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title, true);
         $smarty->assign('message', $message);

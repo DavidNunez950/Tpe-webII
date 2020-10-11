@@ -7,53 +7,67 @@ require_once 'libs/smarty/libs/Smarty.class.php';
         private $title;
 
         function __construct() {
-            $this->title  = "s";
+            $this->title  = "TodoRopa";
         }
 
-        function RenderHome(){
+        function renderHome($loginIn, $userName){
             $smarty = new Smarty();
             $smarty->assign('BASE_URL', BASE_URL);
+            $smarty->assign('loginIn', $loginIn, false);
+            $smarty->assign('userName', $userName, true);
             $smarty->display('templates/home.tpl');
         }
 
-        function RenderCategories($categories,$loginIn){ 
+        function renderCategories($categories,$loginIn, $userName){ 
             $smarty = new Smarty();
             $smarty->assign('BASE_URL', BASE_URL);
             $smarty->assign('categorias', $categories, false);
             $smarty->assign('loginIn', $loginIn, false);
+            $smarty->assign('userName', $userName, true);
             $smarty->display('templates/categories.tpl');
             
         }
 
-        function RenderProducts($categories, $products,$loginIn){
+        function renderProducts($categories, $products,$loginIn, $userName){
             $smarty = new Smarty();
             $smarty->assign('BASE_URL', BASE_URL);
             $smarty->assign('categoria', $categories, true);
             $smarty->assign('producto', $products, true);
             $smarty->assign('loginIn', $loginIn, false);
+            $smarty->assign('userName', $userName, true);
             $smarty->display('templates/productsByCategory.tpl');
-            
         }
-        function RenderAllProducsWithCategorys($productss, $categories, $loginIn){
+
+        function renderProduct($products,$loginIn, $userName) {
+            $smarty = new Smarty();
+            $smarty->assign('BASE_URL', BASE_URL);
+            $smarty->assign('producto', $products, true);
+            $smarty->assign('loginIn', $loginIn, false);
+            $smarty->assign('userName', $userName, true);
+            $smarty->display('templates/product.tpl');
+        }
+
+        function renderAllProducsWithCategorys($productss, $categories, $loginIn, $userName){
             $smarty = new Smarty();
             $smarty->assign('BASE_URL', BASE_URL);
             $smarty->assign('categorias', $categories, true);
             $smarty->assign('producto', $productss, true);
             $smarty->assign('loginIn', $loginIn, false);
+            $smarty->assign('userName', $userName, true);
             $smarty->display('templates/products.tpl');
         }
 
-        function ShowHomeLocation(){
+        function showHomeLocation(){
             header("Location: ".BASE_URL."Home");
         }
-        function ShowCategoriesLocation(){
+        function showCategoriesLocation(){
             header("Location: ".BASE_URL."categories");
         }
 
-        function ShowCategoryLocation($id_category){
+        function showCategoryLocation($id_category){
             header("Location: ".BASE_URL."category/$id_category");
         }
-        function ShowProductsLocation(){
+        function showProductsLocation(){
             header("Location: ".BASE_URL."products");
         }
     }

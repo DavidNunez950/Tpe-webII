@@ -17,11 +17,12 @@
     $r->addRoute("home", "GET", "IndumentariaController", "showHome");
     $r->addRoute("categories", "GET", "IndumentariaController", "showCategories");
 
-    $r->addRoute("login", "GET", "UserController", "Login");
-    $r->addRoute("logout", "GET", "UserController", "Logout");
-    $r->addRoute("verifyUser", "POST", "UserController", "VerifyUser");
+    $r->addRoute("login", "GET", "UserController", "login");
+    $r->addRoute("logout", "GET", "UserController", "logout");
+    $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     
-    $r->addRoute("products", "GET", "IndumentariaController", "ShowAllProducts");
+    $r->addRoute("products", "GET", "IndumentariaController", "showAllProducts");
+    $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");
     $r->addRoute("editProduct/:ID", "POST", "IndumentariaController", "editProducts");
