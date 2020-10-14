@@ -110,18 +110,19 @@
                                         <form class="form p-0 m-0" action="insertProductoEnCategoria" method="POST">
                                             <td>
                                                 <div class="form-group m-0 p-0">
-                                                    <label for="tipo"></label>
+                                                    {* <label for="tipo">Tipo</label> *}
                                                     <input type="text" class="form-control" name="tipo" required>
                                                 </div>
                                             </td>
-                                                <td>
-                                                    <div class="form-group m-0 p-0">
-                                                        <label for="color"></label>
-                                                        <input type="text" class="form-control" name="color" required>
-                                                    </div>
-                                                <td>
+                                            <td>
                                                 <div class="form-group m-0 p-0">
-                                                    <label for="talle"></label>
+                                                    {* <label for="color">Color</label> *}
+                                                    <input type="text" class="form-control" name="color" required>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group m-0 p-0">
+                                                    {* <label for="talle">Talle</label> *}
                                                     <select class="form-control  m-0 p-0" name="talle">
                                                         <optgroup label="Selecione su tipo de talle preferido">
                                                             <option value="XS">XS</option>
@@ -135,19 +136,21 @@
                                                         </optgroup>
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                            <label for="categoria">Categoria</label>
-                                                            <select class="form-control" name="categoria">
-                                                                <optgroup label="Selecione categoria">
-                                                                   {foreach from=$categorias item=categoria}
-                                                                    <option value="{$categoria->id}">{$categoria->$coleccion}</option>
-                                                                   {/foreach}
-                                                                </optgroup>
-                                                            </select>
-                                                        </div>
                                             </td>
                                             <td>
-                                                <div class="btn-group btn-group-lg m-0 mt-3" role="group">
+                                                <div class="form-group">
+                                                    {* <label for="categoria">Categoria</label> *}
+                                                    <select class="form-control" name="categoria">
+                                                        <optgroup label="Selecione categoria">
+                                                            {foreach from=$categorias item=categoria}
+                                                            <option value="{$categoria->id}">{$categoria->coleccion}</option>
+                                                            {/foreach}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group btn-group-lg m-0 mt-0" role="group">
                                                     <button type="sumbit" class="btn btn-outline-success btn-sm">Agregar</button>
                                                 </div>
                                             </td>

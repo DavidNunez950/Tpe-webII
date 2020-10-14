@@ -36,7 +36,6 @@ require_once('libs/smarty/libs/Smarty.class.php');
             
         }
         function showAllCategorias($productos,$loginIn,$categorias){
-            var_dump($categorias);
             $smarty = new Smarty();
             $smarty->assign('BASE_URL', BASE_URL);
             $smarty->assign('producto', $productos, true);

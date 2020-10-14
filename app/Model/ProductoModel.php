@@ -1,5 +1,6 @@
 <?php
 
+
     class ProductoModel {
 
         private $db;
@@ -34,6 +35,7 @@
             $sentencia = $this->db->prepare("UPDATE producto SET tipo=?, color=?, talle=? WHERE id=?");
             $sentencia->execute(array($tipo,$color,$talle,$id));
         }
+        
         
     }
 ?>
