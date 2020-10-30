@@ -7,10 +7,12 @@ class UserController{
 
     private $view;
     private $model;
+    private $AuthHelper;
 
     function __construct(){
         $this->view = new UserView();
         $this->model = new UserModel();
+        $this->AuthHelper =  new AuthHelper();
     }
 
     function login(){
@@ -18,8 +20,7 @@ class UserController{
     }
 
     function logout(){
-        session_start();
-        session_destroy();
+        $this->AuthHelper->logout();
         header("Location: ".LOGIN);
     }
 
@@ -32,8 +33,7 @@ class UserController{
             if(isset($userFromDB) && $userFromDB){  
                 if (password_verify($pass, $userFromDB->password)){
                     session_start();
-                    $_SESSION["NAME"] = $userFromDB->user;
-                    $_SESSION["EMAIL"] = $userFromDB->email;
+                    $this->AuthHelper->login($userFromDB);
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
                 }else{
