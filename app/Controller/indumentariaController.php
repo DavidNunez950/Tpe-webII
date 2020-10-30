@@ -29,14 +29,14 @@
         // 1.a Funciones para ver Categorys
         function showCategories() {
             $category = $this->CategoryModel->getCategories();
-            $loginIn = $this->AuthHelper->AuthHelper->isUserLogin();
-            $userName = $this->AuthHelper->AuthHelper->getUserLoged();
+            $loginIn = $this->AuthHelper->isUserLogin();
+            $userName = $this->AuthHelper->getUserLoged();
             $this->view->renderCategories($category,$loginIn, $userName);
         }
 
         // 1.b Funciones para realizar acciones de ABM con la tabla de Categorys
         function insertCategory(){
-            $this->AuthHelper->AuthHelper->checkLoggedIn();
+            $this->AuthHelper->checkLoggedIn();
             if ((isset($_POST['url_img'])&&!empty($_POST['url_img']))
             &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
                 $this->CategoryModel-> insertCategory($_POST['url_img'],$_POST['coleccion']);
@@ -46,14 +46,14 @@
         }         
 
         function deleteCategory($params = null){
-            $this->AuthHelper->AuthHelper->checkLoggedIn();
+            $this->AuthHelper->checkLoggedIn();
             $id_category = $params[':ID'];
             $this->CategoryModel->deleteCategory($id_category);
             $this->view->showCategoriesLocation();
         }
 
         function editCategory($params = null){
-            $this->AuthHelper->AuthHelper->checkLoggedIn();
+            $this->AuthHelper->checkLoggedIn();
             $id_category = $params[':ID'];
             if ((isset($_POST['url_img'])&&!empty($_POST['url_img']))
             &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
