@@ -7,124 +7,154 @@
     class IndumentariaController{
 
         private $view;
-        private $CategoriaModel;
-        private $ProductoModel;
+        private $CategoryModel;
+        private $ProductModel;
 
         function __construct() {
             $this->view = new IndumentariaView();
-            $this->CategoriaModel = new CategoriaModel();
-            $this->ProductoModel = new ProductoModel();
+            $this->CategoryModel = new CategoryModel();
+            $this->ProductModel = new ProductModel();
         }
 
-        // 1.a Funciones para ver categorias
-
-        function Home() {
-            // $this->checkLoggedIn();
-           // $categoria = $this->CategoriaModel->GetCategoria();
-            $this->view->showHome();
+        // 0.a Funcion para ver el home de la página
+        function showHome() {
+            $loginIn = $this->isUserLogin();
+            $userName = $this->getUserLoged();
+            $this->view->renderHome($loginIn, $userName);
         }
-        // 1.b Funciones para realizar acciones de ABM con la tabla de categorias
 
-        function insertCategoria(){
-            // $this->checkLoggedIn();
-            $this->CategoriaModel-> InsertCategoria($_POST['input_url_img'],$_POST['input_coleccion']);
-            $this->view->ShowCategoriasLocation();
-        } 
+        // 1.a Funciones para ver Categorys
+        function showCategories() {
+            $category = $this->CategoryModel->getCategories();
+            $loginIn = $this->isUserLogin();
+            $userName = $this->getUserLoged();
+            $this->view->renderCategories($category,$loginIn, $userName);
+        }
 
-        function deleteCategoria($params = null){
+        // 1.b Funciones para realizar acciones de ABM con la tabla de Categorys
+        function insertCategory(){
             $this->checkLoggedIn();
-            $id_categoria = $params[':ID'];
-            $this->CategoriaModel->DeleteCategoria($id_categoria);
-            $this->view->ShowCategoriasLocation();
-        }
+            if ((isset($_POST['url_img'])&&!empty($_POST['url_img']))
+            &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
+                $this->CategoryModel-> insertCategory($_POST['url_img'],$_POST['coleccion']);
+                $this->view->showCategoriesLocation();
+                echo "saasd";
+            }
+        }         
 
-        function editCategoria($params = null){
+        function deleteCategory($params = null){
             $this->checkLoggedIn();
-            $id_categoria = $params[':ID'];
-            $url_img = $_POST['url_img'];
-            $coleccion= $_POST['coleccion'];
-            $this->CategoriaModel->EditCategoria($id_categoria, $url_img, $coleccion);
-            $this->view->ShowCategoriasLocation();
+            $id_category = $params[':ID'];
+            $this->CategoryModel->deleteCategory($id_category);
+            $this->view->showCategoriesLocation();
         }
 
-        // 2.a Funciones para ver categorias
-        function showProducto($params = null){
-            // $this->checkLoggedIn();
-            $id_categoria = $params[':ID'];
-            $IsUserLogin = $this->IsUserLogin();
-            $categoria =  $this->CategoriaModel->GetCategoriaPorID($id_categoria);
-            $producto = $this->ProductoModel->GetProducto($id_categoria);
-            $this->view->showProducto($categoria[0], $producto,$IsUserLogin);
-        }
-
-        // 2.b Funciones para realizar acciones de ABM con productos
-        function insertProductoEnCategoria($params = null){
-            // $this->checkLoggedIn();
-            $id_categoria = $params[':ID'];
-            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
-                $this->ProductoModel->InsertProducto($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_categoria);
+        function editCategory($params = null){
+            $this->checkLoggedIn();
+            $id_category = $params[':ID'];
+            if ((isset($_POST['url_img'])&&!empty($_POST['url_img']))
+            &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
+                $this->CategoryModel->editCategory($id_category, $_POST['url_img'], $_POST['coleccion']);
+                $this->view->showCategoriesLocation();
             }
-            $this->view->ShowCategoriaLocation($id_categoria);
         }
 
-        function editProducto($params = null){
-            // $this->checkLoggedIn();
-            $id_producto = $params[':ID'];
+        // 2.a Funciones para ver los productss
+        function showProducts($params = null){
+            $id_category = $params[':ID'];
+            $category =  $this->CategoryModel->getCategoryById($id_category);
+            $products = $this->ProductModel->getProductsByIdCategory($id_category);
+            $loginIn = $this->isUserLogin();
+            $userName = $this->getUserLoged();
+            $this->view->renderProducts($category[0], $products,$loginIn, $userName);
+        }
+
+        function showProductById($params = null){
+            $id_product = $params[':ID'];
+            $products = $this->ProductModel->getProductsById($id_product);
+            $loginIn = $this->isUserLogin();
+            $userName = $this->getUserLoged();
+            $this->view->renderProduct($products[0],$loginIn, $userName);
+        }
+
+        // 2.b Funciones para realizar acciones de ABM con productss
+        function insertProductsInCategoryByGET($params = null){
+            $this->checkLoggedIn();
+            $id_category = $params[':ID'];
             if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
-                $this->ProductoModel->EditProducto($id_producto, $_POST['color'], $_POST['talle'], $_POST['tipo']);
-            } 
-            $this->view->ShowCategoriasLocation();
-        }
-
-        function deleteProducto($params = null){
-            // $this->checkLoggedIn();
-            $id_producto = $params[':ID'];
-            $this->ProductoModel->DeleteProducto($id_producto);
-            $this->view->ShowCategoriasLocation();
-        }
-
-        function Categorias() {
-            // $this->checkLoggedIn();
-            $categoria = $this->CategoriaModel->GetCategoria();
-            $IsUserLogin = $this->IsUserLogin();
-            $this->view->showCategorias($categoria,$IsUserLogin);
-        }
-        function MostrarTodosLosProductos(){
-            $productos = $this->ProductoModel->GetProductoConCategoria();
-            $categoria = $this->CategoriaModel->GetCategoria();
-            $IsUserLogin = $this->IsUserLogin();
-            $this->view->showAllCategorias($productos,$IsUserLogin,$categoria);
-        }
-
-        function InsertarProductoEnCategoria() {
-            $id_categoria = $_POST['categoria'];
-            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
-                $this->ProductoModel->InsertProducto($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_categoria);
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category);
             }
-            $this->view->ShowCategoriaLocation($id_categoria);
-
+            $this->view->showCategoryLocation($id_category);
         }
 
+        function editProducts($params = null){
+            $this->checkLoggedIn();
+            $id_products = $params[':ID'];
+            if ((isset($_POST['color'])&&!empty($_POST['color']))
+            &&(isset($_POST['talle'])&&!empty($_POST['talle']))
+            &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))) { 
+                $this->ProductModel->editProduct($id_products, $_POST['color'], $_POST['talle'], $_POST['tipo']);
+            }
+            $this->view->showCategoriesLocation();
+        }
+
+        function deleteProducts($params = null){
+            $this->checkLoggedIn();
+            $id_products = $params[':ID'];
+            $this->ProductModel->deleteProduct($id_products);
+            $this->view->showCategoriesLocation();
+        }
+
+        // 3.a Función para ver todas las Categorys con sus productss
+        function showAllProducts(){
+            $productss = $this->ProductModel->getProductsWithCategory();
+            $category = $this->CategoryModel->getCategories();
+            $loginIn = $this->isUserLogin();
+            $userName = $this->getUserLoged();
+            $this->view->renderAllProducsWithCategorys($productss,$category, $loginIn, $userName);
+        }
+
+        // 3.b Función para insertar products en Category por POST
+        function insertProductsInCategoryByPOST() {
+            $this->checkLoggedIn();
+            if ((isset($_POST['color'])&&!empty($_POST['color']))
+            &&(isset($_POST['talle'])&&!empty($_POST['talle']))
+            &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
+            &&(isset($_POST['id_category'])&&!empty($_POST['id_category']))) { 
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category']);
+                $this->view->showCategoryLocation($_POST['id_category']);
+            } else {
+                $this->view->showProductsLocation();
+            }
+        }
+
+        // 4.a Función para chekear que el usuario está logeado y no realise accines de ABM con las url del sitio
         private function checkLoggedIn(){
             session_start();
-            
-            if(!isset($_SESSION["EMAIL"])){
-                header("Location: ". LOGIN);
+            if(!$this->isUserLogin()){
+                header("Location: ".LOGIN);
                 die();
             }else{
-                if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1000000)) { 
-                    header("Location: ". LOGOUT);
+                if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1000000)) { 
+                    header("Location: ".LOGOUT);
                     die();
                 } 
-            
                 $_SESSION['LAST_ACTIVITY'] = time();
             }
         }
-        function IsUserLogin(){
-            session_start();
-            return isset($_SESSION["EMAIL"]);
-        }
-    
 
+        // 4.b Función para chekear que el usuario está logeado y mostrar, o no, el HTML para realizar las acciones de ABM
+        function isUserLogin(){
+            session_start();
+            return (isset($_SESSION["NAME"])&&isset($_SESSION["EMAIL"]));
+        }
+
+        // 4.c Obtener el nmbre de usuario
+        function getUserLoged(){
+            session_start();
+            if($this->isUserLogin()) {
+                return $_SESSION["NAME"];
+            }
+        }
     }
-?>
+?>    

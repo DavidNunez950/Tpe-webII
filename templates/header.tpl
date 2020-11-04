@@ -27,14 +27,30 @@
                                 <a class="nav-link display-5 text-white" href="home">Home</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link display-5 text-white" href="categorias">Categorias</a>
+                                <a class="nav-link display-5 text-white" href="categories">Categorias</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link display-5 text-white" href="productos">Productos</a>
+                                <a class="nav-link display-5 text-white" href="products">Productos</a>
                             </li>
                         </ul>
                     </div>
-                    <a class="nav-link display-5 text-white" href="login">Login</a>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary bg-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {if $loginIn eq false}
+                            Ingresar?
+                            {else}
+                            {$userName}
+                            {/if}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="login">Login</a>
+                            {if $loginIn eq false}
+                            <a class="dropdown-item disabled" href="logout">Logout</a>
+                            {else}
+                            <a class="dropdown-item" href="logout">Logout</a>
+                            {/if}
+                        </div>
+                    </div>
                     <figure class="figure d-flex flex-column justify-content-center align-items-center pr-5 mr-5">
                         <img src="https://thumbs.dreamstime.com/b/icono-del-usuario-s%C3%ADmbolo-humano-de-la-persona-muestra-inicio-sesi%C3%B3n-avatar-ejemplo-vector-aislado-en-fondo-moderno-118096858.jpg" class="rounded-circle" width="75px" height="75px" >
                     </figure>                  
