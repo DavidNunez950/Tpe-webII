@@ -79,10 +79,10 @@ INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_data`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `user_data` (
+CREATE TABLE `user` (
   `id` int(50) NOT NULL,
   `user` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -91,10 +91,10 @@ CREATE TABLE `user_data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user_data`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user_data` (`id`, `user`, `email`, `password`, `admin`) VALUES
+INSERT INTO `user` (`id`, `user`, `email`, `password`, `admin`) VALUES
 (1, 'usuario', 'usuario@uno.com', '$2y$10$yppTcGTXlZWE4scjl8lVce5aaMm.ZlMPDkeiqG5fCie32LnVBrEM.', 0),
 (2, 'administradorUno', 'admin@uno.com', '$2y$10$guxOazOWv/DwW5U48k04SOJWClIZ11UgSq6DFwr4dCk', 1);
 
@@ -116,9 +116,9 @@ ALTER TABLE `producto`
   ADD KEY `id_tipo` (`id_categoria`);
 
 --
--- Indexes for table `user_data`
+-- Indexes for table `user`
 --
-ALTER TABLE `user_data`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -138,9 +138,9 @@ ALTER TABLE `producto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `user_data`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `user_data`
+ALTER TABLE `user`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --

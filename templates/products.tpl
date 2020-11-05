@@ -29,7 +29,7 @@
                             <td>{$prenda->color}</td>
                             <td>{$prenda->talle}</td>
                             <td>{$prenda->coleccion}</td>
-                            {if $loginIn eq true}
+                            {if $userData.user.rol.colab eq true}
                             <td class="w-25">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$prenda->id}" aria-expanded="false">Borrar</button>
@@ -110,7 +110,7 @@
                             {/if}
                         </tr>
                     {/foreach}
-                        {if $loginIn eq true}
+                        {if $userData.user.rol.colab eq true}
                         <tr>
                             <form class="form p-0 m-0" action="insertProductInCategory" method="POST">
                                 <td>

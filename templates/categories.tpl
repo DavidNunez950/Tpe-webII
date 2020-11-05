@@ -12,7 +12,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center"> 
                             <a href="category/{$categoria->id}"><img src="{$categoria->url_img}" class="rounded-circle" width="75px" height="75px"/></a>
                             <a href="category/{$categoria->id}">{$categoria->coleccion|upper}</a>
-                            {if $loginIn eq true}
+                            {if $userData.user.rol.colab eq true}
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$categoria->id}" aria-expanded="false">Borrar</button>
                                 <button type="button"  class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$categoria->id}" aria-expanded="false">Editar</button>
@@ -71,7 +71,7 @@
                     {/foreach}
                 </ul>
             </div>
-            {if $loginIn eq true}
+            {if $userData.user.rol.colab eq true}
             <div>
                 <form class="form p-0 m-0 mt-2 col-4" action="insertCategory" method="POST">
                     <div class="d-flex">
@@ -98,5 +98,4 @@
             {/if}
         </div>
     </div>
-
 {include file="footer.tpl"}

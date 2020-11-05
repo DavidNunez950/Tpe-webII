@@ -16,7 +16,8 @@ class UserController{
     }
 
     function login(){
-        $this->view->renderlogin();
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderlogin("", $userStatus);
     }
 
     function logout(){
@@ -43,6 +44,35 @@ class UserController{
                 $this->view->renderlogin("El usuario no existe");
             }
         }
+    }
+
+    function getUsers() {
+        $this->AuthHelper->checkAdminUsser();
+        $users = $this->model->getUsers();
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderUsers($users, $userStatus);
+    }
+    
+    function getUserBydId($params = null) {
+        $this->AuthHelper->checkAdminUsser();
+        $id = $params[':ID'];
+        $users = $this->model->getUserById($id);
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderUser($users, $userStatus);
+    }
+
+    function deleteUser($params = null) {
+        $this->AuthHelper->checkAdminUsser();
+        $id = $params[':ID'];
+        $this->model->deleteUser($id);
+        $this->view->renderUserLocation();  
+    }
+
+    function changeAdministrationPermissions($params = null) {
+        $this->AuthHelper->checkAdminUsser();
+        $id = $params[':ID'];
+        $this->model->changeAdministrationPermissions($id);
+        $this->view->renderUserLocation();
     }
 }
 

@@ -11,14 +11,34 @@ class UserView{
         $this->title = "login";
     }
 
-    function renderlogin($message = ""){
+    function renderlogin($message = "", $userData){
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title, true);
+        $smarty->assign('titulo', $this->title, true);
         $smarty->assign('message', $message);
         $smarty->assign('BASE_URL', BASE_URL, true);
-        $smarty->display('templates/login.tpl'); // muestro el template 
+        $smarty->assign('userData', $userData, true);
+        $smarty->display('templates/login.tpl');
+    }
+
+    function renderUsers($users, $userData) {
+        $smarty = new Smarty();
+        $smarty->assign('users', $users, true);
+        $smarty->assign('BASE_URL', BASE_URL, true);
+        $smarty->assign('userData', $userData, true);
+        $smarty->display('templates/users.tpl'); 
+    }
+
+    function renderUser($user, $userData) {
+        $smarty = new Smarty();
+        $smarty->assign('user', $user, true);
+        $smarty->assign('BASE_URL', BASE_URL, true);
+        $smarty->assign('userData', $userData, true);
+        $smarty->display('templates/user.tpl'); 
+    }
+
+    function renderUserLocation() {
+        header("Location: ".BASE_URL."users");
     }
 }
-
 
 ?>

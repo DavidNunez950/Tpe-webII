@@ -21,17 +21,15 @@
 
         // 0.a Funcion para ver el home de la página
         function showHome() {
-            $loginIn = $this->AuthHelper->isUserLogin();
-            $userName = $this->AuthHelper->getUserLoged();
-            $this->view->renderHome($loginIn, $userName);
+            $userStatus = $this->AuthHelper->getUserStatus();
+            $this->view->renderHome($userStatus);
         }
 
         // 1.a Funciones para ver Categorys
         function showCategories() {
             $category = $this->CategoryModel->getCategories();
-            $loginIn = $this->AuthHelper->isUserLogin();
-            $userName = $this->AuthHelper->getUserLoged();
-            $this->view->renderCategories($category,$loginIn, $userName);
+            $userStatus = $this->AuthHelper->getUserStatus();
+            $this->view->renderCategories($category, $userStatus);
         }
 
         // 1.b Funciones para realizar acciones de ABM con la tabla de Categorys
@@ -67,17 +65,15 @@
             $id_category = $params[':ID'];
             $category =  $this->CategoryModel->getCategoryById($id_category);
             $products = $this->ProductModel->getProductsByIdCategory($id_category);
-            $loginIn = $this->AuthHelper->isUserLogin();
-            $userName = $this->AuthHelper->getUserLoged();
-            $this->view->renderProducts($category[0], $products,$loginIn, $userName);
+            $userData = $this->AuthHelper->getUserStatus();
+            $this->view->renderProducts($category[0], $products,$userData);
         }
 
         function showProductById($params = null){
             $id_product = $params[':ID'];
             $products = $this->ProductModel->getProductsById($id_product);
-            $loginIn = $this->AuthHelper->isUserLogin();
-            $userName = $this->AuthHelper->getUserLoged();
-            $this->view->renderProduct($products[0],$loginIn, $userName);
+            $userData = $this->AuthHelper->getUserStatus();
+            $this->view->renderProduct($products[0],$userData);
         }
 
         // 2.b Funciones para realizar acciones de ABM con productss
@@ -112,9 +108,8 @@
         function showAllProducts(){
             $productss = $this->ProductModel->getProductsWithCategory();
             $category = $this->CategoryModel->getCategories();
-            $loginIn = $this->AuthHelper->isUserLogin();
-            $userName = $this->AuthHelper->getUserLoged();
-            $this->view->renderAllProducsWithCategorys($productss,$category, $loginIn, $userName);
+            $userData = $this->AuthHelper->getUserStatus();
+            $this->view->renderAllProducsWithCategorys($productss,$category, $userData);
         }
 
         // 3.b Función para insertar products en Category por POST
