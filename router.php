@@ -22,6 +22,7 @@
     $r->addRoute("logout", "GET", "UserController", "logout");
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     
+    
     $r->addRoute("products", "GET", "IndumentariaController", "showAllProducts");
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");
@@ -33,6 +34,8 @@
     $r->addRoute("users/:ID", "GET", "UserController", "getUserBydId");
     $r->addRoute("deleteUsers/:ID", "GET", "UserController", "deleteUser");
     $r->addRoute("changeAdministrationPermissions/:ID", "GET", "UserController", "changeAdministrationPermissions");
+    $r->addRoute("register", "GET", "UserController", "showRegister");
+    $r->addRoute("insertUser", "POST", "UserController", "insertUser");
 
     $r->addRoute("insertCategory", "POST", "IndumentariaController", "insertCategory");
     $r->addRoute("deleteCategory/:ID", "GET", "IndumentariaController", "deleteCategory");

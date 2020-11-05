@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 11, 2020 at 03:12 AM
+-- Generation Time: Nov 05, 2020 at 04:36 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -40,7 +40,7 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id`, `coleccion`, `url_img`) VALUES
 (1, 'Colección Otoño 2020', 'https://images.pexels.com/photos/1777321/pexels-photo-1777321.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-(13, 'Colección primavera 2021', 'https://decoracionyjardines.com/wp-content/uploads/2015/04/Flores-para-decorar-en-primavera-1.jpg'),
+(13, 'Coleccion', 'https://decoracionyjardines.com/wp-content/uploads/2015/04/Flores-para-decorar-en-primavera-1.jpg'),
 (15, 'Colección otoño 2021', 'https://imagenes.milenio.com/KwMz7kuKcaOBJB0C8rrPu40Myy8=/936x566/https://www.milenio.com/uploads/media/2019/09/20/el-de-septiembre-es-la_0_10_500_312.jpg');
 
 -- --------------------------------------------------------
@@ -73,8 +73,7 @@ INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`) VALUES
 (20, 'Camisa', 'Amarillo', 'XS', 13),
 (21, 'Zapatillas', 'Gris', 'XS', 13),
 (22, 'Buzo', 'Verde', 'XXL', 1),
-(23, 'Sueter', 'Verde', 'XS', 15),
-(24, 'Camisa', 'Gris', 'XXXL', 1);
+(25, 'Camisa', 'Gris', 'XXXL', 13);
 
 -- --------------------------------------------------------
 
@@ -84,19 +83,21 @@ INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`) VALUES
 
 CREATE TABLE `user` (
   `id` int(50) NOT NULL,
-  `user` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `admin` tinyint(1) NOT NULL
+  `admin` tinyint(1) NOT NULL,
+  `img` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user`, `email`, `password`, `admin`) VALUES
-(1, 'usuario', 'usuario@uno.com', '$2y$10$yppTcGTXlZWE4scjl8lVce5aaMm.ZlMPDkeiqG5fCie32LnVBrEM.', 0),
-(2, 'administradorUno', 'admin@uno.com', '$2y$10$guxOazOWv/DwW5U48k04SOJWClIZ11UgSq6DFwr4dCk', 1);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `admin`, `img`) VALUES
+(1, 'usuario', 'usuario@uno.com', '$2y$10$yppTcGTXlZWE4scjl8lVce5aaMm.ZlMPDkeiqG5fCie32LnVBrEM.', 1, ''),
+(2, 'administradorUno', 'admin@uno.com', '$2y$10$guxOazOWv/DwW5U48k04SOJWClIZ11UgSq6DFwr4dCk', 1, ''),
+(15, 'usuario test', 'usuario@gmail.com', 'asdsdfsdfgdfhgsrthnsrth', 0, '');
 
 --
 -- Indexes for dumped tables
@@ -129,19 +130,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

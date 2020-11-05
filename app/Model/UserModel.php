@@ -38,6 +38,11 @@ class UserModel{
         $query->execute(array($admin,$id));
         return $query->fetch(PDO::FETCH_OBJ);
     }
+
+    function insertUser($user, $mail, $pass, $admin){
+        $query = $this->db->prepare("INSERT INTO user(name,email,password,admin) VALUES(?,?,?,?)");  //password y admin palabra reservada         
+        $query->execute(array($user, $mail, $pass, $admin));
+    }
 }
 
 ?>

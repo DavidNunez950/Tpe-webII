@@ -24,8 +24,7 @@ require_once("app/Model/UserModel.php");
 
         // 1.a Función para chekear que el usuario está logeado y no realise accines de ABM con las url del sitio
         function checkLoggedIn(){
-            session_start();
-            if($this->getUserStatus()!=null) {
+            if($this->getUserStatus()['user']['rol']['colab']!=true) {
                 header("Location: ".LOGIN);
                 die();
             }else{
@@ -34,7 +33,6 @@ require_once("app/Model/UserModel.php");
         }
 
         function checkAdminUsser(){
-            session_start();
             if($this->getUserStatus()['user']['rol']['admin']!=true){
                 header("Location: ".LOGIN);
                 die();
@@ -63,16 +61,12 @@ require_once("app/Model/UserModel.php");
                     )
                 ),
             );
-                if(isset($_SESSION['NAME'])&&isset($_SESSION['EMAIL'])&&isset($_SESSION['ROL'])) {
-                $userStatus['user']['name']= (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
-                $userStatus['user']['email']= (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
-                $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0) )? true : false;
-                $userStatus['user']['rol']['admin'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']==1)) ? true : false;
-                
 
-            } else {
-                $userStatus = null;
-            }
+            $userStatus['user']['name']= (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
+            $userStatus['user']['email']= (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
+            $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0)) ? true : false;
+            $userStatus['user']['rol']['admin'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']==1)) ? true : false;
+        
             return $userStatus;
         }
 

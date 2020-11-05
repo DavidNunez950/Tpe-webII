@@ -36,6 +36,13 @@ class UserView{
         $smarty->display('templates/user.tpl'); 
     }
 
+    function renderRegister($userStatus){
+        $smarty = new Smarty();
+        $smarty->assign('BASE_URL', BASE_URL, true);
+        $smarty->assign('userData', $userStatus, true);
+        $smarty->display('templates/register.tpl'); 
+    }
+
     function renderUserLocation() {
         header("Location: ".BASE_URL."users");
     }
