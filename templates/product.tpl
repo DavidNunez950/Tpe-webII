@@ -16,7 +16,7 @@
                             <th scope="col">Color</th>
                             <th scope="col">Talle</th>
                             <th scope="col">Coleccion</th>
-                            {if $loginIn eq true}
+                            {if $userData.user.rol gte 0}
                             <th scope="col">Editar</th>
                             {/if}
                         </tr>
@@ -27,7 +27,7 @@
                             <td>{$producto->color}</td>
                             <td>{$producto->talle}</td>
                             <td>{$producto->coleccion}</td>
-                            {if $loginIn eq true}
+                            {if $userData.user.rol.colab eq true}
                             <td class="w-25">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$producto->id}" aria-expanded="false">Borrar</button>

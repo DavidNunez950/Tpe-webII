@@ -23,3 +23,16 @@
     padding-left: 125px;
     height: 250px;
 }
+
+.icon-user {
+    font-size: 75px;
+    border-radius: 100%;
+    color: aquamarine;
+}
+
+.icon-user-admin {
+    font-size: 75px;
+    border-radius: 100%;
+    color: rgb(255, 221, 127);
+}
+

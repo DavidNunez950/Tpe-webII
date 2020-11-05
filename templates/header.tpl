@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{$BASE_URL}css/css.css"  type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     
     <script src="jquery-1.3.2.min.js" type="text/javascript"></script>   
@@ -32,22 +33,25 @@
                             <li class="nav-item active">
                                 <a class="nav-link display-5 text-white" href="products">Productos</a>
                             </li>
+                            {if $userData.user.rol.admin eq true}
+                                <a class="nav-link display-5 text-white" href="users">Usuarios</a>
+                            {/if}
                         </ul>
                     </div>
                     <div class="dropdown">
                         <a class="btn btn-secondary bg-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {if $loginIn eq false}
-                            Ingresar?
+                            {if $userData.user.rol.colab eq false}
+                                Ingresar?
                             {else}
-                            {$userName}
+                                {$userData.user.name}
                             {/if}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="login">Login</a>
-                            {if $loginIn eq false}
-                            <a class="dropdown-item disabled" href="logout">Logout</a>
+                            {if $userData.user.rol.colab eq false}
+                                <a class="dropdown-item disabled" href="logout">Logout</a>
                             {else}
-                            <a class="dropdown-item" href="logout">Logout</a>
+                                <a class="dropdown-item" href="logout">Logout</a>
                             {/if}
                         </div>
                     </div>

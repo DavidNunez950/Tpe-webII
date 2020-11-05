@@ -28,6 +28,12 @@
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");
     $r->addRoute("editProduct/:ID", "POST", "IndumentariaController", "editProducts");
 
+    
+    $r->addRoute("users", "GET", "UserController", "getUsers");
+    $r->addRoute("users/:ID", "GET", "UserController", "getUserBydId");
+    $r->addRoute("deleteUsers/:ID", "GET", "UserController", "deleteUser");
+    $r->addRoute("changeAdministrationPermissions/:ID", "GET", "UserController", "changeAdministrationPermissions");
+
     $r->addRoute("insertCategory", "POST", "IndumentariaController", "insertCategory");
     $r->addRoute("deleteCategory/:ID", "GET", "IndumentariaController", "deleteCategory");
     $r->addRoute("editCategory/:ID", "POST", "IndumentariaController", "editCategory");

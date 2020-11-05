@@ -7,19 +7,21 @@ class UserController{
 
     private $view;
     private $model;
+    private $AuthHelper;
 
     function __construct(){
         $this->view = new UserView();
         $this->model = new UserModel();
+        $this->AuthHelper =  new AuthHelper();
     }
 
     function login(){
-        $this->view->renderlogin();
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderlogin("", $userStatus);
     }
 
     function logout(){
-        session_start();
-        session_destroy();
+        $this->AuthHelper->logout();
         header("Location: ".LOGIN);
     }
 
@@ -32,8 +34,7 @@ class UserController{
             if(isset($userFromDB) && $userFromDB){  
                 if (password_verify($pass, $userFromDB->password)){
                     session_start();
-                    $_SESSION["NAME"] = $userFromDB->user;
-                    $_SESSION["EMAIL"] = $userFromDB->email;
+                    $this->AuthHelper->login($userFromDB);
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
                 }else{
@@ -43,6 +44,35 @@ class UserController{
                 $this->view->renderlogin("El usuario no existe");
             }
         }
+    }
+
+    function getUsers() {
+        $this->AuthHelper->checkAdminUsser();
+        $users = $this->model->getUsers();
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderUsers($users, $userStatus);
+    }
+    
+    function getUserBydId($params = null) {
+        $this->AuthHelper->checkAdminUsser();
+        $id = $params[':ID'];
+        $users = $this->model->getUserById($id);
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderUser($users, $userStatus);
+    }
+
+    function deleteUser($params = null) {
+        $this->AuthHelper->checkAdminUsser();
+        $id = $params[':ID'];
+        $this->model->deleteUser($id);
+        $this->view->renderUserLocation();  
+    }
+
+    function changeAdministrationPermissions($params = null) {
+        $this->AuthHelper->checkAdminUsser();
+        $id = $params[':ID'];
+        $this->model->changeAdministrationPermissions($id);
+        $this->view->renderUserLocation();
     }
 }
 
