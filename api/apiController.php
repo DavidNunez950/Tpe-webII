@@ -1,6 +1,6 @@
 <?php
 
-require_once('/api/apiView.php');
+require_once('api/ApiView.php');
 
 abstract class ApiController {
     protected $model; 
