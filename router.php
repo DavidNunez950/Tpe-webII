@@ -6,6 +6,11 @@
     require_once('app/Controller/indumentariaController.php');
     require_once('app/Controller/UserController.php');
     require_once 'RouterClass.php';
+    
+
+    require_once('api/ApiController.php');
+require_once('api/apiCommentaryController.php');
+require_once('RouterClass.php');
 
     if(!empty($_GET['action'])) {
         $action = $_GET['action'];
@@ -39,8 +44,10 @@
     $r->addRoute("category/:ID", "GET", "IndumentariaController", "showProducts");
     $r->addRoute("insertProductInCategory", "POST", "IndumentariaController", "insertProductsInCategoryByPOST");
 
+
+$r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
+$r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
+$r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
     $r->setDefaultRoute("IndumentariaController", "showHome");
 
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
-?>
-
