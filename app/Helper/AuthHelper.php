@@ -62,13 +62,40 @@ require_once("app/Model/UserModel.php");
                 ),
             );
 
-            $userStatus['user']['name']= (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
-            $userStatus['user']['email']= (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
-            $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0)) ? true : false;
+            $userStatus['user']['name'] = (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
+            $userStatus['user']['email'] = (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
+            $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0) )? true : false;
             $userStatus['user']['rol']['admin'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']==1)) ? true : false;
-        
+                
+
             return $userStatus;
         }
+
+        
+        // function getUserStatus(){
+        //     session_start();
+        //     $userStatus = array(
+        //         'user' => array( 
+        //             'name' => false,
+        //             'email'=> false,
+        //             'rol' => array( 
+        //                 'colab' => false,
+        //                 'admin' => false,
+        //             )
+        //         ),
+        //     );
+        //         if(isset($_SESSION['NAME'])&&isset($_SESSION['EMAIL'])&&isset($_SESSION['ROL'])) {
+        //         $userStatus['user']['name']= (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
+        //         $userStatus['user']['email']= (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
+        //         $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0) )? true : false;
+        //         $userStatus['user']['rol']['admin'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']==1)) ? true : false;
+                
+
+        //     } else {
+        //         $userStatus = null;
+        //     }
+        //     return $userStatus;
+        // }
 
         // function getUserStatus(){
         //     session_start();
