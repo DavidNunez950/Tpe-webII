@@ -24,7 +24,7 @@
             $query->execute(array($id));
         }
 
-        function insertComentary($text, $star, $date, $id_product, $id_user) {
+        function insertCommentary($text, $star, $date, $id_product, $id_user) {
             $query = $this->db->prepare("INSERT INTO commentary(text, star, date, id_product, id_user) VALUES (?,?,?,?,?)");
             $query->execute(array($text, $star, $date, $id_product, $id_user));
         }
