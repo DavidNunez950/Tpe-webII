@@ -36,6 +36,9 @@
                             {if $userData.user.rol.admin eq true}
                                 <a class="nav-link display-5 text-white" href="users">Usuarios</a>
                             {/if}
+                            <li class="nav-item active">
+                            <a class="nav-link display-5 text-white" href="register">Registro</a>
+                        </li>
                         </ul>
                     </div>
                     <div class="dropdown">

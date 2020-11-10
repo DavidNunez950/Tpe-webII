@@ -5,18 +5,19 @@
     
     require_once('app/Controller/indumentariaController.php');
     require_once('app/Controller/UserController.php');
-    require_once 'RouterClass.php';
+    // require_once 'RouterClass.php';
     
 
     require_once('api/ApiController.php');
-require_once('api/apiCommentaryController.php');
-require_once('RouterClass.php');
+    require_once('api/ApiCommentaryController.php');
+    require_once('RouterClass.php');
 
     if(!empty($_GET['action'])) {
         $action = $_GET['action'];
     }else {
         $action = "home";
     }
+    
     $r = new Router(); 
 
     $r->addRoute("home", "GET", "IndumentariaController", "showHome");
@@ -25,6 +26,7 @@ require_once('RouterClass.php');
     $r->addRoute("login", "GET", "UserController", "login");
     $r->addRoute("logout", "GET", "UserController", "logout");
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
+    
     
     $r->addRoute("products", "GET", "IndumentariaController", "showAllProducts");
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
@@ -37,6 +39,8 @@ require_once('RouterClass.php');
     $r->addRoute("users/:ID", "GET", "UserController", "getUserBydId");
     $r->addRoute("deleteUsers/:ID", "GET", "UserController", "deleteUser");
     $r->addRoute("changeAdministrationPermissions/:ID", "GET", "UserController", "changeAdministrationPermissions");
+    $r->addRoute("register", "GET", "UserController", "showRegister");
+    $r->addRoute("insertUser", "POST", "UserController", "insertUser");
 
     $r->addRoute("insertCategory", "POST", "IndumentariaController", "insertCategory");
     $r->addRoute("deleteCategory/:ID", "GET", "IndumentariaController", "deleteCategory");
@@ -45,9 +49,10 @@ require_once('RouterClass.php');
     $r->addRoute("insertProductInCategory", "POST", "IndumentariaController", "insertProductsInCategoryByPOST");
 
 
-$r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
-$r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
-$r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
+    $r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
+    $r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
+    $r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
+
     $r->setDefaultRoute("IndumentariaController", "showHome");
 
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 

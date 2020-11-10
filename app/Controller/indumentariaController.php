@@ -39,7 +39,6 @@
             &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
                 $this->CategoryModel-> insertCategory($_POST['url_img'],$_POST['coleccion']);
                 $this->view->showCategoriesLocation();
-                echo "saasd";
             }
         }         
 
@@ -126,3 +125,4 @@
             }
         }
     }
+?>    

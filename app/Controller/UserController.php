@@ -74,6 +74,35 @@ class UserController{
         $this->model->changeAdministrationPermissions($id);
         $this->view->renderUserLocation();
     }
+
+    function showRegister(){
+        $userStatus = $this->AuthHelper->getUserStatus();
+        $this->view->renderRegister( $userStatus);
+    }
+
+    function insertUser(){
+        $user = $_POST["user"];        
+        $email = $_POST["email"];
+        $pass = $_POST["pass"];
+        $admin = 0;
+
+        if ((isset($user)&&!empty($user))
+        &&(isset($email)&&!empty($email))&&(isset($pass)&&!empty($pass))){
+
+            $userFromDB = $this->model->getUser($email);
+            if(isset($userFromDB) && $userFromDB){
+             //   $this->view->renderRegister("El usuario existe"); CONSULTAR A DAVID
+            }else{
+                
+                $password = password_hash ($pass , PASSWORD_DEFAULT );
+                $this->model->insertUser($_POST['user'], $_POST['email'], $password, $admin);
+                $this->verifyUser();
+                header("Location: ".BASE_URL."home");
+                //$this->view->showhomeLocation(); 
+            } 
+          
+        }
+    }
 }
 
 ?>

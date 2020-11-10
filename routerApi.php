@@ -1,7 +1,7 @@
 <?php
 
 require_once('api/ApiController.php');
-require_once('api/ApiCommentaryController.php');
+// require_once('api/ApiCommentaryController.php');
 require_once('RouterClass.php');
 
 
