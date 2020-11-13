@@ -49,9 +49,10 @@
     $r->addRoute("insertProductInCategory", "POST", "IndumentariaController", "insertProductsInCategoryByPOST");
 
     //ROUTER API------------------------------------------------
-    // $r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
-    // $r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
-    // $r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
+    $r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
+    $r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
+    $r->addRoute("api/commentary/:ID", "PUT", "ApiCommentaryController", "editCommentary");
+    $r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
 
     $r->setDefaultRoute("IndumentariaController", "showHome");
 

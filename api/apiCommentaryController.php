@@ -29,11 +29,11 @@ class ApiCommentaryController extends ApiController {
     function insertCommentary(){
         $body = $this->getData();
         $id = $this->model->insertCommentary($body->text,$body->star,$body->date,$body->id_product,$body->id_user);     
-        if (empty ($this->model->getCommentaryById($id))) {
+        $commentary = $this->model->getCommentaryById($id);
+        if(empty($commentary)) {
             $this->view->response("Cant insert commentary", 500);
-           
         } else{
-            $this->view->response("Se inserto", 200);
+            $this->view->response($commentary, 200);
         } 
     }
 

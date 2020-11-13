@@ -1,0 +1,15 @@
+{literal}
+<div class="col-12 bg-white" id="commentary" >
+    <ul class="list-group"  id="commentaries-list">
+
+        <li class="list-group-item d-flex flex-row justify-content-between" v-for="commentary in commentaries" v-bind:data-id-commentary="commentary.id">
+            <div contentEditable="false">
+                {{commentary.text}}
+            </div>
+            <button class="btn btn-danger btn-delete" v-on:click="remove">borrar</button>
+            <button class="btn btn-primary btn-edit" v-on:click="edit">Editar</button>
+        </li>
+
+    </ul>
+</div>
+{/literal}
