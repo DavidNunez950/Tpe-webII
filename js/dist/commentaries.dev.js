@@ -109,10 +109,10 @@ document.addEventListener('DOMContentLoaded', function () {
       edit: function edit(event) {
         var btn = event.target;
         var div = btn.previousElementSibling.previousElementSibling;
-        console.log(div);
-        div.contentEditable = !div.contentEditable ? true : false;
+        div.contentEditable = !div.contentEditable ? true : true;
 
         if (div.contentEditable == false) {
+          div.contentEditable = true;
           var text = div.innerHTML;
           updateComentary({
             text: text.trim("\n"),

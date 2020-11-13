@@ -2,18 +2,27 @@
 
 require_once('api/ApiController.php');
 require_once('app/Model/CommentaryModel.php');
+require_once('app/Model/ProductoModel.php');
 require_once('api/ApiView.php');
 
 class ApiCommentaryController extends ApiController {
 
+    private $productModel;
+
     public function __construct() {
-        parent::__construct();
+        parent::__construct(); // Agregar helper
         $this->view = new ApiView();
         $this->model = new CommentaryModel();
+        $this->productModel = new ProductModel();
     }
 
     function showCommentary($params = null){
         $id_product = $params[':ID'];
+        $product = $this->productModel->getProductsById($id_product);
+        if (empty($product)){
+            $this->view->response("Not found product with id=$id_product", 404);
+            die();
+        }
         $commentary= $this->model->getCommentariesByProduct($id_product);
         $this->view->response($commentary, 200);
     
@@ -30,7 +39,7 @@ class ApiCommentaryController extends ApiController {
                 $status = 500;
             }
             $this->view->response($commentary, $status);
-        } catch(exception $e) {
+        } catch(Exception $e) {
             $this->view->response("Internal server error", 500);
         }  
     }
@@ -62,11 +71,4 @@ class ApiCommentaryController extends ApiController {
             die();
         }
     }
-
-
-
-    
-
-
-  
 } 

@@ -47,25 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.log(error));
     }
 
-    // Añadir eventos
-    // function addEventsBtn() {
-    //     document.querySelectorAll(".btn-delete").forEach(btn => {
-    //         btn.addEventListener("click", () => {
-    //             deleteCommentary(btn.parentElement.getAttribute("data-id-commentary"));
-    //         });
-    //     });
-    //     document.querySelectorAll(".btn-edit").forEach(btn => {
-    //         btn.addEventListener("click", () => {
-    //             btn.parentElement.contentEditable = true;
-    //             btn.addEventListener("click", () => {
-    //                 btn.parentElement.contentEditable = false;
-    //                 let text = btn.previousElementSibling.previousElementSibling.innerHTML;
-    //                 updateComentary({text: text.trim("\n"), star: 5},btn.parentElement.getAttribute("data-id-commentary"));
-    //             });
-    //         });
-    //     });
-    // }
-
     // Capturar el evento sumbit, armar los datos, y llamar a la api
     form.addEventListener("submit", e=> {
         e.preventDefault();
@@ -99,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
             edit: function (event) {
                 let btn = event.target;
                 let div = btn.previousElementSibling.previousElementSibling;
-                console.log((div))
-                div.contentEditable = (!div.contentEditable) ? true : false;
+                div.contentEditable = (!div.contentEditable) ? true : true;
                 if (div.contentEditable == false){
+                    div.contentEditable = true;
                     let text = div.innerHTML;
                     updateComentary({text: text.trim("\n"), star: 5},btn.parentElement.getAttribute("data-id-commentary"));
                 }

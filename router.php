@@ -28,7 +28,7 @@
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     
     
-    $r->addRoute("products", "GET", "IndumentariaController", "showAllProducts");
+    $r->addRoute("products/:RANGE", "GET", "IndumentariaController", "showAllProducts");
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");
@@ -57,3 +57,11 @@
     $r->setDefaultRoute("IndumentariaController", "showHome");
 
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
+
+    // api bien
+    // abstraer modelos conexión
+    // smarty
+    // js bien vue bien
+    // componente bien
+    // 
+
