@@ -30,18 +30,21 @@ class UserController{
         $email = $_POST["email"];
         $pass = $_POST["pass"];
         if(isset($email)){
-            $userFromDB = $this->model->getUser($email);
-            if(isset($userFromDB) && $userFromDB){  
+            $userFromDB = $this->model->getUser($email);  
+            if(isset($userFromDB) && $userFromDB){ 
+                var_dump (password_verify($pass, $userFromDB->password));
                 if (password_verify($pass, $userFromDB->password)){
                     session_start();
                     $this->AuthHelper->login($userFromDB);
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
-                }else{
+                } else {
                     $this->view->renderlogin("Contraseña incorrecta");
+                    header("Location: ".LOGIN);;
                 }
             }else{
                 $this->view->renderlogin("El usuario no existe");
+                header("Location: ".LOGIN);;
             }
         }
     }
@@ -85,22 +88,17 @@ class UserController{
         $email = $_POST["email"];
         $pass = $_POST["pass"];
         $admin = 0;
-
         if ((isset($user)&&!empty($user))
         &&(isset($email)&&!empty($email))&&(isset($pass)&&!empty($pass))){
-
+            var_dump(!($this->model->getUser($email)));
             $userFromDB = $this->model->getUser($email);
-            if(isset($userFromDB) && $userFromDB){
-             //   $this->view->renderRegister("El usuario existe"); CONSULTAR A DAVID
-            }else{
-                
+            if(!($userFromDB)){
                 $password = password_hash ($pass , PASSWORD_DEFAULT );
-                $this->model->insertUser($_POST['user'], $_POST['email'], $password, $admin);
+                $this->model->insertUser($user, $email, $password, $admin);
                 $this->verifyUser();
                 header("Location: ".BASE_URL."home");
                 //$this->view->showhomeLocation(); 
             } 
-          
         }
     }
 }

@@ -31,7 +31,8 @@ class ApiCommentaryController extends ApiController {
     function insertCommentary(){
         $body = $this->getData();
         try {
-            $id = $this->model->insertCommentary($body->text,$body->star,$body->date,$body->id_product,$body->id_user);     
+            session_start();
+            $id = $this->model->insertCommentary($body->text,$body->star,$body->date,$body->id_product,$_SESSION['ID']);     
             $commentary = $this->model->getCommentaryById($id);
             $status = 200;
             if(empty($commentary)) {

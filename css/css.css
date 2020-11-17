@@ -30,6 +30,10 @@
     color: aquamarine;
 }
 
+#commentary .icon-user {
+    font-size: 45px;
+}
+
 .icon-user-admin {
     font-size: 75px;
     border-radius: 100%;
@@ -58,16 +62,31 @@ label {
     color: white;
 }
 
+
+label i {
+    color: white;
+    font-size: 20px;
+}
+
+
+#form-commentary label:hover i, #form-commentary label:hover~label i{
+    color: rgb(255, 251, 40);
+}
+
+input[type="radio"]:checked~label i{
+    color: rgb(255, 251, 40); 
+}
+
 .clasificacion {
     direction: rtl;
     unicode-bidi: bidi-override;
 }
 
-label:hover,
-label:hover~label {
-    color: orange;
+.mark-star label i, .mark-star~div label i{
+    color: rgb(255, 251, 40);
 }
 
-input[type="radio"]:checked~label {
-    color: orange;
+.dropdown-menu-min {
+    min-width: 120px!important;
+    transform: translate3d(-60px, 38px, 0px)!important;
 }

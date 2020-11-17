@@ -12,6 +12,7 @@ require_once("app/Model/UserModel.php");
 
         function login($user){
             session_start();
+            $_SESSION['ID'] = $user->id;
             $_SESSION["NAME"] = $user->name;
             $_SESSION["EMAIL"] = $user->email;
             $_SESSION["ROL"] = $user->admin;
@@ -62,6 +63,7 @@ require_once("app/Model/UserModel.php");
                 ),
             );
 
+            $userStatus['user']['id'] = (isset($_SESSION['ID'])) ? $_SESSION['ID'] : false;
             $userStatus['user']['name'] = (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
             $userStatus['user']['email'] = (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
             $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0) )? true : false;
