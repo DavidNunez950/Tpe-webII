@@ -104,11 +104,23 @@
         }
 
         // 3.a Función para ver todas las Categorys con sus productss
-        function showAllProducts(){
-            $productss = $this->ProductModel->getProductsWithCategory();
+        function showAllProducts($params = null) {
+            $range = ($params[':RANGE'] == null) ? 0 : $params[':RANGE'];
+            $limit = 5;
+            $cantproducts = $this->ProductModel->getCountProducts();
+            $cantproducts = (get_object_vars($cantproducts[0])["COUNT(*)"]);
+            $productss = $this->ProductModel->getProductsWithCategory($range, $limit);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
-            $this->view->renderAllProducsWithCategorys($productss,$category, $userData);
+            $cantPag = [];
+            $aux = 0;
+            while ($aux < $cantproducts) {
+                array_push($cantPag, $aux);
+                $aux += $limit;
+                echo $aux < $cantproducts;
+            }
+            $pag = ($range + 1);
+            $this->view->renderAllProducsWithCategorys($productss,$category, $userData, $cantPag,  $pag);
         }
 
         // 3.b Función para insertar products en Category por POST

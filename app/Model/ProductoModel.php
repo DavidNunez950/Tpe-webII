@@ -5,11 +5,18 @@
         private $db;
 
         function __construct() {
-            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', '');
+            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', 'root'); // clase pare
         }
 
-        function getProductsWithCategory(){
-            $query = $this->db->prepare("SELECT producto.id,producto.tipo,producto.color,producto.talle,producto.id_categoria,categoria.coleccion FROM producto,categoria WHERE producto.id_categoria = categoria.id");
+        function getCountProducts(){
+            $query = $this->db->prepare("SELECT COUNT(*) FROM producto");
+            $query->execute(array());
+            return  $query->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        
+        function getProductsWithCategory($n1, $n2){
+            $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria LIMIT '.$n1.','.$n2.'');
             $query->execute(array());
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }

@@ -107,29 +107,6 @@
                 </div>
                 <div class="w-100">
                    <div class="col-12">
-                   {* <form class="form-inline" method="POST" data-id-product={$producto->id} id="form-commentary">
-                        <div class="form-group">
-                            <label for="text">Comentario:</label>
-                            <input type="text" class="form-control" name="text" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="star" value="1">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="star" value="2">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="star" value="3">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="star" value="4">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="star" value="5">
-                            </div>
-                        </div>
-                        </form> *}
                         <form class="form-inline" method="POST" data-id-product={$producto->id} id="form-commentary">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="text" required placeholder="Inserte un comentario">

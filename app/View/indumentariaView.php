@@ -43,12 +43,16 @@ require_once 'libs/smarty/libs/Smarty.class.php';
             $smarty->display('templates/product.tpl');
         }
 
-        function renderAllProducsWithCategorys($productss, $categories, $userData){
+        function renderAllProducsWithCategorys($productss,$categories, $userData, $cantPaginas, $pag){
             $smarty = new Smarty();
+            var_dump($productss);
             $smarty->assign('BASE_URL', BASE_URL);
             $smarty->assign('categorias', $categories, true);
             $smarty->assign('producto', $productss, true);
             $smarty->assign('userData', $userData, true);
+            $smarty->assign('aux', 0, true);
+            $smarty->assign('cantPaginas', $cantPaginas, true);
+            $smarty->assign('pag', $pag, true);
             $smarty->display('templates/products.tpl');
         }
 
