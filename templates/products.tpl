@@ -11,6 +11,37 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <form action="products/0" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="prenda">Prenda</label>
+                            <input type="text" class="form-control" name="prenda" placeholder="prenda">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="color">Color</label>
+                            <input type="text" class="form-control" name="color" placeholder="Color">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="talle">Talle</label>
+                            <input type="text" class="form-control" name="talle" placeholder="Talle">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="coleccion">Coleccion</label>
+                            <input type="text" class="form-control" name="coleccion" placeholder="coleccion">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="conectorLogico">
+                                <label class="form-check-label" for="conectorLogico">
+                                    Restricto
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="sumbit" class="btn btn-primary btn-sm">Agregar</button>
+                    </form>
+            </div>
             <div class="w-100">
                 <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
                     <thead class="thead-dark">
@@ -166,25 +197,7 @@
                         <ul class="pagination">
                         {foreach from=$cantPaginas item=a}
                             <li class="page-item"><a class="page-link" href="products/{$aux++*5} ">{$aux}</a></li>
-                        {/foreach} 
-                        {* </ul>
-                            <ul class="pagination">
-                            <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                            </li>
-                        </ul> *}
+                        {/foreach}
                         </tr>
                     </tbody>
                 </table>

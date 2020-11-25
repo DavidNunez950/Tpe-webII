@@ -29,6 +29,7 @@
     
     
     $r->addRoute("products/:RANGE", "GET", "IndumentariaController", "showAllProducts");
+    $r->addRoute("products/:RANGE", "POST", "IndumentariaController", "showAllProducts");
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");

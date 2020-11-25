@@ -14,6 +14,28 @@
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
 
+        // function getFilteredProducts($conectorLogico, $n1, $n2, $color,$talle,$tipo, $categoria){
+        function getFilteredProducts($conectorLogico, $n1, $n2, $tipo,$color,$talle, $categoria){
+            $sentence = '';
+            $conector = '';
+            // $queryValues = array();
+            $arr = array(
+                'producto.tipo' =>$tipo,
+                'producto.color' =>$color,
+                'producto.talle' =>$talle,
+                'categoria.coleccion' =>$categoria,
+            );
+            foreach(array_keys($arr) as $e) {
+                $sentence .= ' '.$conector.' LOWER(  '.$e.' ) LIKE LOWER("%'.$arr[$e].'%")';
+                $conector = ($conectorLogico == true) ? 'AND': 'AND';
+                array_push($queryValues, $arr[$e]);
+            }
+            $a ='SELECT * FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria WHERE '.$sentence.'LIMIT '.$n1.','.$n2.'';
+            echo($a);
+            $query = $this->db->prepare($a);
+            $query->execute($queryValues);
+            return  $query->fetchAll(PDO::FETCH_OBJ);
+        }
         
         function getProductsWithCategory($n1, $n2){
             $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria LIMIT '.$n1.','.$n2.'');

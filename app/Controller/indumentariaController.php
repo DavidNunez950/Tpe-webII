@@ -106,10 +106,21 @@
         // 3.a Función para ver todas las Categorys con sus productss
         function showAllProducts($params = null) {
             $range = ($params[':RANGE'] == null) ? 0 : $params[':RANGE'];
+            $range = 0;
             $limit = 5;
             $cantproducts = $this->ProductModel->getCountProducts();
+            $products = [];
             $cantproducts = (get_object_vars($cantproducts[0])["COUNT(*)"]);
-            $productss = $this->ProductModel->getProductsWithCategory($range, $limit);
+            if ((isset($_POST['color'])||!empty($_POST['color']))
+            ||(isset($_POST['talle'])||!empty($_POST['talle']))
+            ||(isset($_POST['prenda'])||!empty($_POST['prenda']))
+            ||(isset($_POST['coleccion'])||!empty($_POST['coleccion']))
+            ||(isset($_POST['conectorLogico'])||!empty($_POST['conectorLogico']))) {
+                $conectorLogico = ($_POST['conectorLogico'] == 1) ? true : false;
+                $products = $this->ProductModel->getFilteredProducts($conectorLogico, $range, $limit, $_POST['prenda'], $_POST['color'], $_POST['talle'], $_POST['coleccion']);
+            } else {
+                $products = $this->ProductModel->getProductsWithCategory($range, $limit);
+            }
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
             $cantPag = [];
@@ -120,7 +131,8 @@
                 echo $aux < $cantproducts;
             }
             $pag = ($range + 1);
-            $this->view->renderAllProducsWithCategorys($productss,$category, $userData, $cantPag,  $pag);
+            
+            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag,  $pag);
         }
 
         // 3.b Función para insertar products en Category por POST
@@ -135,6 +147,19 @@
             } else {
                 $this->view->showProductsLocation();
             }
+        }
+
+        // Busqueda de productos:
+        function showFilteredProducts(){
+            // if ((isset($_POST['color'])&&!empty($_POST['color']))
+            // &&(isset($_POST['talle'])&&!empty($_POST['talle']))
+            // &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
+            // &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) { 
+            // $userData = $this->AuthHelper->getUserStatus();
+            // if ((isset($_POST['conectorLogico'])&&!empty($_POST['conectorLogico']))) { 
+            //     $conectorLogico = ($_POST['conectorLogico'] == 1) ? true : false;
+            //     $products = $this->ProductModel->getFilteredProducts($conectorLogico, $_POST['prenda'], $_POST['color'], $_POST['talle'], $_POST['coleccion']);
+            // }
         }
     }
 ?>    
