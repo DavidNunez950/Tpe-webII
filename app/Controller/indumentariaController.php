@@ -79,12 +79,14 @@
         function insertProductsInCategoryByGET($params = null){
             $this->AuthHelper->checkLoggedIn();
             $id_category = $params[':ID'];
-            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])) {
-                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category);
+            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])&&
+            ($_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/jpeg" ||
+            $_FILES['img']['type'] == "image/png")) {
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category, $_FILES['img']['tmp_name']);
             }
             $this->view->showCategoryLocation($id_category);
         }
-
+        
         function editProducts($params = null){
             $this->AuthHelper->checkLoggedIn();
             $id_products = $params[':ID'];
@@ -105,22 +107,26 @@
 
         // 3.a Función para ver todas las Categorys con sus productss
         function showAllProducts($params = null) {
-            $range = ($params[':RANGE'] == null) ? 0 : $params[':RANGE'];
-            $limit = 5;
+            $pagina = ($params[':PAGE'] == null) ? 1 : $params[':PAGE'];
+            echo($pagina.  " -");
+            $range = 5;
+            $n1 =  ($pagina - 1) * $range;
+            $n2 = $pagina * $range;
             $cantproducts = $this->ProductModel->getCountProducts();
             $cantproducts = (get_object_vars($cantproducts[0])["COUNT(*)"]);
-            $productss = $this->ProductModel->getProductsWithCategory($range, $limit);
+            $productss = $this->ProductModel->getProductsWithCategory($n1, $n2);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
             $cantPag = [];
             $aux = 0;
+            echo ($n1 ." - ". $n2  );
+           
             while ($aux < $cantproducts) {
                 array_push($cantPag, $aux);
-                $aux += $limit;
-                echo $aux < $cantproducts;
+                $aux += $range;
+               
             }
-            $pag = ($range + 1);
-            $this->view->renderAllProducsWithCategorys($productss,$category, $userData, $cantPag,  $pag);
+            $this->view->renderAllProducsWithCategorys($productss,$category, $userData, $cantPag, $pagina);
         }
 
         // 3.b Función para insertar products en Category por POST
@@ -129,12 +135,14 @@
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
             &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
-            &&(isset($_POST['id_category'])&&!empty($_POST['id_category']))) { 
-                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category']);
-                $this->view->showCategoryLocation($_POST['id_category']);
-            } else {
-                $this->view->showProductsLocation();
+            &&(isset($_POST['id_category'])&&!empty($_POST['id_category']))
+            &&($_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/jpeg" ||
+                $_FILES['img']['type'] == "image/png")) {
+                    $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category'],$_FILES['img']['tmp_name']);
+                    $this->view->showCategoryLocation($_POST['id_category']);
             }
+            $this->view->showProductsLocation();
+            
         }
     }
 ?>    

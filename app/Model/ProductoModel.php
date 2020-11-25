@@ -5,7 +5,7 @@
         private $db;
 
         function __construct() {
-            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', 'root'); // clase pare
+            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', ''); // clase pare
         }
 
         function getCountProducts(){
@@ -16,7 +16,7 @@
 
         
         function getProductsWithCategory($n1, $n2){
-            $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria LIMIT '.$n1.','.$n2.'');
+            $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria BETWEEN '.$n1.' AND '.$n2.'');
             $query->execute(array());
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
@@ -33,9 +33,9 @@
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
 
-        function insertProduct($color,$talle,$tipo, $id_Category){
-            $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria) VALUES(?,?,?,?)");           
-            $query->execute(array($color,$talle,$tipo, $id_Category));
+        function insertProduct($color,$talle,$tipo, $id_Category, $img){
+            $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria,img) VALUES(?,?,?,?,?)");           
+            $query->execute(array($color,$talle,$tipo, $id_Category, $img));
             
         }
 

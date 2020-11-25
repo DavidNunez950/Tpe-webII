@@ -18,6 +18,7 @@
                             <th scope="col">Prenda</th>
                             <th scope="col">Color</th>
                             <th scope="col">Talle</th>
+                            <th scope="col">Imagen</th>
                             <th scope="col">Datos</th>
                         </tr>
                     </thead>
@@ -27,6 +28,7 @@
                             <td>{$prenda->tipo}</td>
                             <td>{$prenda->color}</td>
                             <td>{$prenda->talle}</td>
+                            <td>{$prenda->img}</td>
                             {if $userData.user.rol.colab eq true}
                             <td class="w-25">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -91,6 +93,11 @@
                                                     </optgroup>
                                                 </select>
                                             </div>
+                                            <div class="form-group m-0 p-0">
+                                                <label for="img"></label>
+                                                <input type="file" class="form-control" name="img" required>
+                                            </div>
+                                        
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Comfirmar</button>
@@ -110,19 +117,19 @@
                     {/foreach}
                         {if $userData.user.rol.colab eq true}
                         <tr>
-                            <form class="form p-0 m-0" action="insertProduct/{$categoria->id}" method="POST">
+                            <form class="form p-0 m-0" action="insertProduct/{$categoria->id}" method="POST" enctype="multipart/form-data">
                                 <td>
                                     <div class="form-group m-0 p-0">
                                         <label for="tipo"></label>
                                         <input type="text" class="form-control" name="tipo" required>
                                     </div>
                                 </td>
-                                    <td>
+                                <td>
                                         <div class="form-group m-0 p-0">
                                             <label for="color"></label>
                                             <input type="text" class="form-control" name="color" required>
                                         </div>
-                                    <td>
+                                <td>
                                     <div class="form-group m-0 p-0">
                                         <label for="talle"></label>
                                         <select class="form-control  m-0 p-0" name="talle">
@@ -139,6 +146,12 @@
                                         </select>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group m-0 p-0">
+                                        <label for="img"></label>
+                                        <input type="file" class="form-control" name="img" id="imageToUpload">
+                                    </div>
+                                <td>
                                 <td>
                                     <div class="btn-group btn-group-lg m-0 mt-3" role="group">
                                         <button type="sumbit" class="btn btn-outline-success btn-sm">Agregar</button>

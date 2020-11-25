@@ -28,7 +28,8 @@
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     
     
-    $r->addRoute("products/:RANGE", "GET", "IndumentariaController", "showAllProducts");
+    $r->addRoute("products/:PAGE", "GET", "IndumentariaController", "showAllProducts");
+    $r->addRoute("products/", "GET", "IndumentariaController", "showAllProducts");
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");
@@ -49,10 +50,10 @@
     $r->addRoute("insertProductInCategory", "POST", "IndumentariaController", "insertProductsInCategoryByPOST");
 
     //ROUTER API------------------------------------------------
-    $r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
-    $r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
-    $r->addRoute("api/commentary/:ID", "PUT", "ApiCommentaryController", "editCommentary");
-    $r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
+    // $r->addRoute("api/commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
+    // $r->addRoute("api/commentary", "POST", "ApiCommentaryController", "insertCommentary");
+    // $r->addRoute("api/commentary/:ID", "PUT", "ApiCommentaryController", "editCommentary");
+    // $r->addRoute("api/commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
 
     $r->setDefaultRoute("IndumentariaController", "showHome");
 

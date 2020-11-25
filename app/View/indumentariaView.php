@@ -50,9 +50,8 @@ require_once 'libs/smarty/libs/Smarty.class.php';
             $smarty->assign('categorias', $categories, true);
             $smarty->assign('producto', $productss, true);
             $smarty->assign('userData', $userData, true);
-            $smarty->assign('aux', 0, true);
             $smarty->assign('cantPaginas', $cantPaginas, true);
-            $smarty->assign('pag', $pag, true);
+            $smarty->assign('pag', 1 , true);
             $smarty->display('templates/products.tpl');
         }
 
