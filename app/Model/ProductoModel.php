@@ -26,19 +26,21 @@
                 'categoria.coleccion' =>$categoria,
             );
             foreach(array_keys($arr) as $e) {
-                $sentence .= ' '.$conector.' LOWER(  '.$e.' ) LIKE LOWER("%'.$arr[$e].'%")';
-                $conector = ($conectorLogico == true) ? 'AND': 'AND';
-                array_push($queryValues, $arr[$e]);
+                if($arr[$e]!= null) {
+                    $sentence .= ' '.$conector.' LOWER(  '.$e.' ) LIKE LOWER("%'.$arr[$e].'%")';
+                    $conector = ($conectorLogico == true) ? 'AND': 'OR';
             }
-            $a ='SELECT * FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria WHERE '.$sentence.'LIMIT '.$n1.','.$n2.'';
+            }
+            $a ='SELECT * FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria WHERE '.$sentence.'LIMIT '.$n1.', 5';
             echo($a);
             $query = $this->db->prepare($a);
-            $query->execute($queryValues);
+            $query->execute();
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
         
         function getProductsWithCategory($n1, $n2){
-            $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria LIMIT '.$n1.','.$n2.'');
+            // echo 'SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria BETWEEN '.$n1.' AND '.$n2.'';die();
+            $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria LIMIT '.$n1.', 5');
             $query->execute(array());
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
@@ -55,9 +57,9 @@
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
 
-        function insertProduct($color,$talle,$tipo, $id_Category){
-            $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria) VALUES(?,?,?,?)");           
-            $query->execute(array($color,$talle,$tipo, $id_Category));
+        function insertProduct($color,$talle,$tipo, $id_Category, $img){
+            $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria,img) VALUES(?,?,?,?,?)");           
+            $query->execute(array($color,$talle,$tipo, $id_Category, $img));
             
         }
 

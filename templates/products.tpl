@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div>
-                <form action="products/0" method="POST">
+                <form action="products/" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="prenda">Prenda</label>
@@ -194,10 +194,11 @@
                         </tr>
                         {/if}
                         <tr class="d-flex flex-end">
-                        <ul class="pagination">
-                        {foreach from=$cantPaginas item=a}
-                            <li class="page-item"><a class="page-link" href="products/{$aux++*5} ">{$aux}</a></li>
-                        {/foreach}
+                        <ul class="pagination">                           
+                        {for $page=1 to $cantPaginas}
+                            <li class="page-item"><a class="page-link" href="products/{$page} ">{$page}</a></li>
+                        {/for}
+                        </ul>
                         </tr>
                     </tbody>
                 </table>

@@ -1,8 +1,9 @@
 .bg-color {
-    background: rgba(232,75,75,1);
-    background: linear-gradient(45deg, rgba(232,75,75,1) 0%, rgba(227,141,240,1) 16%, rgba(141,141,240,1) 32%, rgba(141,240,235,1) 51%, rgba(158,240,141,1) 69%, rgba(240,227,141,1) 85%, rgba(227,123,32,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e84b4b', endColorstr='#e37b20', GradientType=1 );
+    background: rgba(232, 75, 75, 1);
+    background: linear-gradient(45deg, rgba(232, 75, 75, 1) 0%, rgba(227, 141, 240, 1) 16%, rgba(141, 141, 240, 1) 32%, rgba(141, 240, 235, 1) 51%, rgba(158, 240, 141, 1) 69%, rgba(240, 227, 141, 1) 85%, rgba(227, 123, 32, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#e84b4b', endColorstr='#e37b20', GradientType=1);
 }
+
 .bg-transparent {
     background-color: rgba(255, 0, 0, 0);
 }
@@ -12,13 +13,14 @@
 }
 
 .bg-main {
-    background: rgba(87,108,166,1);
-    background: linear-gradient(90deg, rgba(177,104,222,1) 0%, rgba(83,162,201,1) 54%, rgba(84,199,135,1) 100%);
+    background: rgba(87, 108, 166, 1);
+    background: linear-gradient(90deg, rgba(177, 104, 222, 1) 0%, rgba(83, 162, 201, 1) 54%, rgba(84, 199, 135, 1) 100%);
 }
 
 .img-circle-rigth {
     margin-right: -125px;
 }
+
 .text-img-left {
     padding-left: 125px;
     height: 250px;
@@ -62,19 +64,18 @@ label {
     color: white;
 }
 
-
 label i {
     color: white;
     font-size: 20px;
 }
 
-
-#form-commentary label:hover i, #form-commentary label:hover~label i{
+#form-commentary label:hover i,
+#form-commentary label:hover~label i {
     color: rgb(255, 251, 40);
 }
 
-input[type="radio"]:checked~label i{
-    color: rgb(255, 251, 40); 
+input[type="radio"]:checked~label i {
+    color: rgb(255, 251, 40);
 }
 
 .clasificacion {
@@ -82,7 +83,8 @@ input[type="radio"]:checked~label i{
     unicode-bidi: bidi-override;
 }
 
-.mark-star label i, .mark-star~div label i{
+.mark-star label i,
+.mark-star~div label i {
     color: rgb(255, 251, 40);
 }
 

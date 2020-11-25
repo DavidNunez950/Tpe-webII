@@ -106,31 +106,32 @@
                     </table>
                 </div>
                 <div class="w-100">
-                    <div class="col-12">
-                        <form class="form"  data-id-product={$producto->id} id="form-commentary">
-                            <div class="form-group">
-                                <label for="text">Comentario:</label>
-                                <input type="text" class="form-control" name="text" required>
-                            </div>
-                            <div class="form-group clasificacion">
-                                <input id="radio1" type="radio" name="estrellas" value="5">
-                                <label for="radio1"><i class="fas fa-star"></i></label>
-                                <input id="radio2" type="radio" name="estrellas" value="4">
-                                <label for="radio2"><i class="fas fa-star"></i></label>
-                                <input id="radio3" type="radio" name="estrellas" value="3">
-                                <label for="radio3"><i class="fas fa-star"></i></label>
-                                <input id="radio4" type="radio" name="estrellas" value="2">
-                                <label for="radio4"><i class="fas fa-star"></i></label>
-                                <input id="radio5" type="radio" name="estrellas" value="1">
-                                <label for="radio5"><i class="fas fa-star"></i></label>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>    
-                    </div>
+                   <div class="col-12">
+                   <form class="form"  data-id-product={$producto->id} id="form-commentary">
+                   <div class="form-group">
+                       <label for="text">Comentario:</label>
+                       <input type="text" class="form-control" name="text" required>
+                   </div>
+                   <div class="form-group clasificacion">
+                       <input id="radio1" type="radio" name="estrellas" value="5">
+                       <label for="radio1"><i class="fas fa-star"></i></label>
+                       <input id="radio2" type="radio" name="estrellas" value="4">
+                       <label for="radio2"><i class="fas fa-star"></i></label>
+                       <input id="radio3" type="radio" name="estrellas" value="3">
+                       <label for="radio3"><i class="fas fa-star"></i></label>
+                       <input id="radio4" type="radio" name="estrellas" value="2">
+                       <label for="radio4"><i class="fas fa-star"></i></label>
+                       <input id="radio5" type="radio" name="estrellas" value="1">
+                       <label for="radio5"><i class="fas fa-star"></i></label>
+                   </div>
+                   <div class="form-group">
+                       <button type="submit" class="btn btn-primary">Submit</button>
+                   </div>
+               </form>     
+                   </div>
                     {include file="../component/commentaries.html"}
                 </div>
+                
         </div>
     </div>
 <script src="js/commentaries.js"></script>

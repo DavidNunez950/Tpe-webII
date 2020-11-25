@@ -7,10 +7,11 @@ require_once('RouterClass.php');
 
 $r = new Router();
 
+
 $r->addRoute("commentary/:ID", "GET", "ApiCommentaryController", "showCommentary");
 $r->addRoute("commentary", "POST", "ApiCommentaryController", "insertCommentary");
-$r->addRoute("commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
 $r->addRoute("commentary/:ID", "PUT", "ApiCommentaryController", "editCommentary");
+$r->addRoute("commentary/:ID", "DELETE", "ApiCommentaryController", "deleteCommentary");
 
 $r->route($_GET['resource'], $_SERVER['REQUEST_METHOD']); 
 

@@ -9,51 +9,52 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCommentaries() {
         let id = form.getAttribute("data-id-product");
         fetch(url + id)
-        .then(response => response.json())
-        .then(commentaries => app.commentaries = commentaries)
-        .catch(error => console.log(error));
+            .then(response => response.json())
+            .then(commentaries => app.commentaries = commentaries)
+            .catch(error => console.log(error));
     }
 
 
     function deleteCommentary(id) {
         fetch(url + id, {
-            "method": "DELETE",
-            "headers": {"Content-type" : "application/json"}
-        })
-        .then(r => getCommentaries())
-        .catch(error => console.log(error));
+                "method": "DELETE",
+                "headers": { "Content-type": "application/json" }
+            })
+            .then(r => getCommentaries())
+            .catch(error => console.log(error));
     }
 
     function updateComentary(obj, id) {
         console.log(JSON.stringify(obj))
         fetch(url + id, {
-            "method": "PUT",
-            "headers": {"Content-type" : "application/json"},
-            "body": JSON.stringify(obj)
-        })
-        .catch(error => console.log(error));
+                "method": "PUT",
+                "headers": { "Content-type": "application/json" },
+                "body": JSON.stringify(obj)
+            })
+            .catch(error => console.log(error));
     }
 
     function insertCommentary(obj) {
+        console.log(JSON.stringify(obj));
         fetch(url, {
-            "method": "POST",
-            "headers": {"Content-type" : "application/json"},
-            "body": JSON.stringify(obj)
-        })
-        .then(r => r.json())
-        .then( commentary => {
-            app.commentaries.push(commentary)
-        })
-        .catch(error => console.log(error));
+                "method": "POST",
+                "headers": { "Content-type": "application/json" },
+                "body": JSON.stringify(obj)
+            })
+            .then(r => r.json())
+            .then(commentary => {
+                app.commentaries.push(commentary)
+            })
+            .catch(error => console.log(error));
     }
 
     // Capturar el evento sumbit, armar los datos, y llamar a la api
-    form.addEventListener("submit", e=> {
+    form.addEventListener("submit", e => {
         e.preventDefault();
         console.log(form.querySelector('input[type="text"]'));
         console.log(form.querySelector('input[type="radio"]:checked'));
         let date = new Date();
-        let dateS = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+        let dateS = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         console.log(dateS);
         let obj = {
             "text": form.querySelector('input[type="text"]').value,
@@ -62,8 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
             "id_product": form.getAttribute("data-id-product"),
             "id_user": "0",
         }
+        console.log(obj);
         insertCommentary(obj);
-    });
+    })
 
     Vue.component('app-input-star', {
         props: ['value', 'commentaryid'],
@@ -117,13 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vue js
     Vue.component('app-list-commentaries', {
-        props: ['commentaryid','commentary', 'rolcolab', 'roladmin', 'userid'],
-        data: function () {
-                return {
-                    editCommentary: false
-                }
+        props: ['commentaryid', 'commentary', 'rolcolab', 'roladmin', 'userid'],
+        data: function() {
+            return {
+                editCommentary: false
+            }
         },
-        template:`
+        template: `
         <li class="list-group-item d-flex flex-row justify-content-between commentary" v-bind:data-id-commentary="commentary.id" v-bind:data-id-user="commentary.id_user">
             <div class="w-100">
                 <div  class="d-flex align-items-center justify-content-between">
@@ -146,31 +148,31 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </li>`,
         methods: {
-            deleteCommentary: function (event) {
+            deleteCommentary: function(event) {
                 let btn = event.target;
                 deleteCommentary(btn.getAttribute("data-id-commentary"));
             },
-            edtiCommentary: function (event) {
+            edtiCommentary: function(event) {
                 this.editCommentary = (this.editCommentary) ? false : true;
                 let btn = event.target;
-                let li = document.querySelector('li[data-id-commentary="'+btn.getAttribute("data-id-commentary")+'"]');
+                let li = document.querySelector('li[data-id-commentary="' + btn.getAttribute("data-id-commentary") + '"]');
                 let div = li.firstChild.lastChild.firstChild.firstChild;
-                this.markStars({'target': li.querySelector('.mark-star').lastChild.firstChild});
-                if(this.editCommentary) {
+                this.markStars({ 'target': li.querySelector('.mark-star').lastChild.firstChild });
+                if (this.editCommentary) {
                     div.contentEditable = 'true';
                 } else {
                     console
                     div.contentEditable = 'false';
                     let text = div.innerHTML;
                     this.editCommentary = false;
-                    updateComentary({text: text.trim("\n"), star: li.querySelector('input[type="radio"]:checked').value}, btn.getAttribute("data-id-commentary"));
+                    updateComentary({ text: text.trim("\n"), star: li.querySelector('input[type="radio"]:checked').value }, btn.getAttribute("data-id-commentary"));
                 }
             },
             markStars: function(event) {
                 console.log(event)
-                if(this.editCommentary) {
+                if (this.editCommentary) {
                     let label = event.target.parentElement.parentElement;
-                    label.parentElement.querySelectorAll("div").forEach( div => {
+                    label.parentElement.querySelectorAll("div").forEach(div => {
                         div.classList.remove("mark-star");
                     });
                     label.classList.add("mark-star");
