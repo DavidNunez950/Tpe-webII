@@ -1,11 +1,13 @@
 <?php
 
+    require_once("app/Helper/DataBaseHelper.php");
+    
     class CategoryModel {
 
         private $db;
 
         function __construct() {
-            $this->db  = new PDO('mysql:host=localhost;'.'dbname=db_indumentaria;charset=utf8', 'root', 'root');
+            $this->db = DataBaseHelper::connection();
         }
         
         function getCategories(){
