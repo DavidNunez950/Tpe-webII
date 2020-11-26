@@ -34,33 +34,26 @@
                                 <a class="nav-link display-5 text-white" href="products">Productos</a>
                             </li>
                             {if $userData.user.rol.admin eq true}
-                                <a class="nav-link display-5 text-white" href="users">Usuarios</a>
-                            {/if}
                             <li class="nav-item active">
-                            <a class="nav-link display-5 text-white" href="register">Registro</a>
-                        </li>
+                                <a class="nav-link display-5 text-white" href="users">Usuarios</a>
+                            </li>
+                            {/if}
                         </ul>
                     </div>
-                    <div class="dropdown">
-                        <a class="btn btn-secondary bg-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {if $userData.user.rol.colab eq false}
-                                Ingresar?
-                            {else}
-                                {$userData.user.name}
-                            {/if}
+                    {if $userData.user.rol.colab eq false}
+                    <a class="btn display-5 text-white" href="register">Registro</a>
+                    <a class="btn display-5 text-white" href="login">Login</a>
+                    {else}
+                    <div class="dropdown text-center">
+                        <a class="btn btn-secondary bg-sm d-flex text-center aling-items-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>{$userData.user.name}</span><i class="fas fa-user-circle icon-user pl-2 pb-1"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="login">Login</a>
-                            {if $userData.user.rol.colab eq false}
-                                <a class="dropdown-item disabled" href="logout">Logout</a>
-                            {else}
-                                <a class="dropdown-item" href="logout">Logout</a>
-                            {/if}
+                            <a class="dropdown-item" href="logout">Logout</a>
                         </div>
                     </div>
-                    <figure class="figure d-flex flex-column justify-content-center align-items-center pr-5 mr-5">
-                        <img src="https://thumbs.dreamstime.com/b/icono-del-usuario-s%C3%ADmbolo-humano-de-la-persona-muestra-inicio-sesi%C3%B3n-avatar-ejemplo-vector-aislado-en-fondo-moderno-118096858.jpg" class="rounded-circle" width="75px" height="75px" >
-                    </figure>                  
+                    {/if}                
                 </nav>
             </div>
         </div>

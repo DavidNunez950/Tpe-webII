@@ -32,15 +32,21 @@
     color: aquamarine;
 }
 
-#commentary .icon-user {
-    font-size: 45px;
-}
-
 .icon-user-admin {
     font-size: 75px;
     border-radius: 100%;
     color: rgb(255, 221, 127);
 }
+
+#commentary .icon-user, #commentary .icon-user-admin {
+    font-size: 45px;
+}
+
+nav .icon-user, nav .icon-user-admi {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
 
 #form {
     width: 250px;
