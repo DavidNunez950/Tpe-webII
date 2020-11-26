@@ -5,7 +5,6 @@
     
     require_once('app/Controller/indumentariaController.php');
     require_once('app/Controller/UserController.php');
-    // require_once 'RouterClass.php';
     
 
     require_once('api/ApiController.php');
