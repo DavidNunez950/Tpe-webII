@@ -4,16 +4,19 @@ require_once('api/ApiController.php');
 require_once('app/Model/CommentaryModel.php');
 require_once('app/Model/ProductoModel.php');
 require_once('api/ApiView.php');
+require_once('app/Helper/AuthHelper.php');
 
 class ApiCommentaryController extends ApiController {
 
     private $productModel;
+    private $authHelper;
 
     public function __construct() {
-        parent::__construct(); // Agregar helper
+        parent::__construct();
         $this->view = new ApiView();
         $this->model = new CommentaryModel();
         $this->productModel = new ProductModel();
+        $this->authHelper = new AuthHelper();
     }
 
     function showCommentary($params = null){
@@ -29,6 +32,7 @@ class ApiCommentaryController extends ApiController {
     }
 
     function insertCommentary(){
+        $this->authHelper->checkLoggedIn();
         $body = $this->getData();
         try {
             session_start();
@@ -46,6 +50,7 @@ class ApiCommentaryController extends ApiController {
     }
 
     function deleteCommentary($params = null){
+        $this->authHelper->checkLoggedIn();
         $id_commentary = $params[':ID'];
         $commentary = $this->model->getCommentaryById($id_commentary);
         $this->checkIfResorseisNotFound($commentary, $id_commentary);
@@ -54,6 +59,7 @@ class ApiCommentaryController extends ApiController {
     }
 
     function editCommentary($params = null){
+        $this->authHelper->checkLoggedIn();
         $id_commentary = $params[':ID'];
         $body = $this->getData();
         $commentary = $this->model->getCommentaryById($id_commentary);
