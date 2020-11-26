@@ -5,42 +5,39 @@ require_once("libs/smarty/libs/Smarty.class.php");
 class UserView{
 
     private $title;
-    
+    private $smarty;
 
     function __construct(){
+        $this->smarty = new Smarty();
         $this->title = "login";
     }
 
     function renderlogin($message = "", $userData){
-        $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title, true);
-        $smarty->assign('message', $message);
-        $smarty->assign('BASE_URL', BASE_URL, true);
-        $smarty->assign('userData', $userData, true);
-        $smarty->display('templates/login.tpl');
+        $this->smarty->assign('titulo', $this->title, true);
+        $this->smarty->assign('message', $message);
+        $this->smarty->assign('BASE_URL', BASE_URL, true);
+        $this->smarty->assign('userData', $userData, true);
+        $this->smarty->display('templates/login.tpl');
     }
 
     function renderUsers($users, $userData) {
-        $smarty = new Smarty();
-        $smarty->assign('users', $users, true);
-        $smarty->assign('BASE_URL', BASE_URL, true);
-        $smarty->assign('userData', $userData, true);
-        $smarty->display('templates/users.tpl'); 
+        $this->smarty->assign('users', $users, true);
+        $this->smarty->assign('BASE_URL', BASE_URL, true);
+        $this->smarty->assign('userData', $userData, true);
+        $this->smarty->display('templates/users.tpl'); 
     }
 
     function renderUser($user, $userData) {
-        $smarty = new Smarty();
-        $smarty->assign('user', $user, true);
-        $smarty->assign('BASE_URL', BASE_URL, true);
-        $smarty->assign('userData', $userData, true);
-        $smarty->display('templates/user.tpl'); 
+        $this->smarty->assign('user', $user, true);
+        $this->smarty->assign('BASE_URL', BASE_URL, true);
+        $this->smarty->assign('userData', $userData, true);
+        $this->smarty->display('templates/user.tpl'); 
     }
 
     function renderRegister($userStatus){
-        $smarty = new Smarty();
-        $smarty->assign('BASE_URL', BASE_URL, true);
-        $smarty->assign('userData', $userStatus, true);
-        $smarty->display('templates/register.tpl'); 
+        $this->smarty->assign('BASE_URL', BASE_URL, true);
+        $this->smarty->assign('userData', $userStatus, true);
+        $this->smarty->display('templates/register.tpl'); 
     }
 
     function renderUserLocation() {
