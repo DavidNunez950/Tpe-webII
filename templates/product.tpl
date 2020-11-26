@@ -1,50 +1,58 @@
 {include "header.tpl" }
-    <div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
-        <div class="row p-5">
-            <div class="w-100">
-                <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-transparent">
-                    <div class="h-100 w-100 ml-n5 pl-5 display-1 border-secondary shadow  text-white bg-dark d-flex">
-                        <h1 class="ml-5 pl-5 pt-5 d-inline align-middle">{$producto->tipo}</h1>
-                    </div>
+<div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
+    <div class="row p-5">
+        <div class="w-100">
+            <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-transparent">
+                <div class="h-100 w-100 ml-n5 pl-5 display-1 border-secondary shadow  text-white bg-dark d-flex">
+                    <h1 class="ml-5 pl-5 pt-5 d-inline align-middle">{$producto->tipo}</h1>
                 </div>
             </div>
-            <div class="w-100">
-                <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Prenda</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Talle</th>
-                            <th scope="col">Coleccion</th>
-                            {if $userData.user.rol gte 0}
+        </div>
+        <div class="w-100">
+            <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Prenda</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Talle</th>
+                        <th scope="col">Coleccion</th>
+                        <th scope="col">Imagen</th>
+                        {if $userData.user.rol gte 0}
                             <th scope="col">Editar</th>
-                            {/if}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{$producto->tipo}</td>
-                            <td>{$producto->color}</td>
-                            <td>{$producto->talle}</td>
-                            <td>{$producto->coleccion}</td>
-                            {if $userData.user.rol.colab eq true}
+                        {/if}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{$producto->tipo}</td>
+                        <td>{$producto->color}</td>
+                        <td>{$producto->talle}</td>
+                        <td>{$producto->coleccion}</td>
+                        {if $prenda->img}
+                            <td>
+                                <img src="uploads/{$prenda->img}" width="100px" height="100px" />
+                            </td>
+                        {else}
+                            <td><img /></td>
+                        {/if}
+                        {if $userData.user.rol.colab eq true}
                             <td class="w-25">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$producto->id}" aria-expanded="false">Borrar</button>
-                                    <button type="button"  class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$producto->id}" aria-expanded="false">Editar</button>
+                                    <button type="button" class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$producto->id}" aria-expanded="false">Borrar</button>
+                                    <button type="button" class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$producto->id}" aria-expanded="false">Editar</button>
                                 </div>
                             </td>
                             <div class="modal fade" id="borrar{$producto->id}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content ">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Estas seguro de que quieres borrar la  prenda {$producto->tipo} de la {$producto->coleccion}</h5>
+                                            <h5 class="modal-title">Estas seguro de que quieres borrar la prenda {$producto->tipo} de la {$producto->coleccion}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-footer">
-                                            <div class="btn-group btn-group-lg m-0 mt-3" role="group"> 
+                                            <div class="btn-group btn-group-lg m-0 mt-3" role="group">
                                                 <button type="button" class="border-0 close">
                                                     <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
                                                         Cancelar
@@ -59,11 +67,11 @@
                             <div class="modal fade" id="modificar{$producto->id}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content ">
-                                        <form class="form-inline" action="editProduct/{$producto->id}" method="POST">
+                                        <form class="form-inline" action="editProduct/{$producto->id}" method="POST" enctype="multipart/form-data">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Estas seguro de que quieres realizar cambios de la producto: "{$producto->tipo}", de la {$producto->coleccion}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                                    <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
@@ -91,6 +99,10 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="img">Imagen</label>
+                                                <input type="file" class="form-control" id="file_img" name="img">
+                                            </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Comfirmar</button>
                                             </div>
@@ -98,44 +110,44 @@
                                     </div>
                                 </div>
                             </div>
-                            {/if}
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="w-100">
-                <div class="col-12 bg-light pt-4">
-                    <form class="form"  data-id-product={$producto->id} id="form-commentary">
-                        <div class="form-group d-flex flex-row flex-nowrap alling-items-center   p-0 m-0">
-                            <label for="text" class="text-dark col-3">Comenta y puntua el producto:</label>
-                            <div class="form-group clasificacion p-0 rounded-pill">
-                                <input id="radio1" type="radio" name="estrellas" value="5">
-                                <label for="radio1"><i class="fas fa-star"></i></label>
-                                <input id="radio2" type="radio" name="estrellas" value="4">
-                                <label for="radio2"><i class="fas fa-star"></i></label>
-                                <input id="radio3" type="radio" name="estrellas" value="3">
-                                <label for="radio3"><i class="fas fa-star"></i></label>
-                                <input id="radio4" type="radio" name="estrellas" value="2">
-                                <label for="radio4"><i class="fas fa-star"></i></label>
-                                <input id="radio5" type="radio" name="estrellas" value="1">
-                                <label for="radio5"><i class="fas fa-star"></i></label>
-                            </div>
+                        {/if}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="w-100">
+            <div class="col-12 bg-light pt-4">
+                <form class="form" data-id-product={$producto->id} id="form-commentary">
+                    <div class="form-group d-flex flex-row flex-nowrap alling-items-center   p-0 m-0">
+                        <label for="text" class="text-dark col-3">Comenta y puntua el producto:</label>
+                        <div class="form-group clasificacion p-0 rounded-pill">
+                            <input id="radio1" type="radio" name="estrellas" value="5">
+                            <label for="radio1"><i class="fas fa-star"></i></label>
+                            <input id="radio2" type="radio" name="estrellas" value="4">
+                            <label for="radio2"><i class="fas fa-star"></i></label>
+                            <input id="radio3" type="radio" name="estrellas" value="3">
+                            <label for="radio3"><i class="fas fa-star"></i></label>
+                            <input id="radio4" type="radio" name="estrellas" value="2">
+                            <label for="radio4"><i class="fas fa-star"></i></label>
+                            <input id="radio5" type="radio" name="estrellas" value="1">
+                            <label for="radio5"><i class="fas fa-star"></i></label>
                         </div>
-                        <div class="form-group row  p-0 m-0">
-                            <div class="form-group col-11">
-                                <input type="text" class="form-control" name="text" required>
-                            </div>
-                            {if $userData.user.rol.colab eq true}
+                    </div>
+                    <div class="form-group row  p-0 m-0">
+                        <div class="form-group col-11">
+                            <input type="text" class="form-control" name="text" required>
+                        </div>
+                        {if $userData.user.rol.colab eq true}
                             <div class="form-group col-1">
                                 <button type="submit" class="btn btn-primary  rounded-circle"><i class="fas fa-paper-plane"></i></button>
                             </div>
-                            {/if}
-                        </div>
-                    </form>     
-                </div>
-                {include file="../component/commentaries.html"}
+                        {/if}
+                    </div>
+                </form>
             </div>
+            {include file="../component/commentaries.html"}
         </div>
     </div>
+</div>
 <script src="js/commentaries.js"></script>
 {include file="footer.tpl"}

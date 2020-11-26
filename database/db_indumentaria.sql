@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Nov 05, 2020 at 04:36 PM
--- Server version: 5.7.24
--- PHP Version: 7.4.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 26-11-2020 a las 18:01:05
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_indumentaria`
+-- Base de datos: `db_indumentaria`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -35,7 +34,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`id`, `coleccion`, `url_img`) VALUES
@@ -46,7 +45,45 @@ INSERT INTO `categoria` (`id`, `coleccion`, `url_img`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `commentary`
+--
+
+CREATE TABLE `commentary` (
+  `id` int(11) NOT NULL,
+  `text` varchar(250) DEFAULT NULL,
+  `star` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `commentary`
+--
+
+INSERT INTO `commentary` (`id`, `text`, `star`, `date`, `id_product`, `id_user`) VALUES
+(2, 'COMENTARIO 2 EDITADO', 5, '2020-11-18', 1, 1),
+(3, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(4, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(5, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(7, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(8, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(9, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(10, 'Algo que podamos reco', 5, '2020-11-18', 1, 1),
+(11, 'kjhvurfhdihfiisdhciohfkcjl<zxk´pjeiud1', 5, '2020-11-18', 1, 1),
+(12, 'COMENTARIO 2 EDITADO', 5, '2020-11-18', 7, 1),
+(13, 'COMENTARIO 3 EDITADO', 5, '2020-11-18', 7, 1),
+(14, 'COMENTARIO 5 EDITADO', 5, '2020-11-18', 7, 1),
+(15, 'COMENTARIO 4 EDITADO', 5, '2020-11-18', 7, 1),
+(16, 'Comentario 8', 3, '2020-11-25', 7, 0),
+(17, 'Comentario 8', 3, '2020-11-25', 7, 0),
+(18, 'kjhjadhfiohiñszx', 4, '2020-11-25', 7, 0),
+(19, 'Comentario 8', 4, '2020-11-25', 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
@@ -54,31 +91,31 @@ CREATE TABLE `producto` (
   `tipo` varchar(10) NOT NULL,
   `color` varchar(10) NOT NULL,
   `talle` varchar(10) NOT NULL,
-  `id_categoria` int(11) NOT NULL
+  `id_categoria` int(11) NOT NULL,
+  `img` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `producto`
+-- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`) VALUES
-(7, 'Zapatillas', 'Rojo Flama', 'XXXL', 1),
-(10, 'Pantalon', 'Verde', 'X', 1),
-(13, 'Camisa', 'Amarillo', 'XS', 1),
-(14, 'Zapatillas', 'Gris', 'XS', 1),
-(16, 'Buzo', 'Negro', 'XXXL', 15),
-(17, 'Zapatillas', 'Gris', 'XXXL', 13),
-(18, 'Camisa', 'Amarillo', 'XS', 13),
-(19, 'Jean', 'Gris', 'S', 13),
-(20, 'Camisa', 'Amarillo', 'XS', 13),
-(21, 'Zapatillas', 'Gris', 'XS', 13),
-(22, 'Buzo', 'Verde', 'XXL', 1),
-(25, 'Camisa', 'Gris', 'XXXL', 13);
+INSERT INTO `producto` (`id`, `tipo`, `color`, `talle`, `id_categoria`, `img`) VALUES
+(7, 'Zapatillas', 'Rojo Flama', 'XXXL', 1, 'zapatilla.jpg'),
+(10, 'Pantalon', 'Verde', 'X', 1, NULL),
+(13, 'Camisa', 'rojo', 'M', 1, NULL),
+(14, 'Zapatillas', 'Gris', 'XS', 1, NULL),
+(16, 'Buzo', 'Negro', 'XXXL', 15, NULL),
+(17, 'Zapatillas', 'Gris', 'XXXL', 13, NULL),
+(18, 'Camisa', 'Amarillo', 'XS', 13, NULL),
+(19, 'Jean', 'Gris', 'S', 13, NULL),
+(21, 'Zapatillas', 'Gris', 'XS', 13, NULL),
+(22, 'Buzo', 'Verde', 'XXL', 1, NULL),
+(25, 'Camisa', 'Gris', 'XXXL', 13, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estructura de tabla para la tabla `user`
 --
 
 CREATE TABLE `user` (
@@ -87,69 +124,83 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `img` varchar(10) NOT NULL
+  `img` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Volcado de datos para la tabla `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `admin`, `img`) VALUES
 (1, 'usuario', 'usuario@uno.com', '$2y$10$yppTcGTXlZWE4scjl8lVce5aaMm.ZlMPDkeiqG5fCie32LnVBrEM.', 1, ''),
 (2, 'administradorUno', 'admin@uno.com', '$2y$10$guxOazOWv/DwW5U48k04SOJWClIZ11UgSq6DFwr4dCk', 1, ''),
-(15, 'usuario test', 'usuario@gmail.com', 'asdsdfsdfgdfhgsrthnsrth', 0, '');
+(15, 'usuario test', 'usuario@gmail.com', 'asdsdfsdfgdfhgsrthnsrth', 1, ''),
+(16, 'leandro', 'lazarte@tudai.com', '$2y$10$/pOaAOR8eH2ZeSpkffhSPe7IDHu5Cdzm00xw1IDGlpCrwRs2ucoNS', 0, NULL),
+(17, 'david', 'nunez@tudail.com', '$2y$10$Fss2jF70mOIWG5gOtIVgfObn2ALNdkB/Bw9G.jfjUbtOCK4rbIbCS', 0, NULL);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `categoria`
+-- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `producto`
+-- Indices de la tabla `commentary`
+--
+ALTER TABLE `commentary`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_tipo` (`id_categoria`);
 
 --
--- Indexes for table `user`
+-- Indices de la tabla `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `categoria`
+-- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `producto`
+-- AUTO_INCREMENT de la tabla `commentary`
+--
+ALTER TABLE `commentary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `producto`
+-- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`);

@@ -54,7 +54,7 @@
         }
 
         function getProductsById($id){
-            $query = $this->db->prepare("SELECT producto.id,producto.tipo,producto.color,producto.talle,producto.id_categoria,categoria.coleccion FROM producto,categoria WHERE  producto.id =? AND producto.id_categoria = categoria.id");
+            $query = $this->db->prepare("SELECT producto.id,producto.tipo,producto.color,producto.talle,producto.id_categoria,producto.img, categoria.coleccion FROM producto,categoria WHERE  producto.id =? AND producto.id_categoria = categoria.id");
             $query->execute(array($id));
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
@@ -70,9 +70,9 @@
             $query->execute(array($id));
         }
 
-        function editProduct($id,$color,$talle,$tipo){
-            $query = $this->db->prepare("UPDATE producto SET tipo=?, color=?, talle=? WHERE id=?");
-            $query->execute(array($tipo,$color,$talle,$id));
+        function editProduct($tipo,$color,$talle,$img,$id){
+            $query = $this->db->prepare("UPDATE producto SET tipo=?, color=?, tipo=?, img=? WHERE id=?");
+            $query->execute(array($tipo,$color,$talle,$img,$id));
         }
     }
 ?>

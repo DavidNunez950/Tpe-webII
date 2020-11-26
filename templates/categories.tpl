@@ -42,7 +42,7 @@
                             <div class="modal fade" id="modificar{$categoria->id}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content ">
-                                        <form class="form-inline" action="editCategory/{$categoria->id}" method="POST">
+                                        <form class="form-inline" action="editCategory/{$categoria->id}" method="POST" >
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Esta seguro que quiere editar {$categoria->coleccion}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -78,11 +78,17 @@
         // 2.b Funciones para realizar acciones de ABM con productss
         function insertProductsInCategoryByGET($params = null){
             $this->AuthHelper->checkLoggedIn();
+           
+            $destino = null;
             $id_category = $params[':ID'];
-            if(isset($_POST['color'])&&isset($_POST['talle'])&&isset($_POST['tipo'])&&
-            ($_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/jpeg" ||
-            $_FILES['img']['type'] == "image/png")) {
-                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category, $_FILES['img']['tmp_name']);
+           
+            if(isset($_POST['color']) && isset($_POST['talle']) && isset($_POST['tipo']) &&
+            (isset($_FILES['img']))) { 
+                $uploads = getcwd() . "//uploads/";
+                $destino = tempnam($uploads, $_FILES['img']['name']);
+                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                $destino = basename($destino);
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category, $destino);
             }
             $this->view->showCategoryLocation($id_category);
         }
@@ -90,11 +96,16 @@
         function editProducts($params = null){
             $this->AuthHelper->checkLoggedIn();
             $id_products = $params[':ID'];
+            $destino = null;
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
-            &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))) { 
-                $this->ProductModel->editProduct($id_products, $_POST['color'], $_POST['talle'], $_POST['tipo']);
-            }
+            &&(isset($_POST['tipo'])&&!empty($_POST['tipo'])) && (isset($_FILES['img']))) {
+                $uploads = getcwd() . "//uploads/";
+                $destino = tempnam($uploads, $_FILES['img']['name']);
+                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                $destino = basename($destino);
+                $this->ProductModel->editProduct($_POST['tipo'], $_POST['color'], $_POST['talle'], $destino, $id_products,);
+            } 
             $this->view->showCategoriesLocation();
         }
 
@@ -138,15 +149,19 @@
         // 3.b Función para insertar products en Category por POST
         function insertProductsInCategoryByPOST() {
             $this->AuthHelper->checkLoggedIn();
+            $destino = null;
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
             &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
             &&(isset($_POST['id_category'])&&!empty($_POST['id_category']))
-            &&($_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/jpeg" ||
-                $_FILES['img']['type'] == "image/png")) {
-                    $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category'],$_FILES['img']['tmp_name']);
-                    $this->view->showCategoryLocation($_POST['id_category']);
-            }
+            &&(isset($_FILES['img']))) {
+                $uploads = getcwd() . "//uploads/";
+                $destino = tempnam($uploads, $_FILES['img']['name']);
+                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                $destino = basename($destino);
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category'],$destino);
+                //$this->view->showCategoryLocation($_POST['id_category']);
+            } 
             $this->view->showProductsLocation();
             
         }
