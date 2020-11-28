@@ -78,10 +78,8 @@
         // 2.b Funciones para realizar acciones de ABM con productss
         function insertProductsInCategoryByGET($params = null){
             $this->AuthHelper->checkLoggedIn();
-           
             $destino = null;
             $id_category = $params[':ID'];
-           
             if(isset($_POST['color']) && isset($_POST['talle']) && isset($_POST['tipo']) &&
             (isset($_FILES['img']))) { 
                 $uploads = getcwd() . "//uploads/";
@@ -118,32 +116,15 @@
 
         // 3.a Función para ver todas las Categorys con sus productss
         function showAllProducts($params = null) {
-            $pagina = ($params[':PAGE'] == null) ? 1 : $params[':PAGE'];
-            $range = 5;
-            $n1 =  ($pagina - 1) * $range;
-            $n2 = ($pagina * $range);
-            $cantproducts = $this->ProductModel->getCountProducts();
-            $products = [];
-            $cantproducts = (get_object_vars($cantproducts[0])["COUNT(*)"]);
-            if ((isset($_POST['color'])||!empty($_POST['color']))
-            ||(isset($_POST['talle'])||!empty($_POST['talle']))
-            ||(isset($_POST['prenda'])||!empty($_POST['prenda']))
-            ||(isset($_POST['coleccion'])||!empty($_POST['coleccion']))
-            ||(isset($_POST['conectorLogico'])||!empty($_POST['conectorLogico']))) {
-                $conectorLogico = ($_POST['conectorLogico'] == 1) ? true : false;
-                $products = $this->ProductModel->getFilteredProducts($conectorLogico, $n1, $n2, $_POST['prenda'], $_POST['color'], $_POST['talle'], $_POST['coleccion']);
-            } else {
-                $products = $this->ProductModel->getProductsWithCategory($n1, $n2);
-            }
+            $page = ($params[':PAGE'] == null) ? 1 : $params[':PAGE'];
+            $index =  ($page - 1) * 5;
+            $conectorLogico = ($_GET['conectorLogico'] == 'on') ? true : false;
+            $cantPag = ceil((($this->ProductModel->getCountProducts($conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion']))->cant)/5);
+            // $cantproducts = ($this->ProductModel->getCountProducts())->cant;
+            $products = $this->ProductModel->getFilteredProducts($index, $conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion']);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
-            $cantPag = [];
-            $aux = 0;
-            while ($aux < $cantproducts) {
-                array_push($cantPag, $aux);
-                $aux += $range;
-            }
-            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag, $pagina);
+            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag, $page, ('?prenda='.$_GET['prenda'].'&color='.$_GET['color'].'&talle='.$_GET['talle'].'&coleccion='.$_GET['coleccion'].''));
         }
 
         // 3.b Función para insertar products en Category por POST

@@ -41,13 +41,14 @@ require_once('libs/smarty/libs/Smarty.class.php');
             $this->smarty->display('templates/product.tpl');
         }
 
-        function renderAllProducsWithCategorys($productss,$categories, $userData, $cantPaginas, $pag){
+        function renderAllProducsWithCategorys($productss,$categories, $userData, $cantPaginas, $pagePointed, $search) {
             $this->smarty->assign('BASE_URL', BASE_URL);
             $this->smarty->assign('categorias', $categories, true);
             $this->smarty->assign('producto', $productss, true);
             $this->smarty->assign('userData', $userData, true);
-            $this->smarty->assign('cantPaginas', count($cantPaginas), true);
-            $this->smarty->assign('pag', 1 , true);
+            $this->smarty->assign('cantPaginas', $cantPaginas, true);
+            $this->smarty->assign('search', $search, true);
+            $this->smarty->assign('pagePointed', $pagePointed , true);
             $this->smarty->display('templates/products.tpl');
         }
 

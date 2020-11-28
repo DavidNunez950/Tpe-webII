@@ -12,7 +12,7 @@
             </div>
         </div>
         <div>
-            <form action="products/" method="POST">
+            <form action="products/{$pag}/" method="GET">
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="prenda">Prenda</label>
@@ -61,14 +61,6 @@
                             <td>{$prenda->color}</td>
                             <td>{$prenda->talle}</td>
                             <td>{$prenda->coleccion}</td>
-                            {if $prenda->img}
-                                <td>
-                                    <img src="uploads/{$prenda->img}" width="100px" height="100px" />
-                                </td>
-                            {else}
-                                <td><img /></td>
-                            {/if}
-    
                             {if $userData.user.rol.colab eq true}
                                 <td class="w-25">
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -212,17 +204,23 @@
                             </form>
                         </tr>
                     {/if}
+                    <tr class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
+                        
+                        <td scope="row" colspan="5" class="">
+                            <ul class="pagination">
+                                <li class="page-item {if $pagePointed eq 1} disabled{/if}">
+                                    <a class="page-link" href="products/{$pagePointed - 1}/{$search}" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                {for $page=1 to $cantPaginas}
+                                    <li class="page-item {if $pagePointed eq $page} active{/if}"><a class="page-link" href="products/{$page}/{$search} ">{$page}</a></li>
+                                {/for}
+                                <li class="page-item  {if $pagePointed eq $cantPaginas} disabled{/if}">
+                                    <a class="page-link" href="products/{$pagePointed + 1}/{$search}">Next</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
                 </tbody>
-            </table>
-            <table>
-
-                <tr class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
-                    <ul class="pagination">
-                        {for $page=1 to $cantPaginas}
-                            <li class="page-item"><a class="page-link" href="products/{$page} ">{$page}</a></li>
-                        {/for}
-                    </ul>
-                </tr>
             </table>
         </div>
     </div>

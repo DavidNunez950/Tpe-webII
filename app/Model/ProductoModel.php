@@ -10,38 +10,23 @@
             $this->db = DataBaseHelper::connection();
         }
 
-        function getCountProducts(){
-            $query = $this->db->prepare("SELECT COUNT(*) FROM producto");
-            $query->execute(array());
-            return  $query->fetchAll(PDO::FETCH_OBJ);
+        function getCountProducts($conectorLogico, $tipo,$color,$talle, $categoria){
+            $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria);
+            $sentence = 'SELECT COUNT(*) AS cant FROM producto'.$sentence;
+            $query = $this->db->prepare($sentence);
+            $query->execute();
+            return  $query->fetch(PDO::FETCH_OBJ);
         }
 
-        // function getFilteredProducts($conectorLogico, $n1, $n2, $color,$talle,$tipo, $categoria){
-        function getFilteredProducts($conectorLogico, $n1, $n2, $tipo,$color,$talle, $categoria){
-            $sentence = '';
-            $conector = '';
-            // $queryValues = array();
-            $arr = array(
-                'producto.tipo' =>$tipo,
-                'producto.color' =>$color,
-                'producto.talle' =>$talle,
-                'categoria.coleccion' =>$categoria,
-            );
-            foreach(array_keys($arr) as $e) {
-                if($arr[$e]!= null) {
-                    $sentence .= ' '.$conector.' LOWER(  '.$e.' ) LIKE LOWER("%'.$arr[$e].'%")';
-                    $conector = ($conectorLogico == true) ? 'AND': 'OR';
-            }
-            }
-            $a ='SELECT * FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria WHERE '.$sentence.'LIMIT '.$n1.', 5';
-            echo($a);
-            $query = $this->db->prepare($a);
+        function getFilteredProducts($index, $conectorLogico, $tipo,$color,$talle, $categoria){
+            $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria);
+            $sentence ='SELECT * FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria '.$sentence.'LIMIT '.$index.', 5';
+            $query = $this->db->prepare($sentence);
             $query->execute();
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
-        
+
         function getProductsWithCategory($n1, $n2){
-            // echo 'SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria BETWEEN '.$n1.' AND '.$n2.'';die();
             $query = $this->db->prepare('SELECT * FROM categoria INNER JOIN producto ON categoria.id = producto.id_categoria LIMIT '.$n1.', 5');
             $query->execute(array());
             return  $query->fetchAll(PDO::FETCH_OBJ);
@@ -73,6 +58,24 @@
         function editProduct($tipo,$color,$talle,$img,$id){
             $query = $this->db->prepare("UPDATE producto SET tipo=?, color=?, tipo=?, img=? WHERE id=?");
             $query->execute(array($tipo,$color,$talle,$img,$id));
+        }
+        
+        private function generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria) {
+            $sentence = '';
+            $conector = 'WHERE ';
+            $arr = array(
+                'producto.tipo' =>$tipo,
+                'producto.color' =>$color,
+                'producto.talle' =>$talle,
+                'categoria.coleccion' =>$categoria,
+            );
+            foreach(array_keys($arr) as $e) {
+                if($arr[$e]!= null) {
+                    $sentence .= ' '.$conector.' LOWER(  '.$e.' ) LIKE LOWER("%'.$arr[$e].'%")';
+                    $conector = ($conectorLogico == true) ? 'AND': 'OR';
+                }
+            }
+            return $sentence;
         }
     }
 ?>
