@@ -96,15 +96,25 @@
         function editProducts($params = null){
             $this->AuthHelper->checkLoggedIn();
             $id_products = $params[':ID'];
-            $destino = null;
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
-            &&(isset($_POST['tipo'])&&!empty($_POST['tipo'])) && (isset($_FILES['img']))) {
+            &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))) {
+               
+                $this->ProductModel->editProduct($_POST['tipo'], $_POST['color'], $_POST['talle'], $id_products,);
+            } 
+            $this->view->showCategoriesLocation();
+        }
+
+        function editImage($params = null){
+            $this->AuthHelper->checkLoggedIn();
+            $id_products = $params[':ID'];
+            $destino = null;
+            if ((isset($_FILES['img']))) {
                 $uploads = getcwd() . "//uploads/";
                 $destino = tempnam($uploads, $_FILES['img']['name']);
                 move_uploaded_file($_FILES['img']['tmp_name'], $destino);
                 $destino = basename($destino);
-                $this->ProductModel->editProduct($_POST['tipo'], $_POST['color'], $_POST['talle'], $destino, $id_products,);
+                $this->ProductModel->editImage($destino, $id_products,);
             } 
             $this->view->showCategoriesLocation();
         }
@@ -114,6 +124,17 @@
             $id_products = $params[':ID'];
             $this->ProductModel->deleteProduct($id_products);
             $this->view->showCategoriesLocation();
+        }
+
+        function deleteImage($params = null){
+            $this->AuthHelper->checkLoggedIn();
+           
+            $id_products = $params[':ID'];
+
+            $this->ProductModel->deleteImage($id_products);
+
+            $this->view->showProductsLocation();
+
         }
 
         // 3.a Función para ver todas las Categorys con sus productss
