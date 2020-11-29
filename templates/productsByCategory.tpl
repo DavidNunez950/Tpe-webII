@@ -18,23 +18,23 @@
                             <th scope="col">Prenda</th>
                             <th scope="col">Color</th>
                             <th scope="col">Talle</th>
-                            <th scope="col">Imagen</th>
                             <th scope="col">Datos</th>
                         </tr>
                     </thead>
                     <tbody>
                     {foreach from=$producto item=prenda}
                         <tr>
-                            <td>{$prenda->tipo}</td>
+                            <td>
+                                <button type="button"  class="btn{if $prenda->img eq ""} btn-secondary {else} btn-warning{/if} text-white mr-1 rounded-circle" data-toggle="modal" data-target="#img{$prenda->id}" aria-expanded="false"><i class="fas fa-images"></i></button>{$prenda->tipo}
+                            </td>
                             <td>{$prenda->color}</td>
                             <td>{$prenda->talle}</td>
-                            <td>{$prenda->img}</td>
                             {if $userData.user.rol.colab eq true}
                             <td class="w-25">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$prenda->id}" aria-expanded="false">Borrar</button>
-                                    <a href="product/{$prenda->id}" class="btn btn-success stretched-link text-white">Ver</a>
-                                    <button type="button"  class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$prenda->id}" aria-expanded="false">Editar</button>
+                                    <button type="button"  class="btn btn-danger  stretched-link text-white" data-toggle="modal" data-target="#borrar{$prenda->id}" aria-expanded="false"><i class="fas fa-trash-alt"></i></button>
+                                    <a href="product/{$prenda->id}" class="btn btn-success stretched-link text-white"><i class="fas fa-search"></i></a>
+                                    <button type="button"  class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$prenda->id}" aria-expanded="false"><i class="far fa-edit"></i></button>
                                 </div>
                             </td>
                             <div class="modal fade" id="borrar{$prenda->id}" tabindex="-1" aria-hidden="true">
@@ -61,7 +61,7 @@
                             </div>
                             <div class="modal fade" id="modificar{$prenda->id}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <div class="modal-content ">
+                                    <div class="modal-content">
                                     <form class="form-inline" action="editProduct/{$prenda->id}" method="POST">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Estas seguro de que quieres realizar cambios de la prenda: "{$prenda->tipo}", de la {$categoria->coleccion}</h5>
@@ -71,33 +71,32 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label for="tipo">Prenda:</label>
-                                                <input type="text" class="form-control" name="tipo" required>
+                                                <label for="tipo" class="text-dark">Prenda:</label>
+                                                <input type="text" class="form-control" name="tipo" value={$prenda->tipo} required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="color">Color:</label>
-                                                <input type="text" class="form-control" name="color" required>
+                                                <label for="color" class="text-dark">Color:</label>
+                                                <input type="text" class="form-control" name="color" value={$prenda->color} required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="talle">Talle</label>
+                                            <div class="form-group" >
+                                                <label for="talle" class="text-dark">Talle</label>
                                                 <select class="form-control" name="talle">
-                                                    <optgroup label="Selecione su tipo de talle preferido">
-                                                        <option value="XS">XS</option>
-                                                        <option value="S">S</option>
-                                                        <option value="M">M</option>
-                                                        <option value="L">L</option>
-                                                        <option value="XL">XL</option>
-                                                        <option value="XXL">XXL</option>
-                                                        <option value="XXXL">XXXL</option>
-                                                        <option value="Otro">Otro</option>
+                                                    <optgroup label="Selecione su tipo de talle preferido"> 
+                                                        <option value="XS"  {if $prenda->talle eq "XS"}selected{/if}>XS</option>
+                                                        <option value="S" {if $prenda->talle eq "S"}selected{/if}>S</option>
+                                                        <option value="M" {if $prenda->talle eq "M"}selected{/if}>M</option>
+                                                        <option value="L" {if $prenda->talle eq "L"}selected{/if}>L</option>
+                                                        <option value="XL" {if $prenda->talle eq "XL"}selected{/if}>XL</option>
+                                                        <option value="XXL" {if $prenda->talle eq "XXL"}selected{/if}>XXL</option>
+                                                        <option value="XXXL" {if $prenda->talle eq "XXXL"} selected{/if}>XXXL</option>
+                                                        <option value="Otro" {if $prenda->talle eq "Otro"}selected{/if}>Otro</option>
                                                     </optgroup>
                                                 </select>
                                             </div>
-                                            <div class="form-group m-0 p-0">
-                                                <label for="img"></label>
+                                            {* <div class="form-group m-0 p-0">
+                                                <label for="img" ></label>
                                                 <input type="file" class="form-control" name="img" required>
-                                            </div>
-                                        
+                                            </div> *}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Comfirmar</button>
@@ -113,6 +112,32 @@
                                 </div>
                             </td>
                             {/if}
+                            
+                            <div class="modal fade" id="img{$prenda->id}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{$prenda->tipo}:</h5><br>
+                                        </div>
+                                        <div class="modal-body">
+                                            {if $prenda->img eq ""}
+                                            <p>No tenemos una imagen para este producto, usted puede agregar una</p>
+                                            {/if}
+                                            <div class="modal-img-product pl-2"> 
+                                                {if $prenda->img neq ""}
+                                                <img src="uploads/{$prenda->img}" alt="{$prenda->img}" class="img rounded" width="250px">
+                                                {else}
+                                                <img src="uploads/img_404.png" alt="img 404" class="img rounded" width="250px">
+                                                {/if}
+                                                <div  class="modal-img-buttons">
+                                                    <button type="button" class="btn btn-danger display-1 text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></button>
+                                                    <button type="button" class="btn btn-primary text-whie"><label for="fileToUpload" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                     {/foreach}
                         {if $userData.user.rol.colab eq true}
@@ -125,10 +150,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                        <div class="form-group m-0 p-0">
-                                            <label for="color"></label>
-                                            <input type="text" class="form-control" name="color" required>
-                                        </div>
+                                    <div class="form-group m-0 p-0">
+                                        <label for="color"></label>
+                                        <input type="text" class="form-control" name="color" required>
+                                    </div>
                                 <td>
                                     <div class="form-group m-0 p-0">
                                         <label for="talle"></label>
@@ -146,12 +171,12 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td>
+                                {* <td>
                                     <div class="form-group m-0 p-0">
                                         <label for="img"></label>
                                         <input type="file" class="form-control" name="img" id="imageToUpload">
                                     </div>
-                                <td>
+                                <td> *}
                                 <td>
                                     <div class="btn-group btn-group-lg m-0 mt-3" role="group">
                                         <button type="sumbit" class="btn btn-outline-success btn-sm">Agregar</button>

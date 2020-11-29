@@ -15,16 +15,15 @@
                         {else}
                             <i class="fas fa-user-circle icon-user pr-3"></i>
                         {/if}
-                            {* <img src="{$user->url_img}" class="rounded-circle" width="75px" height="75px"/> *}
                             <a href="users/{$user->id}">{$user->name}<span class="text-secondary"> - {$user->email}</span></a>
                             <div class="btn-group btn-group-toggle ml-3" data-toggle="buttons">
-                                <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$user->id}" aria-expanded="false">Borrar cuenta</button>
-                                <a class="btn btn-success stretched-link text-white" href="users/{$user->id}">Ver perfil</a>
+                                <button type="button"  class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrar{$user->id}" aria-expanded="false"><i class="fas fa-trash-alt"></i></button>
+                                <a class="btn btn-success stretched-link text-white" href="users/{$user->id}"><i class="fas fa-search"></i></a>
                                 <button type="button"  class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificar{$user->id}" aria-expanded="false">
-                                    {if $user->admin == 1}
-                                    Quitar permisos de administración
+                                    {if $user->admin == 0}
+                                    <i class="fas fa-toggle-off"></i>
                                     {else} 
-                                    Dar permisos de administración
+                                    <i class="fas fa-toggle-on"></i>
                                     {/if}
                                 </button>
                             </div>
@@ -54,7 +53,13 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content ">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Esta seguro que quiere editar {$user->coleccion}</h5>
+                                            <h5 class="modal-title">                            
+                                                {if $user->admin == 1}
+                                                Quitar permisos de administración 
+                                                {else} 
+                                                Dar permisos de administración 
+                                                {/if}{$user->coleccion}
+                                                del usuario: {$user->name}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>

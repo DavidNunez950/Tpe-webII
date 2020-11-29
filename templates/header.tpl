@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{$BASE_URL}css/css.css"  type="text/css">
+    <link rel="stylesheet" href="{$BASE_URL}css/normalize.css"  type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="jquery-1.3.2.min.js" type="text/javascript"></script>   
+    <link rel="icon" type="image/x-icon" href="uploads/logo.png" class="rounded-circle">
     <base href="{$BASE_URL}">
     <title>TodoRopa</title>
 </head>
@@ -18,7 +20,7 @@
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-around bg-main border-ligth">
-                    <a class="navbar-brand" href="#"><h1 class=" display-5 text-white">TodoRopa</h1> <a>
+                    <img src="uploads/logo.png" class="rounded-circle bg-light p-1" width="40px"><a class="navbar-brand" href="home"><h1 class=" display-5 text-white">TodoRopa</h1> <a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -58,3 +60,4 @@
             </div>
         </div>
     </div>
+

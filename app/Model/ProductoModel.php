@@ -20,7 +20,7 @@
 
         function getFilteredProducts($index, $conectorLogico, $tipo,$color,$talle, $categoria){
             $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria);
-            $sentence ='SELECT * FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria '.$sentence.'LIMIT '.$index.', 5';
+            $sentence ='SELECT producto.*, categoria.coleccion FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria '.$sentence.'LIMIT '.$index.', 5';
             $query = $this->db->prepare($sentence);
             $query->execute();
             return  $query->fetchAll(PDO::FETCH_OBJ);
@@ -41,7 +41,7 @@
         function getProductsById($id){
             $query = $this->db->prepare("SELECT producto.id,producto.tipo,producto.color,producto.talle,producto.id_categoria,producto.img, categoria.coleccion FROM producto,categoria WHERE  producto.id =? AND producto.id_categoria = categoria.id");
             $query->execute(array($id));
-            return  $query->fetchAll(PDO::FETCH_OBJ);
+            return  $query->fetch(PDO::FETCH_OBJ);
         }
 
         function insertProduct($color,$talle,$tipo, $id_Category, $img){

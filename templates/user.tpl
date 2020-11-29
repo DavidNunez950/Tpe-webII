@@ -1,30 +1,31 @@
 {include file="header.tpl" }
     <div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
-        <div class="row p-5 d-block">
+        <div class="row p-5 d-flex justify-content-center align-items-center">
             <div class="d-flex justify-content-start align-items-center">
                 <div class="text-center display-1">
-                    <h1>Usuarios</h1>
+                    <h1>Mira el perfil de uno de nuestros usuarios:</h1>
                 </div>
-            </div>
+            </div> 
 
-            <div class="card d-flex justify-content-between align-items-center" style="width: 18rem;">
-                <div class=" card-body d-flex justify-content-between align-items-center">
+            <div class="col-12 m-2 w-75 ">
+                <div class="d-flex justify-content-center align-items-center card-header-bg ">
+                    {if $user->admin == 1}
+                    <i class="fas fa-user-circle icon-user-admin m-5 p-5"></i>
+                    {else}
+                    <i class="fas fa-user-circle icon-user m-5 p-5"></i>
+                    {/if}
+                </div>
+                <ul class="list-group text-center">
+                    <li class="list-group-item">{$user->name}</li>
+                    <li class="list-group-item">{$user->email}</li>
+                    <li class="list-group-item">
                         {if $user->admin == 1}
-                            <i class="fas fa-user-circle icon-user-admin"></i>
+                        Administrador
                         {else}
-                            <i class="fas fa-user-circle icon-user"></i>
+                        Colaborador 
                         {/if}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{$user->name}</h5>
-                    <p class="card-text">No estas logeado, Unete y conece a distintos usuarios!!!</p>
-                </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nombre: {$user->name}</li>
-                        <li class="list-group-item">Administrador: {$user->admin}</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

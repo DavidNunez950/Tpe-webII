@@ -72,7 +72,7 @@
             $id_product = $params[':ID'];
             $products = $this->ProductModel->getProductsById($id_product);
             $userData = $this->AuthHelper->getUserStatus();
-            $this->view->renderProduct($products[0],$userData);
+            $this->view->renderProduct($products,$userData);
         }
 
         // 2.b Funciones para realizar acciones de ABM con productss
@@ -80,12 +80,13 @@
             $this->AuthHelper->checkLoggedIn();
             $destino = null;
             $id_category = $params[':ID'];
-            if(isset($_POST['color']) && isset($_POST['talle']) && isset($_POST['tipo']) &&
-            (isset($_FILES['img']))) { 
-                $uploads = getcwd() . "//uploads/";
-                $destino = tempnam($uploads, $_FILES['img']['name']);
-                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
-                $destino = basename($destino);
+            if(isset($_POST['color']) && isset($_POST['talle']) && isset($_POST['tipo'])
+            //  && (isset($_FILES['img']))
+            ) { 
+                // $uploads = getcwd() . "//uploads/";
+                // $destino = tempnam($uploads, $_FILES['img']['name']);
+                // move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                // $destino = basename($destino);
                 $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category, $destino);
             }
             $this->view->showCategoryLocation($id_category);
@@ -97,11 +98,14 @@
             $destino = null;
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
-            &&(isset($_POST['tipo'])&&!empty($_POST['tipo'])) && (isset($_FILES['img']))) {
-                $uploads = getcwd() . "//uploads/";
-                $destino = tempnam($uploads, $_FILES['img']['name']);
-                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
-                $destino = basename($destino);
+            &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
+            //  && (isset($_FILES['img']))
+            ) {
+                // $uploads = getcwd() . "//uploads/";
+                // $destino = tempnam($uploads, $_FILES['img']['name']);
+                // move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                // $destino = basename($destino);
+                
                 $this->ProductModel->editProduct($_POST['tipo'], $_POST['color'], $_POST['talle'], $destino, $id_products,);
             } 
             $this->view->showCategoriesLocation();
@@ -109,9 +113,10 @@
 
         function deleteProducts($params = null){
             $this->AuthHelper->checkLoggedIn();
-            $id_products = $params[':ID'];
-            $this->ProductModel->deleteProduct($id_products);
-            $this->view->showCategoriesLocation();
+            $id_product = $params[':ID'];
+            $id_category = ($this->ProductModel->getProductsById($id_product))->id_categoria;
+            $this->ProductModel->deleteProduct($id_product);
+            $this->view->showCategoryLocation($id_category);
         }
 
         // 3.a Función para ver todas las Categorys con sus productss
@@ -120,7 +125,6 @@
             $index =  ($page - 1) * 5;
             $conectorLogico = ($_GET['conectorLogico'] == 'on') ? true : false;
             $cantPag = ceil((($this->ProductModel->getCountProducts($conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion']))->cant)/5);
-            // $cantproducts = ($this->ProductModel->getCountProducts())->cant;
             $products = $this->ProductModel->getFilteredProducts($index, $conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion']);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
@@ -135,11 +139,12 @@
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
             &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
             &&(isset($_POST['id_category'])&&!empty($_POST['id_category']))
-            &&(isset($_FILES['img']))) {
-                $uploads = getcwd() . "//uploads/";
-                $destino = tempnam($uploads, $_FILES['img']['name']);
-                move_uploaded_file($_FILES['img']['tmp_name'], $destino);
-                $destino = basename($destino);
+            // &&(isset($_FILES['img']))) //
+            ) {
+                // $uploads = getcwd() . "//uploads/";
+                // $destino = tempnam($uploads, $_FILES['img']['name']);
+                // move_uploaded_file($_FILES['img']['tmp_name'], $destino);
+                // $destino = basename($destino);
                 $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category'],$destino);
                 //$this->view->showCategoryLocation($_POST['id_category']);
             } 

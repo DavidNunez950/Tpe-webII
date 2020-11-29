@@ -54,6 +54,7 @@ require_once("app/Model/UserModel.php");
             session_start();
             $userStatus = array(
                 'user' => array( 
+                    'id' => false,
                     'name' => false,
                     'email'=> false,
                     'rol' => array( 
