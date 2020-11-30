@@ -1,32 +1,7 @@
 {literal}
 <div class="col-12 bg-white p-0" id="commentary">
     <ul class="list-group m-0" id="commentaries-list">
-        <!-- <li class="list-group-item d-flex flex-row justify-content-between commentary"  v-for="commentary in commentaries" v-bind:data-id-commentary="commentary.id" v-bind:data-id-user="commentary.id_user"
-        {/literal}
-        {if $userData.user.rol.colab eq true}rolcolab="true"{/if}
-        {if $userData.user.rol.admin eq true}roladmin="true"{else}roladmin="false"{/if}
-        {literal}>
-            <div class="w-100">
-                <div  class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <samp class="mr-2">
-                            <i class="fas fa-user-circle icon-user"></i>
-                        </samp>
-                        <h6 class="pr-3">
-                            Anonimus user
-                        </h6>
-                        <div class="form-group clasificacion pt-3 d-flex flex-row flex-nowrap pr-5">
-                            <app-input-star v-for="i in 5" v-bind:value="6-i" v-bind:commentaryid="commentary.id" v-bind:class="{'mark-star' : commentary.star == (6-i)}" v-on:click-star="markStars" ></app-input-star>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <app-menu-btn v-if="editCommentary == false" v-bind:displaybtnedit="(commentary.id_user == {/literal}{$userData.user.id}{literal})" v-bind:commentaryid="commentary.id" v-bind:commentaryuserid="commentary.id_user" v-bind:userid="userid" v-bind:displaybtnremove="roladmin" v-on:start-edit="edtiCommentary" v-on:event-remove="deleteCommentary"></app-menu-btn>
-                    </div>
-                </div>
-                <app-commentary-text  v-bind:editCommentary="editCommentary" v-bind:commentaryid="commentary.id" v-bind:commentarytext="commentary.text" v-on:finish-edit="edtiCommentary"></app-commentary-text>
-            </div>
-        </li> -->
-        <app-list-commentaries v-for="commentary in commentaries" v-bind:commentary="commentary" {/literal} {if $userData.user.rol.colab eq true} username={$userData.user.name} rolcolab="true" userid={$userData.user.id}{/if} {if $userData.user.rol.admin eq true} roladmin="true" userid={else}roladmin="false"{/if} {literal}></app-list-commentaries>
+        <app-list-commentaries v-for="commentary in commentaries" v-bind:commentary="commentary" {/literal} {if $userData.user.rol.colab eq true} rolcolab="true" userid={$userData.user.id}{/if} {if $userData.user.rol.admin eq true} roladmin="true" userid={else}roladmin="false"{/if} {literal}></app-list-commentaries>
     </ul>
 </div>
 {/literal}

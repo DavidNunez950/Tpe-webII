@@ -43,7 +43,7 @@ require_once("app/Model/UserModel.php");
         }
 
         function verifyTine() {
-            if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1000000)) { 
+            if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1200)) { 
                 header("Location: ".LOGOUT);
                 die();
             } 

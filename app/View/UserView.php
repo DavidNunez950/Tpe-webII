@@ -12,7 +12,7 @@ class UserView{
         $this->title = "login";
     }
 
-    function renderlogin($message = "", $userData){
+    function renderlogin($userData, $message = ""){
         $this->smarty->assign('titulo', $this->title, true);
         $this->smarty->assign('message', $message);
         $this->smarty->assign('BASE_URL', BASE_URL, true);

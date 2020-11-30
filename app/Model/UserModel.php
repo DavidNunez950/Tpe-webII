@@ -10,9 +10,15 @@
             $this->db = DataBaseHelper::connection();
         }
 
-        function getUser($email){
-            $query = $this->db->prepare("SELECT * FROM user WHERE email=?");
-            $query->execute(array($email));
+        function getUser($name){
+            $query = $this->db->prepare("SELECT * FROM user WHERE name=?");
+            $query->execute(array($name));
+            return $query->fetch(PDO::FETCH_OBJ);
+        }
+
+        function getNumberUserAdmin() {
+            $query = $this->db->prepare("SELECT COUNT(*) AS cant FROM user WHERE admin=1");
+            $query->execute();
             return $query->fetch(PDO::FETCH_OBJ);
         }
 
@@ -34,8 +40,7 @@
             return $query->fetch(PDO::FETCH_OBJ);
         }
 
-        function changeAdministrationPermissions($id){
-            $admin = ($this->getUserById($id)->admin==1) ? 0 : 1;
+        function changeAdministrationPermissions($id, $admin){
             $query = $this->db->prepare("UPDATE user SET admin = ? WHERE id = ?");
             $query->execute(array($admin,$id));
             return $query->fetch(PDO::FETCH_OBJ);

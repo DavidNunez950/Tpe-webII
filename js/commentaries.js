@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vue js
     Vue.component('app-list-commentaries', {
-        props: ['commentaryid', 'commentary', 'rolcolab', 'roladmin', 'userid', 'username'],
+        props: ['commentaryid', 'commentary', 'rolcolab', 'roladmin', 'userid'],
         data: function() {
             return {
                 editCommentary: false
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <i class="fas fa-user-circle icon-user"></i>
                         </samp>
                         <h6 class="pr-3">
-                            <a v-bind:href="'users/' + userid" class="text-dark">{{username}}</a>
+                            <a v-bind:href="'users/' + userid" class="text-dark">Usuario </a>
                         </h6>
                         <div class="form-group clasificacion pt-3 d-flex flex-row flex-nowrap pr-5">
                             <app-input-star v-for="i in 5" v-bind:value="6-i" v-bind:commentaryid="commentary.id" v-bind:class="{'mark-star' : commentary.star == (6-i)}" v-on:click-star="markStars" ></app-input-star>
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <app-menu-btn v-if="editCommentary == false" v-bind:displaybtnedit="(commentary.id_user == userid) && editCommentary == false" v-bind:commentaryid="commentary.id" v-bind:commentaryuserid="commentary.id_user" v-bind:userid="userid" v-bind:displaybtnremove="roladmin" v-on:start-edit="edtiCommentary" v-on:event-remove="deleteCommentary"></app-menu-btn>
                     </div>
                 </div>
-                <app-commentary-text  v-bind:username="userName"  v-bind:editCommentary="editCommentary" v-bind:commentaryid="commentary.id" v-bind:commentarytext="commentary.text" v-on:finish-edit="edtiCommentary"></app-commentary-text>
+                <app-commentary-text v-bind:editCommentary="editCommentary" v-bind:commentaryid="commentary.id" v-bind:commentarytext="commentary.text" v-on:finish-edit="edtiCommentary"></app-commentary-text>
             </div>
         </li>`,
         methods: {
