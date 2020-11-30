@@ -1,13 +1,9 @@
+
 {include "header.tpl" }
 <div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
     <div class="row p-5">
         <div class="w-100">
             <div class="w-100 h-100 d-inline-flex justify-content-start align-items-center bg-transparent">
-                {if $producto->img}
-                    <figure class="figure text-center position-relative mt-0 mb-0 pt-0 pb-0 mr-n4">
-                        <img src="uploads/{$producto->img}" class="rounded-circle mr-n5" alt="colleciones" width="250" height="250">
-                    </figure>
-                {/if}
                 <div class="h-100 w-100 ml-n5 pl-5 display-1 border-secondary shadow  text-white bg-dark d-flex">
                     <h1 class="ml-5 pl-5 pt-5 d-inline align-middle">{$producto->tipo}</h1>
                 </div>
@@ -34,91 +30,6 @@
                         <td>{$producto->color}</td>
                         <td>{$producto->talle}</td>
                         <td>{$producto->coleccion}</td>
-<<<<<<< HEAD
-=======
-                        {if $producto->img}
-                            <td>
-                                <div>
-                                    <img src="uploads/{$producto->img}" width="130px" height="130px" />
-                                </div>
-                                {if $userData.user.rol.colab eq true}
-                                    <div>
-                                        <button type="button" class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrarImg{$producto->id}" aria-expanded="false">Borrar</button>
-                                        <button type="button" class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificarImg{$producto->id}" aria-expanded="false">Editar</button>
-                                    </div>
-        
-                                {/if}
-                            </td>
-                            <div class="modal fade" id="borrarImg{$producto->id}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content ">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Estas seguro de que quieres borrar la prenda {$producto->tipo} de la {$producto->coleccion}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div class="btn-group btn-group-lg m-0 mt-3" role="group">
-                                                <button type="button" class="border-0 close">
-                                                    <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
-                                                        Cancelar
-                                                    </button>
-                                                </button>
-                                                <a href="deleteImg/{$producto->id}" class="btn btn-danger stretched-link text-white">Confirmar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="modificarImg{$producto->id}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content ">
-                                        <form class="form-inline" action="editImg/{$producto->id}" method="POST" enctype="multipart/form-data">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Estas seguro de que quieres realizar cambios en la imagen de "{$producto->tipo}", de la {$producto->coleccion}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="img">Imagen</label>
-                                                <input type="file" class="form-control" id="file_img" name="img">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Comfirmar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        {else}
-                            <td>
-                                <button type="button" class="btn btn-success stretched-link text-white" data-toggle="modal" data-target="#insertImg{$producto->id}" aria-expanded="false">Agregar Imagen</button>
-                            </td>
-                            <div class="modal fade" id="insertImg{$producto->id}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content ">
-                                        <form class="form-inline" action="editImg/{$producto->id}" method="POST" enctype="multipart/form-data">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Inserte una imagen para el producto "{$producto->tipo}", de la {$producto->coleccion}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="img">Imagen</label>
-                                                <input type="file" class="form-control" id="file_img" name="img">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Comfirmar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        {/if}
->>>>>>> 83b8338ccaacf603ea3f3bb356d589701363db62
                         {if $userData.user.rol.colab eq true}
                         <td class="w-25">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -183,17 +94,12 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        {* <div class="form-group">
-                                            <label for="img">Imagen</label>
-                                            <input type="file" class="form-control" id="file_img" name="img">
-                                        </div> *}
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Comfirmar</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </div>
                         {/if}
                         <div class="modal fade" id="img{$producto->id}" tabindex="-1" aria-hidden="true">
@@ -212,48 +118,15 @@
                                             {else}
                                             <img src="uploads/img_404.png" alt="img 404" class="img rounded" width="250px">
                                             {/if}
-                                            <div  class="modal-img-buttons">
-                                                <button type="button" class="btn btn-danger display-1 text-whie {if $producto->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></button>
-                                                <button type="button" class="btn btn-primary text-whie"><label for="fileToUpload" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label></button>
-=======
-                            <div class="modal fade" id="modificar{$producto->id}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content ">
-                                        <form class="form-inline" action="editProduct/{$producto->id}" method="POST">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Estas seguro de que quieres realizar cambios de la producto: "{$producto->tipo}", de la {$producto->coleccion}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="tipo">Prenda:</label>
-                                                    <input type="text" class="form-control" name="tipo" value="{$producto->tipo}" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="color">Color:</label>
-                                                    <input type="text" class="form-control" name="color" value="{$producto->color}" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="talle">Talle</label>
-                                                    <select class="form-control" name="talle" value="{$producto->talle}">
-                                                        <optgroup label="Selecione su tipo de talle preferido">
-                                                            <option value="XS">XS</option>
-                                                            <option value="S">S</option>
-                                                            <option value="M">M</option>
-                                                            <option value="L">L</option>
-                                                            <option value="XL">XL</option>
-                                                            <option value="XXL">XXL</option>
-                                                            <option value="XXXL">XXXL</option>
-                                                            <option value="Otro">Otro</option>
-                                                        </optgroup>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Comfirmar</button>
->>>>>>> 83b8338ccaacf603ea3f3bb356d589701363db62
+                                            <div  class="modal-img-buttons d-flex flex-row ">
+                                                <a  href="deleteImg/{$producto->id}" class="btn btn-danger text-whie {if $producto->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
+                                                <form class="form-inline inputWrapper" action="editImg/{$producto->id}" method="POST" enctype="multipart/form-data">
+                                                    <button type="submit" class="btnnnb btn-primary">Ok</button>
+                                                    <div class="inputWrapper">
+                                                        <label class="btn btn-primary text-whie m-0" for="img" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
+                                                        <input type="file" class="fileInput" id="file_img" name="img">
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +161,7 @@
                         </div>
                         {if $userData.user.rol.colab eq true}
                         <div class="form-group col-1">
-                            <button type="submit" class="btn btn-primary di  rounded-circle"><i class="fas fa-paper-plane"></i></button>
+                            <button type="submit" class="btn btn-primary  rounded-circle"><i class="fas fa-paper-plane"></i></button>
                         </div>
                         {/if}
                     </div>
