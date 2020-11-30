@@ -36,8 +36,8 @@
                                     </div>
                                     {if $userData.user.rol.colab eq true}
                                         <div>
-                                            <button type="button" class="btn btn-danger  stretched-link text-whit" data-toggle="modal" data-target="#borrarImg{$prenda->id}" aria-expanded="false">Borrar</button>
-                                            <button type="button" class="btn btn-primary stretched-link text-white" data-toggle="modal" data-target="#modificarImg{$prenda->id}" aria-expanded="false">Editar</button>
+                                            <button type="button" class="btn btn-danger text-whit" data-toggle="modal" data-target="#borrarImg{$prenda->id}" aria-expanded="false">Borrar</button>
+                                            <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#modificarImg{$prenda->id}" aria-expanded="false">Editar</button>
                                         </div>
                                     {/if}
                                 </td>
@@ -45,7 +45,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content ">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Estas seguro de que quieres borrar la prenda {$prenda->tipo} de la </h5>
+                                                <h5 class="modal-title">Estas seguro de que quieres borrar la prenda {$prenda->tipo} de la {$prenda->coleccion}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -68,7 +68,7 @@
                                         <div class="modal-content ">
                                             <form class="form-inline" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
                                                 <div class="modal-header">
-                                                    <h5> class="modal-title">Estas seguro que quieres realizar cambios en la imagen del producto "{$prenda->tipo}" </h5>
+                                                    <h5 class="modal-title"> Estas seguro que quieres realizar cambios en la imagen del producto "{$prenda->tipo}" </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -93,7 +93,7 @@
                                         <div class="modal-content ">
                                             <form class="form-inline" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Inserte una imagen para el producto "{$prenda->tipo}", de la {$prenda->coleccion} </h5> {*{}*}
+                                                    <h5 class="modal-title">Inserte una imagen para el producto "{$prenda->tipo}", de la {$prenda->coleccion} </h5> 
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>

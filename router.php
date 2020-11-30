@@ -38,7 +38,7 @@
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");
     $r->addRoute("editProduct/:ID", "POST", "IndumentariaController", "editProducts");
     $r->addRoute("editImg/:ID", "POST", "IndumentariaController", "editImage");
-    $r->addRoute("deleteImg/:ID", "POST", "IndumentariaController", "deleteImage");
+    $r->addRoute("deleteImg/:ID", "GET", "IndumentariaController", "deleteImage");
 
    
    
