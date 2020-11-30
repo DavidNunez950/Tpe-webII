@@ -34,6 +34,9 @@
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");
     $r->addRoute("deleteProduct/:ID", "GET", "IndumentariaController", "deleteProducts");
     $r->addRoute("editProduct/:ID", "POST", "IndumentariaController", "editProducts");
+    
+    $r->addRoute("editImg/:ID", "POST", "IndumentariaController", "editImage");
+    $r->addRoute("deleteImg/:ID", "GET", "IndumentariaController", "deleteImage");
 
     $r->addRoute("users", "GET", "UserController", "getUsers");
     $r->addRoute("users/:ID", "GET", "UserController", "getUserBydId");

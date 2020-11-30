@@ -162,8 +162,16 @@
                                             <img src="uploads/img_404.png" alt="img 404" class="img rounded" width="250px">
                                             {/if}
                                             <div  class="modal-img-buttons">
-                                                <button type="button" class="btn btn-danger display-1 text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></button>
-                                                <button type="button" class="btn btn-primary text-whie"><label for="fileToUpload" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label></button>
+                                                <a  href="deleteImg/{$prenda->id}" class="btn btn-danger display-1 text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
+                                                <form class="form-inline" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
+
+                                                        <button type="button" class="btn btn-primary text-whie">
+                                                        <label for="fileToUpload" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
+                                                        <input type="file" class="form-control" id="file_img" name="img" hidden>
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Comfirmar</button>
+
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

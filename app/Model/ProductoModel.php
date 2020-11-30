@@ -44,9 +44,9 @@
             return  $query->fetch(PDO::FETCH_OBJ);
         }
 
-        function insertProduct($color,$talle,$tipo, $id_Category, $img){
+        function insertProduct($color,$talle,$tipo, $id_category, $img){
             $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria,img) VALUES(?,?,?,?,?)");           
-            $query->execute(array($color,$talle,$tipo, $id_Category, $img));
+            $query->execute(array($color,$talle,$tipo, $id_category, $img));
             
         }
 
@@ -55,9 +55,19 @@
             $query->execute(array($id));
         }
 
-        function editProduct($tipo,$color,$talle,$img,$id){
-            $query = $this->db->prepare("UPDATE producto SET tipo=?, color=?, tipo=?, img=? WHERE id=?");
-            $query->execute(array($tipo,$color,$talle,$img,$id));
+        function editProduct($tipo,$color,$talle,$id){
+            $query = $this->db->prepare("UPDATE producto SET tipo=?, color=?, talle=? WHERE id=?");
+            $query->execute(array($tipo,$color,$talle,$id));
+        }
+
+        function editImage($img,$id){
+            $query = $this->db->prepare("UPDATE producto SET img=? WHERE id=?");
+            $query->execute(array($img,$id));
+        }
+        
+        function deleteImage($id){
+            $query = $this->db->prepare('UPDATE producto SET img= ? WHERE id=?');
+            $query->execute(array(null,$id));
         }
         
         private function generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria) {
