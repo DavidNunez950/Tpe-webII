@@ -158,7 +158,7 @@
                         </div>
                         {if $userData.user.rol.colab eq true}
                         <div class="form-group col-1">
-                            <button type="submit" class="btn btn-primary  rounded-circle"><i class="fas fa-paper-plane"></i></button>
+                            <button type="submit" class="btn btn-primary di  rounded-circle"><i class="fas fa-paper-plane"></i></button>
                         </div>
                         {/if}
                     </div>

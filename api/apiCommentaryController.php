@@ -34,9 +34,11 @@ class ApiCommentaryController extends ApiController {
     function insertCommentary(){
         $this->authHelper->checkLoggedIn();
         $body = $this->getData();
+        
+        // $this->view->response($body, 500);die
         try {
             session_start();
-            $id = $this->model->insertCommentary($body->text,$body->star, $body->date,$body->id_product,$_SESSION['ID']);     
+            $id = $this->model->insertCommentary($body->text,$body->star, $body->date, $body->id_product, $_SESSION['ID']);     
             $commentary = $this->model->getCommentaryById($id);
             $status = 200;
             if(empty($commentary)) {
@@ -45,7 +47,7 @@ class ApiCommentaryController extends ApiController {
             }
             $this->view->response($commentary, $status);
         } catch(Exception $e) {
-            $this->view->response("Internal server error", 500);
+            $this->view->response("Internal server error ". $body, 500);
         }  
     }
 

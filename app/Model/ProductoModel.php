@@ -33,7 +33,7 @@
         }
 
         function getProductsByIdCategory($id){
-            $query = $this->db->prepare("SELECT * FROM producto WHERE id_categoria=?");
+            $query = $this->db->prepare("SELECT producto.*, categoria.coleccion FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria WHERE id_categoria=?");
             $query->execute(array($id));
             return  $query->fetchAll(PDO::FETCH_OBJ);
         }
