@@ -12,17 +12,17 @@
             </div>
         </div>
         <div>
-            <form action="products/{$pag}/" method="GET">
+            <form action="products/{$pag}/" method="GET" class="mt-3 p-2 rounded bg-dark">
                 <div class="form-row">
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-1">
                         <label for="prenda">Prenda</label>
                         <input type="text" class="form-control" name="prenda" placeholder="prenda">
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-1">
                         <label for="color">Color</label>
                         <input type="text" class="form-control" name="color" placeholder="Color">
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-1">
                         <label for="talle">Talle</label>
                         <input type="text" class="form-control" name="talle" placeholder="Talle">
                     </div>
@@ -32,14 +32,26 @@
                     </div>
                     <div class="form-group col-md-1">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="conectorLogico">
-                            <label class="form-check-label" for="conectorLogico">
-                                Restricto
+                            <label>Imágen</label>
+                            <label  class="switch">
+                                <input type="checkbox" name="image">
+                                <span class="slider round"></span>
                             </label>
                         </div>
                     </div>
+                    <div class="form-group col-md-3">
+                        <div class="form-check">
+                            <label>Buscar producto específico</label>
+                            <label  class="switch">
+                                <input type="checkbox" name="conectorLogico">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1 pt-4">
+                        <button type="sumbit" class="btn btn-outline-success">Buscar</button>
+                    </div>
                 </div>
-                <button type="sumbit" class="btn btn-primary btn-sm">Agregar</button>
             </form>
         </div>
         <div class="w-100">
