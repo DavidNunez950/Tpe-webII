@@ -26,6 +26,7 @@ require_once("app/Model/UserModel.php");
         // 1.a Función para chekear que el usuario está logeado y no realise accines de ABM con las url del sitio
         function checkLoggedIn(){
             if($this->getUserStatus()['user']['rol']['colab']!=true) {
+                $this->sendMessage("Se necesita ser usuario colaborador para realizar esa acción, debes logearte primero");
                 header("Location: ".LOGIN);
                 die();
             }else{
@@ -35,6 +36,7 @@ require_once("app/Model/UserModel.php");
 
         function checkAdminUsser(){
             if($this->getUserStatus()['user']['rol']['admin']!=true){
+                $this->sendMessage("Se necesita ser usuario administrador para realizar esa acción, debes logearte primero");
                 header("Location: ".LOGIN);
                 die();
             } else { 
@@ -63,15 +65,24 @@ require_once("app/Model/UserModel.php");
                     )
                 ),
             );
-
             $userStatus['user']['id'] = (isset($_SESSION['ID'])) ? $_SESSION['ID'] : false;
             $userStatus['user']['name'] = (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
             $userStatus['user']['email'] = (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
             $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0) )? true : false;
             $userStatus['user']['rol']['admin'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']==1)) ? true : false;
-                
-
             return $userStatus;
+        }
+
+        function sendMessage($message) {
+            session_start();
+            $_SESSION["MESSAGE"] = $message;
+        }
+
+        function getMessage() {
+            session_start();
+            $message = (isset($_SESSION["MESSAGE"])&&$_SESSION["MESSAGE"]!="") ? $_SESSION["MESSAGE"] : "";
+            $_SESSION["MESSAGE"] = "";
+            return  $message;
         }
     }
 ?>

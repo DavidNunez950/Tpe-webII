@@ -17,7 +17,8 @@ class UserController{
 
     function login(){
         $userStatus = $this->AuthHelper->getUserStatus();
-        $this->view->renderlogin($userStatus, "");
+        $message = $this->AuthHelper->getMessage();
+        $this->view->renderlogin($userStatus, $message);
     }
 
     function logout(){
@@ -26,26 +27,28 @@ class UserController{
     }
 
     function verifyUser(){
-        $userStatus = $this->AuthHelper->getUserStatus();
         $name = $_POST["user"];        
         $email = $_POST["email"];
         $pass = $_POST["pass"];
+        session_start();
         if(isset($name)&&isset($email)){
             $userFromDB = $this->model->getUser($name);  
             if(isset($userFromDB) && $userFromDB){ 
                 if (password_verify($pass, $userFromDB->password)){
-                    session_start();
                     $this->AuthHelper->login($userFromDB);
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
                 } else {
-                    $this->view->renderlogin($userStatus, "Contraseña incorrecta");
+                    $this->AuthHelper->sendMessage("Contraseña incorrecta");
+                    header("Location: ".LOGIN);
                 }
             }else{
-                $this->view->renderlogin($userStatus, "El usuario no existe");
+                $this->AuthHelper->sendMessage("El usuario no existe");
+                header("Location: ".LOGIN);
             }
         } else {
-            $this->view->renderlogin($userStatus, "Complete todos campos");
+            $this->AuthHelper->sendMessage("Contraseña incorrecta");
+            header("Location: ".LOGIN);
         }
     }
 
@@ -53,7 +56,8 @@ class UserController{
         $this->AuthHelper->checkAdminUsser();
         $users = $this->model->getUsers();
         $userStatus = $this->AuthHelper->getUserStatus();
-        $this->view->renderUsers($users, $userStatus);
+        $message = $this->AuthHelper->getMessage();
+        $this->view->renderUsers($users, $userStatus, $message);
     }
 
     function getUserBydId($params = null) {
@@ -67,7 +71,12 @@ class UserController{
     function deleteUser($params = null) {
         $this->AuthHelper->checkAdminUsser();
         $id = $params[':ID'];
-        $this->model->deleteUser($id);
+        $deletedUser = $this->model->getUserById($id);
+        if (($this->model->getNumberUserAdmin())->cant > 1 || $deletedUser->admin != 1) {
+            $this->model->deleteUser($id);
+        } else {
+            $this->AuthHelper->sendMessage("No pudes eliminar tu cuenta porque eres él último administrador!!!");
+        }
         $this->view->renderUserLocation();  
     }
 
@@ -77,17 +86,19 @@ class UserController{
         $admin = ($this->model->getUserById($id)->admin==1) ? 0 : 1;
         if (($this->model->getNumberUserAdmin())->cant > 1 || $admin == 1) {
             $this->model->changeAdministrationPermissions($id, $admin);
+        } else {
+            $this->AuthHelper->sendMessage("No se puede eliminar al último administrador!!!");
         }
         $this->view->renderUserLocation();
     }
 
     function showRegister(){
         $userStatus = $this->AuthHelper->getUserStatus();
-        $this->view->renderRegister($userStatus, "");
+        $message = $this->AuthHelper->getMessage();
+        $this->view->renderRegister($userStatus, $message);
     }
 
     function insertUser() {
-        $userStatus = $this->AuthHelper->getUserStatus();
         $name = $_POST["user"];        
         $email = $_POST["email"];
         $pass = $_POST["pass"];
@@ -102,10 +113,12 @@ class UserController{
                 $this->verifyUser();
                 header("Location: ".BASE_URL."home");
             } else {
-                $this->view->renderRegister($userStatus, "Ya existe un usuario con ese nombre");
+                $this->AuthHelper->sendMessage("Ya existe un usuario con ese nombre");
+                header("Location: ".REGISTER);
             }
         } else {
-            $this->view->renderRegister($userStatus, "Complete todos los campos");
+            $this->AuthHelper->sendMessage("Complete todos los campos");
+            header("Location: ".REGISTER);
         }
     }
 }

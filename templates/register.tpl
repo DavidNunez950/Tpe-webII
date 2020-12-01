@@ -1,5 +1,4 @@
 {include file="header.tpl" }
-
     <div class="container">
         <div class="row text-black">
             <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
@@ -21,5 +20,4 @@
             </div>
         </div>
     </div>
-
 {include file="footer.tpl"}

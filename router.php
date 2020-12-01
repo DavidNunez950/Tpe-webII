@@ -2,6 +2,7 @@
     define("BASE_URL", '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF']).'/');
     define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
     define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
+    define("REGISTER", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/register');
 
     require_once('app/Controller/indumentariaController.php');
     require_once('app/Controller/UserController.php');
@@ -44,6 +45,8 @@
     $r->addRoute("changeAdministrationPermissions/:ID", "GET", "UserController", "changeAdministrationPermissions");
     $r->addRoute("register", "GET", "UserController", "showRegister");
     $r->addRoute("insertUser", "POST", "UserController", "insertUser");
+
+    $r->addRoute("setDefaultValues", "GET", "UserController", "setDefaultValues");
 
     $r->addRoute("insertCategory", "POST", "IndumentariaController", "insertCategory");
     $r->addRoute("deleteCategory/:ID", "GET", "IndumentariaController", "deleteCategory");

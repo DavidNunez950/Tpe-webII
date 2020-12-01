@@ -161,16 +161,14 @@
                                             {else}
                                             <img src="uploads/img_404.png" alt="img 404" class="img rounded" width="250px">
                                             {/if}
-                                            <div  class="modal-img-buttons">
-                                                <a  href="deleteImg/{$prenda->id}" class="btn btn-danger display-1 text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
-                                                <form class="form-inline" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
-
-                                                        <button type="button" class="btn btn-primary text-whie">
-                                                        <label for="fileToUpload" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
-                                                        <input type="file" class="form-control" id="file_img" name="img" hidden>
-                                                        </button>
-                                                        <button type="submit" class="btn btn-primary">Comfirmar</button>
-
+                                            <div  class="modal-img-buttons d-flex flex-row ">
+                                                <a  href="deleteImg/{$prenda->id}" class="btn btn-danger text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
+                                                <form class="form-inline inputWrapper" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
+                                                    <button type="submit" class="btnnnb btn-primary">Ok</button>
+                                                    <div class="inputWrapper">
+                                                        <label class="btn btn-primary text-whie m-0" for="img" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
+                                                        <input type="file" class="fileInput" id="file_img" name="img">
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -224,12 +222,6 @@
                                     </select>
                                 </div>
                             </td>
-                            {* <td>
-                                <div class="form-group">
-                                    <label for="img"></label>
-                                    <input type="file" class="form-control" id="file_img" name="img">
-                                </div>
-                            </td> *}
                             <td>
                                 <div class="btn-group btn-group-lg m-0 mt-3" role="group">
                                     <button type="sumbit" class="btn btn-outline-success btn-sm">Agregar</button>
@@ -244,11 +236,34 @@
                                 <li class="page-item {if $pagePointed eq 1} disabled{/if}">
                                     <a class="page-link" href="products/{$pagePointed - 1}/{$search}" tabindex="-1" aria-disabled="true">Prev</a>
                                 </li>
-                                {for $page=1 to $cantPaginas}
+                                {if $pagePointed lte 5}
+                                {for $page=1 to $pagePointed}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
                                     <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
                                 </li>
                                 {/for}
+                                {else}
+                                {for $page=$pagePointed-5 to $pagePointed}
+                                <li class="page-item {if $pagePointed eq $page} active{/if}">
+                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                </li>
+                                {/for}
+                                {/if}
+
+                                {if $pagePointed gte $cantPaginas-5}
+                                {for $page=1+$pagePointed to $cantPaginas}
+                                <li class="page-item {if $pagePointed eq $page} active{/if}">
+                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                </li>
+                                {/for}
+                                {else}
+                                {for $page=1+$pagePointed to $pagePointed+5}
+                                <li class="page-item {if $pagePointed eq $page} active{/if}">
+                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                </li>
+                                {/for}
+                                {/if}
+
                                 <li class="page-item  {if $pagePointed eq $cantPaginas} disabled{/if}">
                                     <a class="page-link" href="products/{$pagePointed + 1}/{$search}">Next</a>
                                 </li>

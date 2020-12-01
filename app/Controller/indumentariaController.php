@@ -107,10 +107,11 @@
 
         // 3.a Función para ver todas las Categorys con sus productss
         function showAllProducts($params = null) {
-            $page = ($params[':PAGE'] == null) ? 1 : $params[':PAGE'];
-            $index =  ($page - 1) * 5;
             $conectorLogico = ($_GET['conectorLogico'] == 'on') ? true : false;
             $cantPag = ceil((($this->ProductModel->getCountProducts($conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion']))->cant)/5);
+            $page = (!isset($params[':PAGE'])||$params[':PAGE']<1) ? 1 : $params[':PAGE'];
+            $page = ($page > $cantPag) ? $cantPag : $page;
+            $index =  ($page - 1) * 5;
             $products = $this->ProductModel->getFilteredProducts($index, $conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion']);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
@@ -128,7 +129,6 @@
                 $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category'],$destino);
             } 
             $this->view->showProductsLocation();
-            
         }
 
         // 4 ABM de imágenes

@@ -12,7 +12,7 @@
 
         function getCountProducts($conectorLogico, $tipo,$color,$talle, $categoria){
             $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria);
-            $sentence = 'SELECT COUNT(*) AS cant FROM producto'.$sentence;
+            $sentence = 'SELECT COUNT(*) AS cant FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria '.$sentence;
             $query = $this->db->prepare($sentence);
             $query->execute();
             return  $query->fetch(PDO::FETCH_OBJ);
@@ -39,14 +39,14 @@
         }
 
         function getProductsById($id){
-            $query = $this->db->prepare("SELECT producto.id,producto.tipo,producto.color,producto.talle,producto.id_categoria,producto.img, categoria.coleccion FROM producto,categoria WHERE  producto.id =? AND producto.id_categoria = categoria.id");
+            $query = $this->db->prepare("SELECT  producto.*, categoria.coleccion  FROM producto,categoria WHERE  producto.id =? AND producto.id_categoria = categoria.id");
             $query->execute(array($id));
             return  $query->fetch(PDO::FETCH_OBJ);
         }
 
-        function insertProduct($color,$talle,$tipo, $id_category, $img){
-            $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria,img) VALUES(?,?,?,?,?)");           
-            $query->execute(array($color,$talle,$tipo, $id_category, $img));
+        function insertProduct($color,$talle,$tipo, $id_category){
+            $query = $this->db->prepare("INSERT INTO producto(color,talle,tipo,id_categoria) VALUES(?,?,?,?)");           
+            $query->execute(array($color,$talle,$tipo, $id_category));
             
         }
 

@@ -124,16 +124,16 @@
                                                 {else}
                                                 <img src="uploads/img_404.png" alt="img 404" class="img rounded" width="250px">
                                                 {/if}
-                                                <div  class="modal-img-buttons d-flex flex-row ">
-                                                    <a  href="deleteImg/{$producto->id}" class="btn btn-danger text-whie {if $producto->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
-                                                    <form class="form-inline inputWrapper" action="editImg/{$producto->id}" method="POST" enctype="multipart/form-data">
-                                                        <button type="submit" class="btnnnb btn-primary">Ok</button>
-                                                        <div class="inputWrapper">
-                                                            <label class="btn btn-primary text-whie m-0" for="img" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
-                                                            <input type="file" class="fileInput" id="file_img" name="img">
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                            <div  class="modal-img-buttons d-flex flex-row ">
+                                                <a  href="deleteImg/{$prenda->id}" class="btn btn-danger text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
+                                                <form class="form-inline inputWrapper" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
+                                                    <button type="submit" class="btnnnb btn-primary">Ok</button>
+                                                    <div class="inputWrapper">
+                                                        <label class="btn btn-primary text-whie m-0" for="img" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
+                                                        <input type="file" class="fileInput" id="file_img" name="img">
+                                                    </div>
+                                                </form>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
