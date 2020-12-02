@@ -17,12 +17,12 @@
     }else {
         $action = "home";
     }
-    
-    // enviar :page por geto cómo ?page=n
 
 
     // quepsa cuando esta vacio
     // revisar if indu controller
+
+    
     // ver paginado
 
 

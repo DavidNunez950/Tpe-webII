@@ -7,6 +7,7 @@
                 </div>
             </div>
             <div>
+                {if !empty($categorias)}
                 <ul class="list-group">
                     {foreach from=$categorias item=categoria}                                            
                     <li class="list-group-item d-flex justify-content-between align-items-center"> 
@@ -70,6 +71,12 @@
                     </li>
                     {/foreach}
                 </ul>
+                {else}
+                <div class="bg-dark text-white rounded mt-3  p-4">
+                    <h3>No hay categorias D:</h3>
+                    <p>Lo sentimos, no tenemos ninguna categoria, puedes logearte y agregar una</p>
+                </div>
+                {/if}
             </div>
             {if $userData.user.rol.colab eq true}
             <div>

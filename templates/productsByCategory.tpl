@@ -12,6 +12,13 @@
             </div>
         </div>
         <div class="w-100">
+            {if empty($producto)}
+            <div class="bg-dark text-white rounded mt-3 p-4 w-100">
+                <h3>No hay productos D:</h3>
+                <p>Lo sentimos, no tenemos productos, puedes agregar uno si estas logeado</p>
+            </div>
+            {/if} 
+            {if !empty($producto) || $userData.user.rol.colab eq true}
             <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
                 <thead class="thead-dark">
                     <tr>
@@ -184,6 +191,7 @@
                     {/if}
                 </tbody>
             </table>
+            {/if}
         </div>
     </div>
 </div>

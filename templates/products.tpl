@@ -54,7 +54,14 @@
                 </div>
             </form>
         </div>
+        {if empty($producto)}
+        <div class="bg-dark text-white rounded mt-3 p-4 w-100">
+            <h3>No hay productos D:</h3>
+            <p>Lo sentimos, no tenemos productos, puedes agregar uno si estas logeado</p>
+        </div>
+        {/if} 
         <div class="w-100">
+            {if !empty($categorias) && $userData.user.rol.colab eq true}
             <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
                 <thead class="thead-dark">
                     <tr>
@@ -66,6 +73,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {if !empty($producto)}
                     {foreach from=$producto item=prenda}
                     <tr>
                         <td>
@@ -188,6 +196,7 @@
                         </div>
                     </tr>
                     {/foreach}
+                    {/if}
                     {if $userData.user.rol.colab eq true}
                     <tr>
                         <form class="form p-0 m-0" action="insertProductInCategory" method="POST" enctype="multipart/form-data">
@@ -240,6 +249,7 @@
                         </form>
                     </tr>
                     {/if}
+                    {if !empty($producto)}
                     <tr class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
                         <td scope="row" colspan="5" class="">
                             <ul class="pagination">
@@ -278,8 +288,17 @@
                             </ul>
                         </td>
                     </tr>
+                    {/if}
                 </tbody>
             </table>
+            {else}        
+                {if  empty($categorias)}
+                <div class="bg-dark text-white rounded mt-3 p-4">
+                    <h3>No hay categorias D;</h3>
+                    <p>Lo sentimos, no tenemos ninguna categoria, no se puede agregar un producto a menos que este tenga una categoria</p>
+                </div>
+                {/if}
+            {/if}
         </div>
     </div>
 </div>
