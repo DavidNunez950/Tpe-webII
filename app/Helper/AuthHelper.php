@@ -23,7 +23,6 @@ require_once("app/Model/UserModel.php");
         // 1.a Función para chekear que el usuario está logeado y no realise accines de ABM con las url del sitio
         function checkLoggedIn(){
             if($this->getUserStatus()['user']['rol']['colab']!=true) {
-                $this->sendMessage("Se necesita ser usuario colaborador para realizar esa acción, debes logearte primero");
                 header("Location: ".LOGIN);
                 die();
             }else{
@@ -33,7 +32,6 @@ require_once("app/Model/UserModel.php");
 
         function checkAdminUsser(){
             if($this->getUserStatus()['user']['rol']['admin']!=true){
-                $this->sendMessage("Se necesita ser usuario administrador para realizar esa acción, debes logearte primero");
                 header("Location: ".LOGIN);
                 die();
             } else { 
@@ -64,30 +62,16 @@ require_once("app/Model/UserModel.php");
                     )
                 ),
             );
-            
             if(isset($_SESSION['ID'])){
                 $user = $this->Model->getUserById($_SESSION['ID']);
                 if ($user){
                     $userStatus['user']['id'] = $user->id;
                     $userStatus['user']['name'] = $user->name;
                     $userStatus['user']['email'] = $user->email;
-                    $userStatus['user']['rol']['colab'] = ($user->admin < 1)? true : false;
+                    $userStatus['user']['rol']['colab'] = ($user->admin <= 1)? true : false;
                     $userStatus['user']['rol']['admin'] = ($user->admin == 1)? true : false;
                 }
-
             }
-          
             return $userStatus;
-        }
-
-        function sendMessage($message) {
-            session_start();
-            $_SESSION["MESSAGE"] = $message;
-        }
-
-        function getMessage() {
-            $message = (isset($_SESSION["MESSAGE"]) && $_SESSION["MESSAGE"]!="") ? $_SESSION["MESSAGE"] : "";
-            $_SESSION["MESSAGE"] = "";
-            return  $message;
         }
     }

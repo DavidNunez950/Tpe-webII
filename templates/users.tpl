@@ -1,12 +1,4 @@
 {include file="header.tpl" }
-{if ($message neq null) && ($message neq "")}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{$message}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-{/if}
 <div class="container mt-2 bg-color border border-secondaryp-3 mb-5 rounded shadow">
     <div class="row p-5 d-block">
         <div class="d-flex justify-content-start align-items-center">

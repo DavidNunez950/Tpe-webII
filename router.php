@@ -18,18 +18,6 @@
         $action = "home";
     }
 
-
-    // quepsa cuando esta vacio
-    // revisar if indu controller
-
-    
-    // ver paginado
-
-
-
-    // redireccionar a la misma pagina?
-    // no se
-
     $r = new Router(); 
 
     $r->addRoute("home", "GET", "IndumentariaController", "showHome");
@@ -40,8 +28,6 @@
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
 
     $r->addRoute("products", "GET", "IndumentariaController", "showAllProducts");
-    // $r->addRoute("products/:PAGE/", "GET", "IndumentariaController", "showAllProducts");
-
 
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");
     $r->addRoute("insertProduct/:ID", "POST", "IndumentariaController", "insertProductsInCategoryByGET");

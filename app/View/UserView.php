@@ -20,10 +20,9 @@ class UserView{
         $this->smarty->display('templates/login.tpl');
     }
 
-    function renderUsers($users, $userData, $message) {
+    function renderUsers($users, $userData) {
         $this->smarty->assign('users', $users, true);
         $this->smarty->assign('BASE_URL', BASE_URL, true);
-        $this->smarty->assign('message', $message);
         $this->smarty->assign('userData', $userData, true);
         $this->smarty->display('templates/users.tpl'); 
     }

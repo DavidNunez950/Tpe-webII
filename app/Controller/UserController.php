@@ -17,8 +17,7 @@ class UserController{
 
     function login(){
         $userStatus = $this->AuthHelper->getUserStatus();
-        $message = $this->AuthHelper->getMessage();
-        $this->view->renderlogin($userStatus, $message);
+        $this->view->renderlogin($userStatus, "");
     }
 
     function logout(){
@@ -39,25 +38,21 @@ class UserController{
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
                 } else {
-                    $this->AuthHelper->sendMessage("Contraseña incorrecta");
-                    header("Location: ".LOGIN);
+                    $this->view->renderlogin($this->AuthHelper->getUserStatus(), "No existe usuario con ese mail y/o nombre");
                 }
             }else{
-                $this->AuthHelper->sendMessage("No existe usuario con ese mail y/o nombre");
-                header("Location: ".LOGIN);
+                $this->view->renderlogin($this->AuthHelper->getUserStatus(), "No existe usuario con ese mail y/o nombre");
             }
         } else {
-            $this->AuthHelper->sendMessage("Complete todos los campos");
-            header("Location: ".LOGIN);
+            $this->view->renderlogin($this->AuthHelper->getUserStatus(), "Complete todos los campos");
         }
     }
 
     function getUsers() {
         $this->AuthHelper->checkAdminUsser();
-        $users = $this->model->getUsers();
         $userStatus = $this->AuthHelper->getUserStatus();
-        $message = $this->AuthHelper->getMessage();
-        $this->view->renderUsers($users, $userStatus, $message);
+        $users = $this->model->getUsers();
+        $this->view->renderUsers($users, $userStatus);
     }
 
     function getUserBydId($params = null) {
@@ -74,8 +69,6 @@ class UserController{
         $deletedUser = $this->model->getUserById($id);
         if (($this->model->getNumberUserAdmin())->cant > 1 || $deletedUser->admin != 1) {
             $this->model->deleteUser($id);
-        } else {
-            $this->AuthHelper->sendMessage("No pudes eliminar tu cuenta porque eres él último administrador!!!");
         }
         $this->view->renderUserLocation();  
     }
@@ -86,19 +79,17 @@ class UserController{
         $admin = ($this->model->getUserById($id)->admin==1) ? 0 : 1;
         if (($this->model->getNumberUserAdmin())->cant > 1 || $admin == 1) {
             $this->model->changeAdministrationPermissions($id, $admin);
-        } else {
-            $this->AuthHelper->sendMessage("No se puede eliminar al último administrador!!!");
         }
         $this->view->renderUserLocation();
     }
 
     function showRegister(){
         $userStatus = $this->AuthHelper->getUserStatus();
-        $message = $this->AuthHelper->getMessage();
-        $this->view->renderRegister($userStatus, $message);
+        $this->view->renderRegister($userStatus, "");
     }
 
     function insertUser() {
+        $userStatus = $this->AuthHelper->getUserStatus();
         $name = $_POST["user"];        
         $email = $_POST["email"];
         $pass = $_POST["pass"];
@@ -113,12 +104,10 @@ class UserController{
                 $this->verifyUser();
                 header("Location: ".BASE_URL."home");
             } else {
-                $this->AuthHelper->sendMessage("Ya existe un usuario con ese nombre");
-                header("Location: ".REGISTER);
+                $this->view->renderRegister($userStatus, "Ya existe un usuario con ese nombre");
             }
         } else {
-            $this->AuthHelper->sendMessage("Complete todos los campos");
-            header("Location: ".REGISTER);
+            $this->view->renderRegister($userStatus, "Complete todos los campos");
         }
     }
 }
