@@ -10,9 +10,9 @@
             $this->db = DataBaseHelper::connection();
         }
 
-        function getUser($name){
-            $query = $this->db->prepare("SELECT * FROM user WHERE name=?");
-            $query->execute(array($name));
+        function getUser($name,$email){
+            $query = $this->db->prepare("SELECT * FROM user WHERE name=? AND email=?");
+            $query->execute(array($name,$email));
             return $query->fetch(PDO::FETCH_OBJ);
         }
 

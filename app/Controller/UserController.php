@@ -32,7 +32,7 @@ class UserController{
         $pass = $_POST["pass"];
         session_start();
         if(isset($name)&&isset($email)){
-            $userFromDB = $this->model->getUser($name);  
+            $userFromDB = $this->model->getUser($name, $email);  
             if(isset($userFromDB) && $userFromDB){ 
                 if (password_verify($pass, $userFromDB->password)){
                     $this->AuthHelper->login($userFromDB);
@@ -43,11 +43,11 @@ class UserController{
                     header("Location: ".LOGIN);
                 }
             }else{
-                $this->AuthHelper->sendMessage("El usuario no existe");
+                $this->AuthHelper->sendMessage("No existe usuario con ese mail y/o nombre");
                 header("Location: ".LOGIN);
             }
         } else {
-            $this->AuthHelper->sendMessage("Contraseña incorrecta");
+            $this->AuthHelper->sendMessage("Complete todos los campos");
             header("Location: ".LOGIN);
         }
     }
@@ -106,7 +106,7 @@ class UserController{
         if ((isset($name)&&!empty($name)) &&
             (isset($email)&&!empty($email))&&
             (isset($pass)&&!empty($pass))) { 
-            $userFromDB = $this->model->getUser($name);
+            $userFromDB = $this->model->getUser($name, $email);
             if(!($userFromDB)) { 
                 $password = password_hash ($pass , PASSWORD_DEFAULT);
                 $this->model->insertUser($name, $email, $password, $admin);
