@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <i class="fas fa-user-circle icon-user"></i>
                         </samp>
                         <h6 class="pr-3">
-                            <a v-bind:href="'users/' + userid" class="text-dark">Usuario</a>
+                            <a v-bind:href="'users/' + userid" class="text-dark">{{commentary.name}}</a>
                         </h6>
                         <div class="form-group clasificacion pt-3 d-flex flex-row flex-nowrap pr-5">
                             <app-input-star v-for="i in 5" v-bind:value="6-i" v-bind:commentaryid="commentary.id" v-bind:class="{'mark-star' : commentary.star == (6-i)}" v-on:click-star="markStars" ></app-input-star>

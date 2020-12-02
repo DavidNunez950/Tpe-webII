@@ -106,17 +106,17 @@
         }
 
         // 3.a Función para ver todas las Categorys con sus productss
-        function showAllProducts($params = null) {
+        function showAllProducts() {
             $conectorLogico = ($_GET['conectorLogico'] == 'on') ? true : false;
             $image = ($_GET['image'] == 'on') ? true : false;
             $cantPag = ceil((($this->ProductModel->getCountProducts($conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion'], $image))->cant)/5);
-            $page = (!isset($params[':PAGE'])||$params[':PAGE']<1) ? 1 : $params[':PAGE'];
+            $page = (!isset($_GET['page'])||$_GET['page']<1) ? 1 : $_GET['page'];
             $page = ($page > $cantPag) ? $cantPag : $page;
             $index =  ($page - 1) * 5;
             $products = $this->ProductModel->getFilteredProducts($index, $conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion'], $image);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
-            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag, $page, ('?prenda='.$_GET['prenda'].'&color='.$_GET['color'].'&talle='.$_GET['talle'].'&coleccion='.$_GET['coleccion'].'&image='.$_GET['image'].''));
+            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag, $page, ('&prenda='.$_GET['prenda'].'&color='.$_GET['color'].'&talle='.$_GET['talle'].'&coleccion='.$_GET['coleccion'].'&image='.$_GET['image'].''));
         }
 
         // 3.b Función para insertar products en Category por POST

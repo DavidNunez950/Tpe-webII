@@ -33,7 +33,7 @@
                                 <a class="nav-link display-5 text-white" href="categories">Categorias</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link display-5 text-white" href="products">Productos</a>
+                                <a class="nav-link display-5 text-white" href="products?page=1">Productos</a>
                             </li>
                             {if $userData.user.rol.admin eq true}
                             <li class="nav-item active">

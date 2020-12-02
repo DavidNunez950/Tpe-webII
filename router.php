@@ -18,6 +18,18 @@
         $action = "home";
     }
     
+    // enviar :page por geto cómo ?page=n
+
+
+    // quepsa cuando esta vacio
+    // revisar if indu controller
+    // ver paginado
+
+
+
+    // redireccionar a la misma pagina?
+    // no se
+
     $r = new Router(); 
 
     $r->addRoute("home", "GET", "IndumentariaController", "showHome");
@@ -27,8 +39,8 @@
     $r->addRoute("logout", "GET", "UserController", "logout");
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
 
-    $r->addRoute("products/:PAGE/", "GET", "IndumentariaController", "showAllProducts");
-    $r->addRoute("products/", "GET", "IndumentariaController", "showAllProducts");
+    $r->addRoute("products", "GET", "IndumentariaController", "showAllProducts");
+    // $r->addRoute("products/:PAGE/", "GET", "IndumentariaController", "showAllProducts");
 
 
     $r->addRoute("product/:ID", "GET", "IndumentariaController", "showProductById");

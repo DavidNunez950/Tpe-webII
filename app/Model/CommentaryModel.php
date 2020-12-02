@@ -16,7 +16,7 @@
         }
 
         function getCommentariesByProduct($id_product) {
-            $query = $this->db->prepare("SELECT * FROM commentary WHERE id_product = ?");
+            $query = $this->db->prepare("SELECT  commentary.*, user.name  FROM commentary INNER JOIN user ON user.id = commentary.id_user  WHERE id_product = ?");
             $query->execute(array($id_product));
             return $query->fetchAll(PDO::FETCH_OBJ);
         }

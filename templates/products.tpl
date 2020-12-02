@@ -244,36 +244,36 @@
                         <td scope="row" colspan="5" class="">
                             <ul class="pagination">
                                 <li class="page-item {if $pagePointed eq 1} disabled{/if}">
-                                    <a class="page-link" href="products/{$pagePointed - 1}/{$search}" tabindex="-1" aria-disabled="true">Prev</a>
+                                    <a class="page-link" href="products?page={$pagePointed - 1}{$search}" tabindex="-1" aria-disabled="true">Prev</a>
                                 </li>
                                 {if $pagePointed lte 5}
                                 {for $page=1 to $pagePointed}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
-                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                    <a class="page-link" href="products?page={$page}/{$search} ">{$page}</a>
                                 </li>
                                 {/for}
                                 {else}
                                 {for $page=$pagePointed-5 to $pagePointed}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
-                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                    <a class="page-link" href="products?page={$page}{$search} ">{$page}</a>
                                 </li>
                                 {/for}
                                 {/if}
                                 {if $pagePointed gte $cantPaginas-5}
                                 {for $page=1+$pagePointed to $cantPaginas}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
-                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                    <a class="page-link" href="products?page={$page}{$search} ">{$page}</a>
                                 </li>
                                 {/for}
                                 {else}
                                 {for $page=1+$pagePointed to $pagePointed+5}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
-                                    <a class="page-link" href="products/{$page}/{$search} ">{$page}</a>
+                                    <a class="page-link" href="products?page={$page}{$search} ">{$page}</a>
                                 </li>
                                 {/for}
                                 {/if}
                                 <li class="page-item  {if $pagePointed eq $cantPaginas} disabled{/if}">
-                                    <a class="page-link" href="products/{$pagePointed + 1}/{$search}">Next</a>
+                                    <a class="page-link" href="products?page={$pagePointed + 1}{$search}">Next</a>
                                 </li>
                             </ul>
                         </td>
