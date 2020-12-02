@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateComentary(obj, id) {
-    console.log(JSON.stringify(obj));
     fetch(url + id, {
       "method": "PUT",
       "headers": {
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function insertCommentary(obj) {
-    console.log(JSON.stringify(obj));
+    ;
     fetch(url, {
       "method": "POST",
       "headers": {
@@ -64,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    console.log(form.querySelector('input[type="text"]'));
-    console.log(form.querySelector('input[type="radio"]:checked'));
     var date = new Date();
-    var dateS = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-    console.log(dateS);
+    var anio = date.getFullYear();
+    var mes = date.getMonth() + 1;
+    var dia = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+    var dateS = anio + "-" + mes + "-" + dia;
     var obj = {
       "text": form.querySelector('input[type="text"]').value,
       "star": form.querySelector('input[type="radio"]:checked').value,
@@ -76,20 +75,19 @@ document.addEventListener('DOMContentLoaded', function () {
       "id_product": form.getAttribute("data-id-product"),
       "id_user": "0"
     };
-    console.log(obj);
     insertCommentary(obj);
   });
   Vue.component('app-input-star', {
     props: ['value', 'commentaryid'],
-    template: "\n        <div>\n            <input v-bind:name=\"commentaryid\" type=\"radio\" v-bind:value=\"value\">\n            <label v-bind:for=\"commentaryid\" class=\"mr-1\">\n                <i class=\"fas fa-star\" v-on:click=\"$emit('click-star', $event)\" ></i>\n            </label>\n        </div>"
+    template: "\n        <div>\n            <input v-bind:name=\"commentaryid\" type=\"radio\" v-bind:value=\"value\">\n            <label class=\"mr-1\" v-bind:for=\"commentaryid\">\n                <i class=\"fas fa-star\" v-on:click=\"$emit('click-star', $event)\" ></i>\n            </label>\n        </div>"
   });
   var menuBtn = Vue.component('app-menu-btn', {
     props: ['displaybtnremove', 'commentaryid', 'displaybtnedit'],
-    template: "\n        <div v-if=\"displaybtnedit || displaybtnremove== 'true'\">\n            <button type=\"button\" class=\"btn  btn-outline-secondary border-white rounded-circle\" data-toggle=\"dropdown\" aria-haspopup=\"false\" aria-expanded=\"false\">\n                <i class=\"fas fa-ellipsis-h\"></i>\n            </button>\n            <div class=\"dropdown-menu dropdown-menu-right dropdown-menu-min\">\n                <button class=\"btn\" v-if=\"displaybtnremove == 'true'\">Borrar\n                    <div class=\"btn btn-danger rounded-circle\">\n                        <i class=\"fas fa-trash-alt btn-delete\" v-on:click=\"$emit('event-remove', $event)\" v-bind:data-id-commentary=\"commentaryid\"></i>\n                    </div>\n                </button>\n                <button class=\"btn\" v-if=\"displaybtnedit\">Editar\n                    <div class=\"btn btn-primary rounded-circle\">\n                        <i class=\"far fa-edit btn-edit\" v-on:click=\"$emit('start-edit', $event)\" v-bind:data-id-commentary=\"commentaryid\"></i>\n                    </div>\n                </button>\n            </div>\n        </div>"
+    template: "\n        <div v-if=\"displaybtnedit || displaybtnremove\">\n            <button type=\"button\" class=\"btn  btn-outline-secondary border-white rounded-circle\" data-toggle=\"dropdown\" aria-haspopup=\"false\" aria-expanded=\"false\">\n                <i class=\"fas fa-ellipsis-h\"></i>\n            </button>\n            <div class=\"dropdown-menu dropdown-menu-right dropdown-menu-min\">\n                <button class=\"btn\" v-if=\"displaybtnremove\">Borrar\n                    <div class=\"btn btn-danger rounded-circle\">\n                        <i class=\"fas fa-trash-alt btn-delete\" \n                            v-on:click=\"$emit('event-remove', $event)\" \n                            v-bind:data-id-commentary=\"commentaryid\"\n                        ></i>\n                    </div>\n                </button>\n                <button class=\"btn\" v-if=\"displaybtnedit\">Editar\n                    <div class=\"btn btn-primary rounded-circle\">\n                        <i class=\"far fa-edit btn-edit\" \n                            v-on:click=\"$emit('start-edit', $event)\" \n                            v-bind:data-id-commentary=\"commentaryid\"\n                        ></i>\n                    </div>\n                </button>\n            </div>\n        </div>"
   });
   Vue.component('app-commentary-text', {
     props: ['commentaryid', 'commentarytext', "editCommentary"],
-    template: "\n        <div>\n            <div class=\"d-flex justify-content-between\" v-bind:text-commentary=\"commentaryid\">\n                <div class=\"text-break\" contentEditable=\"false\">\n                    {{commentarytext}}\n                </div>\n                <button v-if=\"editCommentary == true\" class=\"btn rounded-circle p-0\">\n                    <div class=\"btn btn-primary  rounded-circle\">\n                        <i class=\"fas fa-paper-plane\" v-bind:data-id-commentary=\"commentaryid\" v-on:click=\"$emit('finish-edit', $event)\"></i>\n                    </div>\n                </button>\n            </div>\n        </div>"
+    template: "\n        <div>\n            <div class=\"d-flex justify-content-between\">\n                <div class=\"text-break\" contentEditable=\"false\">\n                    {{commentarytext}}\n                </div>\n                <button class=\"btn rounded-circle p-0\" v-if=\"editCommentary == true\">\n                    <div class=\"btn btn-primary  rounded-circle\">\n                        <i class=\"fas fa-paper-plane\" \n                        v-bind:data-id-commentary=\"commentaryid\" \n                        v-on:click=\"$emit('finish-edit', $event)\"></i>\n                    </div>\n                </button>\n            </div>\n        </div>"
   }); // Vue js
 
   Vue.component('app-list-commentaries', {
@@ -99,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         editCommentary: false
       };
     },
-    template: "\n        <li class=\"list-group-item d-flex flex-row justify-content-between commentary\" v-bind:data-id-commentary=\"commentary.id\" v-bind:data-id-user=\"commentary.id_user\">\n            <div class=\"w-100\">\n                <div  class=\"d-flex align-items-center justify-content-between\">\n                    <div class=\"d-flex align-items-center\">\n                        <samp class=\"mr-2\">\n                            <i class=\"fas fa-user-circle icon-user\"></i>\n                        </samp>\n                        <h6 class=\"pr-3\">\n                            <a v-bind:href=\"'users/' + userid\" class=\"text-dark\">{{commentary.name}}</a>\n                        </h6>\n                        <div class=\"form-group clasificacion pt-3 d-flex flex-row flex-nowrap pr-5\">\n                            <app-input-star v-for=\"i in 5\" v-bind:value=\"6-i\" v-bind:commentaryid=\"commentary.id\" v-bind:class=\"{'mark-star' : commentary.star == (6-i)}\" v-on:click-star=\"markStars\" ></app-input-star>\n                        </div>\n                    </div>\n                    <div class=\"dropdown\">\n                        <app-menu-btn v-if=\"editCommentary == false\" v-bind:displaybtnedit=\"(commentary.id_user == userid) && editCommentary == false\" v-bind:commentaryid=\"commentary.id\" v-bind:commentaryuserid=\"commentary.id_user\" v-bind:userid=\"userid\" v-bind:displaybtnremove=\"roladmin\" v-on:start-edit=\"edtiCommentary\" v-on:event-remove=\"deleteCommentary\"></app-menu-btn>\n                    </div>\n                </div>\n                <app-commentary-text v-bind:editCommentary=\"editCommentary\" v-bind:commentaryid=\"commentary.id\" v-bind:commentarytext=\"commentary.text\" v-on:finish-edit=\"edtiCommentary\"></app-commentary-text>\n            </div>\n        </li>",
+    template: "\n        <li class=\"list-group-item\" \n            v-bind:data-id-commentary=\"commentary.id\" \n            v-bind:data-id-user=\"commentary.id_user\">\n            <div class=\"w-100\">\n                <div  class=\"d-flex align-items-center justify-content-between\">\n                    <div class=\"d-flex align-items-center\">\n                        <samp class=\"mr-2\">\n                            <i class=\"fas fa-user-circle icon-user\"></i>\n                        </samp>\n                        <h6 class=\"pr-3\">\n                            <a class=\"text-dark\" v-bind:href=\"'users/' + commentary.id_user\">\n                                {{commentary.name}}\n                            </a>\n                        </h6>\n                        <div class=\"form-group clasificacion pt-3 d-flex flex-row flex-nowrap pr-5\">\n                            <app-input-star \n                                v-for=\"i in 5\" \n                                v-bind:value=\"6-i\" \n                                v-bind:commentaryid=\"commentary.id\" \n                                v-bind:class=\"{'mark-star' : commentary.star == (6-i)}\" \n                                v-on:click-star=\"markStars\"\n                                v-bind:key=\"i\"\n                            ></app-input-star>\n                        </div>\n                    </div>\n                    <div class=\"dropdown\">\n                        <app-menu-btn \n                            v-if=\"editCommentary == false\" \n                            v-bind:displaybtnremove=\"(commentary.id_user == userid)\" \n                            v-bind:displaybtnedit=\"(commentary.id_user == userid) && editCommentary == false\" \n                            v-bind:commentaryid=\"commentary.id\" v-bind:commentary.userid=\"commentary.id_user\" \n                            v-on:start-edit=\"edtiCommentary\" v-bind:userid=\"commentary.id_user\"  \n                            v-on:event-remove=\"deleteCommentary\"\n                        ></app-menu-btn>\n                    </div>\n                </div>\n                <app-commentary-text \n                    v-bind:editCommentary=\"editCommentary\"\n                    v-bind:commentaryid=\"commentary.id\" \n                    v-bind:commentarytext=\"commentary.text\" \n                    v-on:finish-edit=\"edtiCommentary\"\n                ></app-commentary-text>\n            </div>\n        </li>",
     methods: {
       deleteCommentary: function deleteCommentary(event) {
         var btn = event.target;
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (this.editCommentary) {
           div.contentEditable = 'true';
         } else {
-          console;
           div.contentEditable = 'false';
           var text = div.innerHTML;
           this.editCommentary = false;
@@ -129,8 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       },
       markStars: function markStars(event) {
-        console.log(event);
-
         if (this.editCommentary) {
           var label = event.target.parentElement.parentElement;
           label.parentElement.querySelectorAll("div").forEach(function (div) {

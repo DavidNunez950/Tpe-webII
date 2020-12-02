@@ -12,7 +12,7 @@ class UserView{
         $this->title = "login";
     }
 
-    function renderlogin($userData, $message){
+    function renderlogin($userData, $message = ""){
         $this->smarty->assign('titulo', $this->title, true);
         $this->smarty->assign('message', $message);
         $this->smarty->assign('BASE_URL', BASE_URL, true);
@@ -34,7 +34,7 @@ class UserView{
         $this->smarty->display('templates/user.tpl'); 
     }
 
-    function renderRegister($userStatus, $message){
+    function renderRegister($userStatus, $message = ""){
         $this->smarty->assign('BASE_URL', BASE_URL, true);
         $this->smarty->assign('message', $message);
         $this->smarty->assign('userData', $userStatus, true);
