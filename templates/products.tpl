@@ -61,7 +61,7 @@
         </div>
         {/if} 
         <div class="w-100">
-            {if !empty($categorias) && $userData.user.rol.colab eq true}
+            {if !empty($categorias) || $userData.user.rol.colab eq true}
             <table class="table table-striped table-light table-responsive-sm shadow text-center mt-3 mb-0">
                 <thead class="thead-dark">
                     <tr>
@@ -157,7 +157,7 @@
                         {else}
                         <td class="w-25">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <a href="product/{$prenda->id}" class="btn btn-success stretched-link text-white">Ver</a>
+                                <a href="product/{$prenda->id}" class="btn btn-success stretched-link text-white"><i class="fas fa-search"></i></a>
                             </div>
                         </td>
                         {/if}

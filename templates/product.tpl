@@ -161,11 +161,11 @@
                         <div class="form-group col-11">
                             <input type="text" class="form-control" name="text" required>
                         </div>
-                        {if $userData.user.rol.colab eq true}
+                       
                         <div class="form-group col-1">
-                            <button type="submit" class="btn btn-primary  rounded-circle"><i class="fas fa-paper-plane"></i></button>
+                            <button type="submit" class="btn  rounded-circle  {if $userData.user.rol.colab neq true} disable btn-secondary {else} btn-primary {/if}"><i class="fas fa-paper-plane"></i></button>
                         </div>
-                        {/if}
+                       
                     </div>
                 </form>
             </div>
