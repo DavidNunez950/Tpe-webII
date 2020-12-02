@@ -72,24 +72,24 @@
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="tipo" class="text-dark">Prenda:</label>
-                                                <input type="text" class="form-control" name="tipo" value={$prenda->tipo} required>
+                                                <input type="text" class="form-control" name="tipo" value={$producto->tipo} required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="color" class="text-dark">Color:</label>
-                                                <input type="text" class="form-control" name="color" value={$prenda->color} required>
+                                                <input type="text" class="form-control" name="color" value={$producto->color} required>
                                             </div>
                                             <div class="form-group" >
                                                 <label for="talle" class="text-dark">Talle</label>
                                                 <select class="form-control" name="talle">
                                                     <optgroup label="Selecione su tipo de talle preferido"> 
-                                                        <option value="XS"  {if $prenda->talle eq "XS"}selected{/if}>XS</option>
-                                                        <option value="S" {if $prenda->talle eq "S"}selected{/if}>S</option>
-                                                        <option value="M" {if $prenda->talle eq "M"}selected{/if}>M</option>
-                                                        <option value="L" {if $prenda->talle eq "L"}selected{/if}>L</option>
-                                                        <option value="XL" {if $prenda->talle eq "XL"}selected{/if}>XL</option>
-                                                        <option value="XXL" {if $prenda->talle eq "XXL"}selected{/if}>XXL</option>
-                                                        <option value="XXXL" {if $prenda->talle eq "XXXL"} selected{/if}>XXXL</option>
-                                                        <option value="Otro" {if $prenda->talle eq "Otro"}selected{/if}>Otro</option>
+                                                        <option value="XS"  {if $producto->talle eq "XS"}selected{/if}>XS</option>
+                                                        <option value="S" {if $producto->talle eq "S"}selected{/if}>S</option>
+                                                        <option value="M" {if $producto->talle eq "M"}selected{/if}>M</option>
+                                                        <option value="L" {if $producto->talle eq "L"}selected{/if}>L</option>
+                                                        <option value="XL" {if $producto->talle eq "XL"}selected{/if}>XL</option>
+                                                        <option value="XXL" {if $producto->talle eq "XXL"}selected{/if}>XXL</option>
+                                                        <option value="XXXL" {if $producto->talle eq "XXXL"} selected{/if}>XXXL</option>
+                                                        <option value="Otro" {if $producto->talle eq "Otro"}selected{/if}>Otro</option>
                                                     </optgroup>
                                                 </select>
                                             </div>

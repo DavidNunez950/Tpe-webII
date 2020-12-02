@@ -12,7 +12,7 @@
             </div>
         </div>
         <div>
-            <form action="products/{$pag}/" method="GET" class="mt-3 p-2 rounded bg-dark">
+            <form action="products?page={$pagePointed}" method="GET" class="mt-3 p-2 rounded bg-dark">
                 <div class="form-row">
                     <div class="form-group col-md-1">
                         <label for="prenda">Prenda</label>
@@ -249,7 +249,7 @@
                                 {if $pagePointed lte 5}
                                 {for $page=1 to $pagePointed}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
-                                    <a class="page-link" href="products?page={$page}/{$search} ">{$page}</a>
+                                    <a class="page-link" href="products?page={$page}{$search} ">{$page}</a>
                                 </li>
                                 {/for}
                                 {else}

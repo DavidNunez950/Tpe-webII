@@ -45,7 +45,7 @@ require_once("app/Model/UserModel.php");
         }
 
         function verifyTine() {
-            if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1200)) { 
+            if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) { 
                 header("Location: ".LOGOUT);
                 die();
             } 
@@ -53,7 +53,9 @@ require_once("app/Model/UserModel.php");
         }
 
         function getUserStatus(){
-            session_start();
+            if (!isset($_SESSION)){
+                session_start();
+            }
             $userStatus = array(
                 'user' => array( 
                     'id' => false,
@@ -79,7 +81,7 @@ require_once("app/Model/UserModel.php");
         }
 
         function getMessage() {
-            session_start();
+          //  session_start();
             $message = (isset($_SESSION["MESSAGE"])&&$_SESSION["MESSAGE"]!="") ? $_SESSION["MESSAGE"] : "";
             $_SESSION["MESSAGE"] = "";
             return  $message;

@@ -54,7 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(form.querySelector('input[type="text"]'));
         console.log(form.querySelector('input[type="radio"]:checked'));
         let date = new Date();
-        let dateS = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        let anio = date.getFullYear();
+        let mes = date.getMonth() + 1;
+        let dia = (date.getDate() > 9) ? date.getDate() : "0" + date.getDate();
+        let dateS = anio + "-" + mes + "-" + dia;
         console.log(dateS);
         let obj = {
             "text": form.querySelector('input[type="text"]').value,
@@ -81,12 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let menuBtn = Vue.component('app-menu-btn', {
         props: ['displaybtnremove', 'commentaryid', 'displaybtnedit'],
         template: `
-        <div v-if="displaybtnedit || displaybtnremove== 'true'">
+        <div v-if="displaybtnedit || displaybtnremove">
             <button type="button" class="btn  btn-outline-secondary border-white rounded-circle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                 <i class="fas fa-ellipsis-h"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-min">
-                <button class="btn" v-if="displaybtnremove == 'true'">Borrar
+                <button class="btn" v-if="displaybtnremove">Borrar
                     <div class="btn btn-danger rounded-circle">
                         <i class="fas fa-trash-alt btn-delete" v-on:click="$emit('event-remove', $event)" v-bind:data-id-commentary="commentaryid"></i>
                     </div>
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     <div class="dropdown">
-                        <app-menu-btn v-if="editCommentary == false" v-bind:displaybtnedit="(commentary.id_user == userid) && editCommentary == false" v-bind:commentaryid="commentary.id" v-bind:commentaryuserid="commentary.id_user" v-bind:userid="userid" v-bind:displaybtnremove="roladmin" v-on:start-edit="edtiCommentary" v-on:event-remove="deleteCommentary"></app-menu-btn>
+                        <app-menu-btn v-if="editCommentary == false" v-bind:displaybtnremove="(commentary.id_user == userid)" v-bind:displaybtnedit="(commentary.id_user == userid) && editCommentary == false" v-bind:commentaryid="commentary.id" v-bind:commentary.userid="commentary.id_user" v-on:start-edit="edtiCommentary" v-bind:userid="commentary.id_user"  v-on:event-remove="deleteCommentary"></app-menu-btn>
                     </div>
                 </div>
                 <app-commentary-text v-bind:editCommentary="editCommentary" v-bind:commentaryid="commentary.id" v-bind:commentarytext="commentary.text" v-on:finish-edit="edtiCommentary"></app-commentary-text>

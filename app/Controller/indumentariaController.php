@@ -38,8 +38,8 @@
             if ((isset($_POST['url_img'])&&!empty($_POST['url_img']))
             &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
                 $this->CategoryModel-> insertCategory($_POST['url_img'],$_POST['coleccion']);
-                $this->view->showCategoriesLocation();
-            }
+            } 
+            $this->view->showCategoriesLocation();
         }         
 
         function deleteCategory($params = null){
@@ -55,8 +55,8 @@
             if ((isset($_POST['url_img'])&&!empty($_POST['url_img']))
             &&(isset($_POST['coleccion'])&&!empty($_POST['coleccion']))) {
                 $this->CategoryModel->editCategory($id_category, $_POST['url_img'], $_POST['coleccion']);
-                $this->view->showCategoriesLocation();
             }
+            $this->view->showCategoriesLocation();
         }
 
         // 2.a Funciones para ver los productss
@@ -78,23 +78,24 @@
         // 2.b Funciones para realizar acciones de ABM con productss
         function insertProductsInCategoryByGET($params = null){
             $this->AuthHelper->checkLoggedIn();
-            $destino = null;
             $id_category = $params[':ID'];
             if(isset($_POST['color']) && isset($_POST['talle']) && isset($_POST['tipo'])) { 
-                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category, $destino);
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $id_category);
+                $this->view->showCategoryLocation($id_category);
             }
-            $this->view->showCategoryLocation($id_category);
+            
         }
         
         function editProducts($params = null){
             $this->AuthHelper->checkLoggedIn();
             $id_products = $params[':ID'];
+            $id_category = ($this->ProductModel->getProductsById($id_products))->id_categoria;
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
             &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))) {
                 $this->ProductModel->editProduct($_POST['tipo'], $_POST['color'], $_POST['talle'], $id_products,);
             } 
-            $this->view->showCategoriesLocation();
+            $this->categoryRedirect($id_category);
         }
 
         function deleteProducts($params = null){
@@ -102,32 +103,35 @@
             $id_product = $params[':ID'];
             $id_category = ($this->ProductModel->getProductsById($id_product))->id_categoria;
             $this->ProductModel->deleteProduct($id_product);
-            $this->view->showCategoryLocation($id_category);
+            $this->categoryRedirect($id_category);  
         }
 
         // 3.a Función para ver todas las Categorys con sus productss
         function showAllProducts() {
-            $conectorLogico = ($_GET['conectorLogico'] == 'on') ? true : false;
-            $image = ($_GET['image'] == 'on') ? true : false;
-            $cantPag = ceil((($this->ProductModel->getCountProducts($conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion'], $image))->cant)/5);
+            $prenda = (isset ($_GET['prenda'])) ? $_GET['prenda'] : "";
+            $color = (isset ($_GET['color'])) ? $_GET['color'] : "";
+            $talle = (isset ($_GET['talle'])) ? $_GET['talle'] : "";
+            $coleccion = (isset ($_GET['coleccion'])) ? $_GET['coleccion'] : "";
+            $conectorLogico = (isset ($_GET['conectorLogico']) && $_GET['conectorLogico'] == 'on') ? true : false;
+            $image = (isset ($_GET['image']) && $_GET['image'] == 'on') ? true : false;
+            $cantPag = ceil((($this->ProductModel->getCountProducts($conectorLogico, $prenda, $color, $talle, $coleccion, $image))->cant)/5);
             $page = (!isset($_GET['page'])||$_GET['page']<1) ? 1 : $_GET['page'];
             $page = ($page > $cantPag) ? $cantPag : $page;
             $index =  ($page - 1) * 5;
-            $products = $this->ProductModel->getFilteredProducts($index, $conectorLogico, $_GET['prenda'], $_GET['color'], $_GET['talle'], $_GET['coleccion'], $image);
+            $products = $this->ProductModel->getFilteredProducts($index, $conectorLogico, $prenda, $color, $talle, $coleccion, $image);
             $category = $this->CategoryModel->getCategories();
             $userData = $this->AuthHelper->getUserStatus();
-            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag, $page, ('&prenda='.$_GET['prenda'].'&color='.$_GET['color'].'&talle='.$_GET['talle'].'&coleccion='.$_GET['coleccion'].'&image='.$_GET['image'].''));
+            $this->view->renderAllProducsWithCategorys($products,$category, $userData, $cantPag, $page, ('&prenda='.$prenda.'&color='.$color.'&talle='.$talle.'&coleccion='.$coleccion.'&image='.$image.''));
         }
 
         // 3.b Función para insertar products en Category por POST
         function insertProductsInCategoryByPOST() {
             $this->AuthHelper->checkLoggedIn();
-            $destino = null;
             if ((isset($_POST['color'])&&!empty($_POST['color']))
             &&(isset($_POST['talle'])&&!empty($_POST['talle']))
             &&(isset($_POST['tipo'])&&!empty($_POST['tipo']))
             &&(isset($_POST['id_category'])&&!empty($_POST['id_category']))) {
-                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category'],$destino);
+                $this->ProductModel->insertProduct($_POST['color'], $_POST['talle'], $_POST['tipo'], $_POST['id_category']);
             } 
             $this->view->showProductsLocation();
         }
@@ -138,13 +142,14 @@
             $id_product = $params[':ID'];
             $id_category = ($this->ProductModel->getProductsById($id_product))->id_categoria;
             $this->ProductModel->deleteImage($id_product);
-            $this->view->showCategoryLocation($id_category);
+            $this->categoryRedirect($id_category);
         }
 
         function editImage($params = null){
             $this->AuthHelper->checkLoggedIn();
             $id_products = $params[':ID'];
             $destino = null;
+            $id_category = ($this->ProductModel->getProductsById($id_products))->id_categoria;
             if ((isset($_FILES['img']))) {
                 $uploads = getcwd() . "//uploads/";
                 $destino = tempnam($uploads, $_FILES['img']['name']);
@@ -152,7 +157,15 @@
                 $destino = basename($destino);
                 $this->ProductModel->editImage($destino, $id_products,);
             } 
-            $this->view->showCategoriesLocation();
+            $this->categoryRedirect($id_category);
+        }
+
+        private function categoryRedirect($id_category){
+            if ($id_category != null){
+                $this->view->showCategoryLocation($id_category);
+            }
+            else {
+                $this->view->showCategoriesLocation();
+            }  
         }
     }
-?>    
