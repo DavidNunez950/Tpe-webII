@@ -61,7 +61,7 @@ class UserController{
     }
 
     function getUserBydId($params = null) {
-        $this->AuthHelper->checkAdminUsser();
+        $this->AuthHelper->checkLoggedIn();
         $id = $params[':ID'];
         $users = $this->model->getUserById($id);
         $userStatus = $this->AuthHelper->getUserStatus();
