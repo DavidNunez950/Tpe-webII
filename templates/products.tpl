@@ -139,10 +139,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        {* <div class="form-group">
-                                            <label for="img"></label>
-                                            <input type="file" class="form-control" id="file_img" name="img">
-                                        </div> *}
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Comfirmar</button>
                                         </div>
@@ -174,14 +170,16 @@
                                             <img src="uploads/img_404.png" alt="img 404" class="img rounded" width="250px">
                                             {/if}
                                             <div  class="modal-img-buttons d-flex flex-row ">
+                                                {if $prenda->img neq ""}
                                                 <a  href="deleteImg/{$prenda->id}" class="btn btn-danger text-whie {if $prenda->img eq ""}disabled{/if}"><i class="fas fa-times-circle"></i></a>
-                                                <form class="form-inline inputWrapper" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
-                                                    <button type="submit" class="btnnnb btn-primary">Ok</button>
+                                                {/if}
+                                                <form class="form-inline" action="editImg/{$prenda->id}" method="POST" enctype="multipart/form-data">
                                                     <div class="inputWrapper">
-                                                        <label class="btn btn-primary text-whie m-0" for="img" class="p-0 m-0"><i class="fas fa-arrow-circle-up"></i></label>
                                                         <input type="file" class="fileInput" id="file_img" name="img">
+                                                        <label class="btn btn-primary text-whie m-0" for="img" class="p-0 m-0"><i class="fas fa-arrow-up"></i></label>
+                                                        <button type="submit" class="btn btn-success"><i class="fas fa-arrow-circle-up"></i></button>
                                                     </div>
-                                                </form>
+                                                </form> 
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +259,6 @@
                                 </li>
                                 {/for}
                                 {/if}
-
                                 {if $pagePointed gte $cantPaginas-5}
                                 {for $page=1+$pagePointed to $cantPaginas}
                                 <li class="page-item {if $pagePointed eq $page} active{/if}">
@@ -275,7 +272,6 @@
                                 </li>
                                 {/for}
                                 {/if}
-
                                 <li class="page-item  {if $pagePointed eq $cantPaginas} disabled{/if}">
                                     <a class="page-link" href="products/{$pagePointed + 1}/{$search}">Next</a>
                                 </li>
@@ -287,4 +283,5 @@
         </div>
     </div>
 </div>
+<script src="js/uploadBtn.js"></script>
 {include file="footer.tpl"}

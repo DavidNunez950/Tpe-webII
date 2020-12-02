@@ -10,16 +10,16 @@
             $this->db = DataBaseHelper::connection();
         }
 
-        function getCountProducts($conectorLogico, $tipo,$color,$talle, $categoria){
-            $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria);
+        function getCountProducts($conectorLogico, $tipo,$color,$talle, $categoria, $image){
+            $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria, $image);
             $sentence = 'SELECT COUNT(*) AS cant FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria '.$sentence;
             $query = $this->db->prepare($sentence);
             $query->execute();
             return  $query->fetch(PDO::FETCH_OBJ);
         }
 
-        function getFilteredProducts($index, $conectorLogico, $tipo,$color,$talle, $categoria){
-            $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria);
+        function getFilteredProducts($index, $conectorLogico, $tipo,$color,$talle, $categoria, $image){
+            $sentence = $this->generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria, $image);
             $sentence ='SELECT producto.*, categoria.coleccion FROM producto INNER JOIN categoria ON categoria.id = producto.id_categoria '.$sentence.'LIMIT '.$index.', 5';
             $query = $this->db->prepare($sentence);
             $query->execute();
@@ -70,7 +70,7 @@
             $query->execute(array(null,$id));
         }
         
-        private function generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria) {
+        private function generateDidamicQueryCondition($conectorLogico, $tipo,$color,$talle, $categoria, $image) {
             $sentence = '';
             $conector = 'WHERE ';
             $arr = array(
@@ -85,6 +85,7 @@
                     $conector = ($conectorLogico == true) ? 'AND': 'OR';
                 }
             }
+            $sentence .= (($image == true) ? (' '.$conector.' producto.img != ""') : "");
             return $sentence;
         }
     }

@@ -111,7 +111,7 @@ input[type="radio"]:checked~label i {
 }
 
 .modal-img-buttons i{
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .invert {
@@ -150,6 +150,8 @@ td .pagination {
     -moz-opacity: 0;
     filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
 }
+
+
 
 .switch {
     position: relative;
@@ -211,3 +213,19 @@ input[type="checkbox"]:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+
+.inputWrapper button i{
+    font-size: 18px;
+}
+
+.inputWrapper > input ~ button{
+    display: none;
+}
+.inputWrapper > input[upload], .inputWrapper > input[upload]+ label {
+    display: none;
+}
+.inputWrapper > input[upload] ~ button{
+    display: block;
+}
+
