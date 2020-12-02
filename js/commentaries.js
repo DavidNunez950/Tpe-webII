@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 app.commentaries.push(commentary)
             })
             .catch(error => console.log(error));
+        console.log(app.commentaries);
     }
 
     // Capturar el evento sumbit, armar los datos, y llamar a la api

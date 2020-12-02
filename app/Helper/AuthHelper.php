@@ -10,12 +10,9 @@ require_once("app/Model/UserModel.php");
             $this->Model = new UserModel();
         }
 
-        function login($user){
+        function login($id_user){
             session_start();
-            $_SESSION['ID'] = $user->id;
-            $_SESSION["NAME"] = $user->name;
-            $_SESSION["EMAIL"] = $user->email;
-            $_SESSION["ROL"] = $user->admin;
+            $_SESSION['ID'] = $id_user;
         }
 
         function logout(){
@@ -67,11 +64,19 @@ require_once("app/Model/UserModel.php");
                     )
                 ),
             );
-            $userStatus['user']['id'] = (isset($_SESSION['ID'])) ? $_SESSION['ID'] : false;
-            $userStatus['user']['name'] = (isset($_SESSION['NAME'])) ? $_SESSION['NAME'] : false;
-            $userStatus['user']['email'] = (isset($_SESSION['EMAIL'])) ? $_SESSION['EMAIL'] : false;
-            $userStatus['user']['rol']['colab'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']>=0) )? true : false;
-            $userStatus['user']['rol']['admin'] = (isset($_SESSION['ROL'])&&($_SESSION['ROL']==1)) ? true : false;
+            
+            if(isset($_SESSION['ID'])){
+                $user = $this->Model->getUserById($_SESSION['ID']);
+                if ($user){
+                    $userStatus['user']['id'] = $user->id;
+                    $userStatus['user']['name'] = $user->name;
+                    $userStatus['user']['email'] = $user->email;
+                    $userStatus['user']['rol']['colab'] = ($user->admin < 1)? true : false;
+                    $userStatus['user']['rol']['admin'] = ($user->admin == 1)? true : false;
+                }
+
+            }
+          
             return $userStatus;
         }
 
@@ -81,10 +86,8 @@ require_once("app/Model/UserModel.php");
         }
 
         function getMessage() {
-          //  session_start();
-            $message = (isset($_SESSION["MESSAGE"])&&$_SESSION["MESSAGE"]!="") ? $_SESSION["MESSAGE"] : "";
+            $message = (isset($_SESSION["MESSAGE"]) && $_SESSION["MESSAGE"]!="") ? $_SESSION["MESSAGE"] : "";
             $_SESSION["MESSAGE"] = "";
             return  $message;
         }
     }
-?>

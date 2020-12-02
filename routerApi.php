@@ -15,4 +15,3 @@ $r->addRoute("commentary/:ID", "DELETE", "ApiCommentaryController", "deleteComme
 
 $r->route($_GET['resource'], $_SERVER['REQUEST_METHOD']); 
 
-?>

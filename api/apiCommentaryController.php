@@ -35,9 +35,7 @@ class ApiCommentaryController extends ApiController {
         $this->authHelper->checkLoggedIn();
         $body = $this->getData();
         
-        // $this->view->response($body, 500);die
         try {
-            session_start();
             $id = $this->model->insertCommentary($body->text,$body->star, $body->date, $body->id_product, $_SESSION['ID']);     
             $commentary = $this->model->getCommentaryById($id);
             $status = 200;

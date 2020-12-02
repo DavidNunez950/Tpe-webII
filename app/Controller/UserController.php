@@ -35,7 +35,7 @@ class UserController{
             $userFromDB = $this->model->getUser($name, $email);  
             if(isset($userFromDB) && $userFromDB){ 
                 if (password_verify($pass, $userFromDB->password)){
-                    $this->AuthHelper->login($userFromDB);
+                    $this->AuthHelper->login($userFromDB->id);
                     $_SESSION['LAST_ACTIVITY'] = time();
                     header("Location: ".BASE_URL."home");
                 } else {
